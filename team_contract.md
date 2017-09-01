@@ -8,7 +8,7 @@ Team Members: Julia Currie, Nicholas Sarkis, Norman Chen, Eric Cole, Wenhan Xia,
 
 #### Team Procedures
 
-It is important to keep all members of the team aware of the time and date of all meetings. It is a good idea to pick a day, time, and place for regular team meetings. Friday 11:15 - 1205
+It is important to keep all members of the team aware of the time and date of all meetings. It is a good idea to pick a day, time, and place for regular team meetings. Friday 11:15am - 12:05pm
 
 Who will set each agenda? How long before the meeting should this be announced? How will team members be notified/reminded? Who will be responsible for the team following the agenda during a team meeting? What will be done to keep the team on track during a meeting? The team leader for each lab will set the agenda for each meeting.
 
@@ -38,7 +38,7 @@ Strategies for keeping on task (task maintenance): Use a google sheet to keep tr
 
 Strategies to get help if you're stuck: Reach out to the whole group if you have a problem, and the team leader can coordinate how to resolve that issue.
 
-Personal Accountability:
+#### Personal Accountability:
 
 Expected individual attendance, punctuality, and participation at all team meetings: Everyone is expected to be at every meeting, unless you have an unavoidable conflict or valid excuse. Let the group know.
 
