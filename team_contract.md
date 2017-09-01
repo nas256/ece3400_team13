@@ -1,37 +1,12 @@
-ECE3400 Fall 2017
+## Team Contract, ECE 3400, Fall 2017
 
-Team Contract, ECE 3400, Fall 2017
+By Team 13, September 1st 2017
 
-By Kirstin Petersen, August 10th 2017
+### ECE 3400, Semester: Fall 2017 Team #13
 
-Adapted from material courtesy of the Center for Teaching Excellence, Cornell
+Team Members: Julia Currie, Nicholas Sarkis, Normal Chen, Eric Richard, Michelle Feng, and Divya Gupta
 
-Preparation for Team work
-
-You will be assigned a team of 5-7 students who you will work with throughout the semester. Every 2-3 weeks you will take turns being the group leader. Team work has a lot of benefits; you get a lot of different insights to solve a problem, you can work efficiently on many tasks at once, and you always have someone to check your work. It is important to be aware that in a team environment, individuals are usually effectively motivated to maximize their own rewards and minimize their own costs. Therefore, successful team performance depends on individual accountability. Writing up a team contract, and doing team assessments throughout the semester can help keep everyone on track. This is good preparation for what will happen when you move on to industry or academia, you will end up as part of a team almost anywhere you go.
-
-According to concepts from Organizational Behavior, there are five stages of team development: forming, storming, norming, performing, and adjourning. During the forming stage, teams tend to communicate in indirect polite ways rather than more directly. The storming stage, characterized by conflict, can be often be productive, but may consume excessive amounts of time and energy. In this stage it is important to listen well for differing expectations. Next, during the norming stage, teams formulate roles and standards, increasing trust and communication. This norming stage is characterized by agreement on procedures, reduction in role ambiguity, and increased “we-ness” or unity. These developments generally are precursors to the performing stage, during which teams achieve their goals, are highly task oriented, and focus on performance and production. The point of the team contract is to help you move to the performing stage faster.
-
-If you find that your team is dysfunctional in any away you should address this immediately by calling a team meeting. If problems persist, seek help from TAs or the instructor.
-
-Team Contract Assignment
-
-Your team contract template is divided into three major sections:
-
-establishing team procedures
-identifying expectations
-specifying the consequences for failing to follow these procedures and fulfill these expectations
-Use the Team Contract template to discuss and finalize your team roles, procedures, and standards. Complete, sign, and upload a copy of your finalized contract to your team website by Monday, August 28th 8am.
-
-TEMPLATE FOR TEAM CONTRACT
-
-(Please add your input to each of the bullet points below.)
-
-ECE 3400, Semester # _ _ _ Team # _ _ _
-
-Team Members: _ _ _
-
-Team Procedures
+#### Team Procedures
 
 It is important to keep all members of the team aware of the time and date of all meetings. It is a good idea to pick a day, time, and place for regular team meetings.
 
@@ -43,9 +18,9 @@ Always keep a written record of what was agreed upon in the meeting. Who will be
 
 All members should agree to a preferred method of communication (e.g., e-mail, cell phone, face-to-face), and be individually responsible for answering in good time as agreed upon in the team. Please note what method(s) and response delay you agree on.
 
-Team Expectations
+#### Team Expectations
 
-Work Quality
+##### Work Quality
 
 Agree on a (realistic) level of quality for website updates, individual work/design, peer reviews, etc.
 
@@ -81,7 +56,7 @@ Describe how, as a group, you would handle individuals who do not live up to thi
 
 Describe what your team will do if these infractions continue:
 
-Team Leadership
+#### Team Leadership
 
 Every person on the team will have to take the role as a leader for at least two weeks. The role of the leader will be to organize meetings and make sure that everything is submitted in a timely manner. Here are some hints on what the leader should do. Please note here who will be responsible when:
 
