@@ -1,5 +1,8 @@
 # Lab 1
 
+### Overview
+ 
+
 ### Modifying the Blink Sketch
 
 TODO: Insert Video \
