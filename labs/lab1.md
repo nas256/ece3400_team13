@@ -5,8 +5,23 @@
 
 ### Modifying the Blink Sketch
 
-TODO: Insert Video \
-TODO: Insert code
+In order to make the external LED blink, we wrote the following code. 
+```cpp
+void setup() {
+    pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+    digitalWrite(ledPin, HIGH); //Turn on LED
+    delay(1000); // wait for a second
+    digitalWrite(ledPin, LOW); // Turn off LED
+    delay(1000); // wait for a second
+}
+```
+Here's a video of our blinking LED in action:
+[Blinking LED](https://youtu.be/Q5QZIRb2aYM)
+
+As you can see in our video, we added a 300 Ohm resistor in series with the LED in order to protect the output pin.
 
 ### Reading a Potentiometer
 
