@@ -1,6 +1,6 @@
 ## Team Contract, ECE 3400, Fall 2017
 
-By Team 13, September 1st 2017
+By Team "Lucky 13", September 1st 2017
 
 ### ECE 3400, Semester: Fall 2017 Team #13
 
@@ -8,7 +8,7 @@ Team Members: Julia Currie, Nicholas Sarkis, Norman Chen, Eric Cole, Wenhan Xia,
 
 #### Team Procedures
 
-It is important to keep all members of the team aware of the time and date of all meetings. It is a good idea to pick a day, time, and place for regular team meetings. We will have a regular two-hour meeting on _date__ (TBD WhenisGood poll) in _location___  as well as meet whenever there are designated group work times in class on Fridays.
+It is important to keep all members of the team aware of the time and date of all meetings. It is a good idea to pick a day, time, and place for regular team meetings. We will have a regular two-hour meeting during a time slot which will be determined from a WhenisGood poll filled out by next week as well as meet whenever there are designated group work times in class on Fridays.
 
 Who will set each agenda? How long before the meeting should this be announced? How will team members be notified/reminded? Who will be responsible for the team following the agenda during a team meeting? What will be done to keep the team on track during a meeting? The team leader for each lab will set the agenda for each meeting and will be responsible for the team following it during the meeting. A brief outline of the agenda should be posted in the meeting minutes at least three hours before the meeting.
 
@@ -30,9 +30,9 @@ Strategies to fulfill these standards: After each lab, the team lead will assign
 
 Team Participation:
 
-Strategies to ensure cooperation and equal distribution of tasks: Everyone should inform the group or team leader if they need help. If someone is doing a difficult task one week, we will try to lighten up the load for the next week. The team leader will review the surveys from the meetings as one factor to ensuring equal distribution of work. 
+Strategies to ensure cooperation and equal distribution of tasks: Everyone should inform the group or team leader if they need help. If someone is doing a difficult task one week, we will try to lighten up the load for the next week. The team leader will review the surveys from the meetings as one factor to help ensure equal distribution of work. 
 
-Strategies for encouraging/including ideas from all team members (team maintenance): Everyone will get a chance to talk to the whole group during the team meeting.
+Strategies for encouraging/including ideas from all team members (team maintenance): We will start our meetings withopens and status updates from everyone. Additionally, it is the team leader's responsibilty to monitor the conversation and make sure everyone is getting a chance to talk to the whole group during the team meeting.
 
 Strategies for keeping on task (task maintenance): We will use a Google sheet to keep track of everyone's task assignments and their progress and post a viewing link on the website.
 
