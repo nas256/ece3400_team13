@@ -30,32 +30,33 @@ TODO: Video
 
 ### Analog Output
 
-We used the Arduino's pulse-width modulator (PWM) to control the brightness of an external LED. \
+Next, we used the Arduino's pulse-width modulator (PWM) to control the brightness of an external LED. 
 
-TODO: Video \
-TODO: Code \
-```cpp
-int analogPin = A0; // potentiometer output
-int LED = 11; // PWM, connected to anode of external LED
-int potValue;
+[![Demo of using potentiometer analog output to adjust LED brightness](http://img.youtube.com/vi/gkdc-MALRLY/default.jpg)](https://www.youtube.com/watch?v=gkdc-MALRLY)
+
+```c
+int analogPin = A0; // potentiometer output 
+int LED = 11; // PWM, connected to anode of external LED int potValue; 
 int brightness;
 
-void setup() {
-  pinMode(analogPin, INPUT); // initialize analog pin as an input
-  pinMode(LED, OUTPUT); // initialize digital pin as an output
-  Serial.begin(9600);
+void setup() 
+{ 
+pinMode(analogPin, INPUT); // initialize analog pin as an input
+pinMode(LED, OUTPUT); // initialize digital pin as an output 
+Serial.begin(9600); 
 }
 
-void loop() {
-  potValue = analogRead(analogPin); // read potentiometer output
-  brightness = map(potValue,0,1023,0,255); // map potentiometer value to brightness value
-  analogWrite(LED, brightness);   // PWM output
-  delay(2);
-}
-```
-TODO: Oscilloscope picture
+void loop() { 
+potValue = analogRead(analogPin); // read potentiometer output 
+brightness = map(potValue,0,1023,0,255); // map potentiometer value to brightness value 
+analogWrite(LED, brightness); // PWM output 
+delay(2); 
+} 
+``` 
 
-Using the oscilloscope, we were able to determine that the frequency of the signal was 50.02Hz. We could also observe the duty cycle of our PWM output vary as we tuned our potentiometer.
+Using the oscilloscope, we were able to determine that the frequency of the analog output signal was 50.02Hz. We could also observe the duty cycle of our PWM output vary as we tuned our potentiometer.
+
+[![PWM duty cycle varying with changing analog values](http://img.youtube.com/vi/FmR-_lkGAR0/default.jpg)](https://www.youtube.com/watch?v=FmR-_lkGAR0)
 
 ### Driving a Servo
 
