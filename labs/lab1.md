@@ -34,7 +34,7 @@ We used the Arduino's pulse-width modulator (PWM) to control the brightness of a
 
 TODO: Video \
 TODO: Code \
-'''c
+'''cpp
 int analogPin = A0; // potentiometer output
 int LED = 11; // PWM, connected to anode of external LED
 int potValue;
