@@ -34,7 +34,7 @@ We used the Arduino's pulse-width modulator (PWM) to control the brightness of a
 
 TODO: Video \
 TODO: Code \
-'''cpp
+```cpp
 int analogPin = A0; // potentiometer output
 int LED = 11; // PWM, connected to anode of external LED
 int potValue;
@@ -52,7 +52,7 @@ void loop() {
   analogWrite(LED, brightness);   // PWM output
   delay(2);
 }
-'''
+```
 TODO: Oscilloscope picture
 
 Using the oscilloscope, we were able to determine that the frequency of the signal was 50.02Hz. We could also observe the duty cycle of our PWM output vary as we tuned our potentiometer.
