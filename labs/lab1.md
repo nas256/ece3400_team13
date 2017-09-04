@@ -26,10 +26,31 @@ As you can see in our video, we added a 300 Ohm resistor in series with the LED 
 ### Reading a Potentiometer
 
 Now, we want to play with Arduino's analog input pins and print out various analog voltages reading from a potentiometer. The potentiometer we used is 3306F-103. Its datasheet link and schematic are attached here.
-[Potentiometer 3306F-103 DataSheet](http://www.bourns.com/data/global/pdfs/3306.pdf)
+[DataSheet](http://www.bourns.com/data/global/pdfs/3306.pdf)
+
 ![alt text](https://media.digikey.com/pdf/Catalog%20Drawings/Pots/ART-3306F%20%5EA.jpg)
 
-TODO: Video
+By simply wiring up Potentiometer's output pin with Arduino's pin A5 (analog input), supply with GND, and input with Arduino's Vcc, we set up the circuit. After programming the code below to Arduino, we can see different voltage values print out on the screen as we rotated the potentiometer. 
+
+```c
+int analogPin = A5;
+int val;
+// the setup function runs once when you press reset or power the board
+void setup() {
+  // initialize digital pin LED_BUILTIN as an output.
+  pinMode(analogPin, INPUT);
+  Serial.begin(9600);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+  val = analogRead(analogPin);   // turn the LED on (HIGH is the voltage level)
+  Serial.println(val);
+  delay(2);
+}
+```
+Here is a video for reading a potentiometer:
+[Reading Potentiometer](https://youtu.be/aUDEQ5ryWt4)
 
 ### Analog Output
 
