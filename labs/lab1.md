@@ -25,8 +25,10 @@ As you can see in our video, we added a 300 Ohm resistor in series with the LED 
 
 ### Reading a Potentiometer
 
-![alt text](https://media.digikey.com/pdf/Catalog%20Drawings/Pots/ART-3306F%20%5EA.jpg|width=100)
-TODO: Schematic \
+Now, we want to play with Arduino's analog input pins and print out various analog voltages reading from a potentiometer. The potentiometer we used is 3306F-103. Its datasheet link and schematic are attached here.
+[Potentiometer 3306F-103 DataSheet](http://www.bourns.com/data/global/pdfs/3306.pdf)
+![alt text](https://media.digikey.com/pdf/Catalog%20Drawings/Pots/ART-3306F%20%5EA.jpg)
+
 TODO: Video
 
 ### Analog Output
