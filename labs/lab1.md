@@ -30,7 +30,7 @@ Now, we want to play with Arduino's analog input pins and print out various anal
 
 ![alt text](https://media.digikey.com/pdf/Catalog%20Drawings/Pots/ART-3306F%20%5EA.jpg)
 
-By simply wiring up Potentiometer's output pin with Arduino's pin A5 (analog input), supply with GND, and input with Arduino's Vcc, we set up the circuit. After programming the code below to Arduino, we can see different voltage values print out on the screen as we rotated the potentiometer. 
+By simply wiring up Potentiometer's output pin with Arduino's pin A5 (analog input), supply with GND, and input with Arduino's Vcc, we set up the circuit. After programming the code below to Arduino, we can see different voltage values printed out on the screen as we rotated the potentiometer. 
 
 ```c
 int analogPin = A5;
