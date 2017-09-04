@@ -25,7 +25,7 @@ As you can see in our video, we added a 300 Ohm resistor in series with the LED 
 
 ### Reading a Potentiometer
 
-![alt text](https://media.digikey.com/pdf/Catalog%20Drawings/Pots/ART-3306F%20%5EA.jpg=250x250)
+![alt text](https://media.digikey.com/pdf/Catalog%20Drawings/Pots/ART-3306F%20%5EA.jpg =300x300)
 TODO: Schematic \
 TODO: Video
 
