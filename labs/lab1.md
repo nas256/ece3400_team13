@@ -1,6 +1,15 @@
 # Lab 1
 
 ### Overview
+The Goal of this lab was to become accustomed with the arduino Uno and servo motors. These are important building blocks for creating our robot as the Arduino Uno serves as the brain. 
+
+The procedure for this lab includes the following steps:
+ - Created a HeartBeat with an external LED with a 50% duty cycle
+ - Reading Analog Input controlled by a potentiometer
+ - Utilized PWM to control the brightness of an external LED
+ - Controlled the speed a servo motor through a potentiometer
+ 
+After completing this procedure, we gathered parts to assemble a barebones frame that could mount the two servo motors, arduino, bread board, and power bank. This allowed us to successfully drive forward and backwards on the floor of the labratory. 
 
 
 ### Modifying the Blink Sketch
