@@ -137,12 +137,12 @@ The easiest way to power our robot is to attach a rechargeable USB power bank to
 
 After we were done soldering, this is what the connector looked like:
 
-![Soldering](https://lh4.googleusercontent.com/sGGWRm2oLoq9DZ4ZxJu5t549kWO7cEsXd8bHokipveiLnmlrj-oygsiIK8rDA4tyza0lGA_oxxlfrA=w1533-h782-rw)
+![Soldering](http://i.imgur.com/qj263i1.jpg)
 
 We used red for +5V and black for GND, to easily identify the two wires.
 
 Now all we need to do is plug in the USB connector and power the arduino!
 
-![powerusb](https://lh4.googleusercontent.com/QmfInmeFZL_uhT-dKPj5BqXLHMwY2wS8u8bP9hLG0pvUBL0yWc7M39auhiiIH1pIzNpfHjoawMAHUg=w1533-h782-rw)
+![powerusb](http://i.imgur.com/6IJ7hyO.jpg)
 
 This isn't the clearest picture, but you should be able to see that the arduino is being powered solely by the usb power bank with no connection to the computer!
