@@ -7,7 +7,7 @@ The procedure for this lab includes the following steps:
  - Created a HeartBeat with an external LED with a 50% duty cycle
  - Reading Analog Input controlled by a potentiometer
  - Utilized PWM to control the brightness of an external LED
- - Controlled the speed a servo motor through a potentiometer
+ - Controlled the speed of a servo motor using a potentiometer
  
 After completing this procedure, we gathered parts to assemble a barebones frame that could mount the two servo motors, arduino, bread board, and power bank. This allowed us to successfully drive forward and backwards on the floor of the labratory. 
 
