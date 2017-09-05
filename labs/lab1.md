@@ -45,37 +45,63 @@ As you can see in our video, we added a 300 Ohm resistor in series with the LED 
 
 ### Reading a Potentiometer
 
-TODO: Schematic \
-TODO: Video
+Now, we want to play with Arduino's analog input pins and print out various analog voltages reading from a potentiometer. The potentiometer we used is 3306F-103. Its datasheet link and schematic are attached here.
+[DataSheet](http://www.bourns.com/data/global/pdfs/3306.pdf)
 
-### Analog Output
+<img src="https://media.digikey.com/pdf/Catalog%20Drawings/Pots/ART-3306F%20%5EA.jpg" width="300">
 
-We used the Arduino's pulse-width modulator (PWM) to control the brightness of an external LED. \
+By simply wiring up Potentiometer's output pin with Arduino's pin A5 (analog input), supply with GND, and input with Arduino's Vcc, we set up the circuit. After programming the code below to Arduino, we can see different voltage values printed out on the screen as we rotated the potentiometer. 
 
-TODO: Video \
-TODO: Code \
-```cpp
-int analogPin = A0; // potentiometer output
-int LED = 11; // PWM, connected to anode of external LED
-int potValue;
-int brightness;
-
+```c
+int analogPin = A5;
+int val;
+// the setup function runs once when you press reset or power the board
 void setup() {
-  pinMode(analogPin, INPUT); // initialize analog pin as an input
-  pinMode(LED, OUTPUT); // initialize digital pin as an output
+  // initialize digital pin LED_BUILTIN as an output.
+  pinMode(analogPin, INPUT);
   Serial.begin(9600);
 }
 
+// the loop function runs over and over again forever
 void loop() {
-  potValue = analogRead(analogPin); // read potentiometer output
-  brightness = map(potValue,0,1023,0,255); // map potentiometer value to brightness value
-  analogWrite(LED, brightness);   // PWM output
+  val = analogRead(analogPin);   // turn the LED on (HIGH is the voltage level)
+  Serial.println(val);
   delay(2);
 }
 ```
-TODO: Oscilloscope picture
+Here is a video for reading a potentiometer:
+[Reading Potentiometer](https://youtu.be/aUDEQ5ryWt4)
 
-Using the oscilloscope, we were able to determine that the frequency of the signal was 50.02Hz. We could also observe the duty cycle of our PWM output vary as we tuned our potentiometer.
+### Analog Output
+
+Next, we used the Arduino's pulse-width modulator (PWM) to control the brightness of an external LED. 
+
+[![Demo of using potentiometer analog output to adjust LED brightness](http://img.youtube.com/vi/gkdc-MALRLY/default.jpg)](https://www.youtube.com/watch?v=gkdc-MALRLY)
+
+```c
+int analogPin = A0; // potentiometer output 
+int LED = 11; // PWM, connected to anode of external LED int potValue; 
+int brightness;
+
+void setup() 
+{ 
+pinMode(analogPin, INPUT); // initialize analog pin as an input
+pinMode(LED, OUTPUT); // initialize digital pin as an output 
+Serial.begin(9600); 
+}
+
+void loop() { 
+potValue = analogRead(analogPin); // read potentiometer output 
+brightness = map(potValue,0,1023,0,255); // map potentiometer value to brightness value 
+analogWrite(LED, brightness); // PWM output 
+delay(2); 
+} 
+``` 
+
+Using the oscilloscope, we were able to determine that the frequency of the analog output signal was 50.02Hz. We could also observe the duty cycle of our PWM output vary as we tuned our potentiometer.
+>>>>>>> 9a693777a182a7c26098e85e66da0a2e32d4d128
+
+[![PWM duty cycle varying with changing analog values](http://img.youtube.com/vi/FmR-_lkGAR0/default.jpg)](https://www.youtube.com/watch?v=FmR-_lkGAR0)
 
 ### Driving a Servo
 
@@ -120,7 +146,7 @@ servo1.write(servo_value);
 
 Here's a video of the system working!
 
-[![Blinky](https://lh5.googleusercontent.com/C_pe3T5O9C1DY4FqcPiNIWOkkI5p_Xs66UtymkKIpmnhcqhQx4MquhRJjDSSDNmhPrrK9mFRxGCz-w=w1920-h1080-n-k-rw)](https://drive.google.com/open?id=0BwyuAcc6KNDnLXFGeFpsc0x4enc)
+[![Servo Spin With Potentiometer](https://img.youtube.com/vi/cf2zTpaFqKs/0.jpg)](https://www.youtube.com/watch?v=cf2zTpaFqKs)
 
 ### Soldering & Powering the Arduno from a USB Power Bank
 
@@ -128,16 +154,16 @@ Our robot can't be tethered to a computer forever, and since the ATMega328p has 
 
 The easiest way to power our robot is to attach a rechargeable USB power bank to the bot and draw power from it's USB port. To do this, we need to solder wires onto a USB connector to route the power back to the Arduino. For reference, here is the pinout of a standard USB A connector:
 
-![UsbAPinout](https://i.stack.imgur.com/5IOnM.jpg)
+<img src="https://i.stack.imgur.com/5IOnM.jpg" width="300">
 
 After we were done soldering, this is what the connector looked like:
 
-![Soldering](https://lh4.googleusercontent.com/sGGWRm2oLoq9DZ4ZxJu5t549kWO7cEsXd8bHokipveiLnmlrj-oygsiIK8rDA4tyza0lGA_oxxlfrA=w1533-h782-rw)
+<img src="http://i.imgur.com/qj263i1.jpg" width="300">
 
 We used red for +5V and black for GND, to easily identify the two wires.
 
 Now all we need to do is plug in the USB connector and power the arduino!
 
-![powerusb](https://lh4.googleusercontent.com/QmfInmeFZL_uhT-dKPj5BqXLHMwY2wS8u8bP9hLG0pvUBL0yWc7M39auhiiIH1pIzNpfHjoawMAHUg=w1533-h782-rw)
+<img src="http://i.imgur.com/6IJ7hyO.jpg" width="300">
 
 This isn't the clearest picture, but you should be able to see that the arduino is being powered solely by the usb power bank with no connection to the computer!
