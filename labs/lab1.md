@@ -1,11 +1,30 @@
 # Lab 1
 
 ### Overview
- 
+
 
 ### Modifying the Blink Sketch
 
-In order to make the external LED blink, we wrote the following code. 
+We first loaded the sample code "Blink", which can be found in the Arduino IDE by going to File -> Examples -> 01.Basics -> Blink.
+
+```cpp
+void setup() {
+    // initialize digital pin LED_BUILTIN as an output.
+    pinMode(LED_BUILTIN, OUTPUT);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+    digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+    delay(1000);                       // wait for a second
+    digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+    delay(1000);                       // wait for a second
+}
+```
+We loaded the code onto the Arduino, and we were able to get the internal LED to blink.
+
+In order to make the external LED blink, we modified the sample "Blink" code to use a digital output pin.
+
 ```cpp
 void setup() {
     pinMode(ledPin, OUTPUT);
@@ -19,7 +38,8 @@ void loop() {
 }
 ```
 Here's a video of our blinking LED in action:
-[Blinking LED](https://youtu.be/Q5QZIRb2aYM)
+
+[![Blinking External LED](https://img.youtube.com/vi/Q5QZIRb2aYM/default.jpg)](https://youtu.be/Q5QZIRb2aYM)
 
 As you can see in our video, we added a 300 Ohm resistor in series with the LED in order to protect the output pin.
 
@@ -34,7 +54,7 @@ We used the Arduino's pulse-width modulator (PWM) to control the brightness of a
 
 TODO: Video \
 TODO: Code \
-'''c
+```cpp
 int analogPin = A0; // potentiometer output
 int LED = 11; // PWM, connected to anode of external LED
 int potValue;
@@ -52,7 +72,7 @@ void loop() {
   analogWrite(LED, brightness);   // PWM output
   delay(2);
 }
-'''
+```
 TODO: Oscilloscope picture
 
 Using the oscilloscope, we were able to determine that the frequency of the signal was 50.02Hz. We could also observe the duty cycle of our PWM output vary as we tuned our potentiometer.
@@ -71,7 +91,7 @@ TODO: Oscilloscope video
 Duty Cycles
 Minimum 0.5ms \
 Stop at 1.5ms \
-Maximum 2.4ms 
+Maximum 2.4ms
 
 (Datasheet says 1.3ms, 1.5ms, 1.7ms)
 
@@ -79,7 +99,7 @@ Maximum 2.4ms
 
 Now that we've driven a servo at different speeds using code, we want to map a potentiometer's position to the speed and direction of the servo.
 
-To do this, we can use Arduino's built in `map` function to convert the 0-1023 output from the ADC to 0-180 for the servo `write` method. 
+To do this, we can use Arduino's built in `map` function to convert the 0-1023 output from the ADC to 0-180 for the servo `write` method.
 
 Like in the previous section, some setup is required first, we need to initialize the servo library to a pin and setup pin A0 as an analog input:
 
