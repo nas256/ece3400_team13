@@ -125,7 +125,7 @@ servo1.write(servo_value);
 
 Here's a video of the system working!
 
-[![Blinky](https://lh5.googleusercontent.com/C_pe3T5O9C1DY4FqcPiNIWOkkI5p_Xs66UtymkKIpmnhcqhQx4MquhRJjDSSDNmhPrrK9mFRxGCz-w=w1920-h1080-n-k-rw)](https://drive.google.com/open?id=0BwyuAcc6KNDnLXFGeFpsc0x4enc)
+[![Servo Spin With Potentiometer](https://img.youtube.com/vi/cf2zTpaFqKs/0.jpg)](https://www.youtube.com/watch?v=cf2zTpaFqKs)
 
 ### Soldering & Powering the Arduno from a USB Power Bank
 
