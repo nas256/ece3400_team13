@@ -1,7 +1,7 @@
 # Lab 1
 
 ### Overview
-The Goal of this lab was to become accustomed with the arduino Uno and servo motors. These are important building blocks for creating our robot as the Arduino Uno serves as the brain.
+The Goal of this lab was to become accustomed with the Arduino Uno and servo motors. These are important building blocks for creating our robot as the Arduino Uno serves as the brain.
 
 The procedure for this lab includes the following steps:
  - Created a HeartBeat with an external LED with a 50% duty cycle
@@ -83,7 +83,7 @@ Here is a video for reading a potentiometer:
 
 ### Analog Output
 
-Next, we used the Arduino's pulse-width modulator (PWM) to control the brightness of an external LED.
+Next, we used the Arduino's pulse-width modulator (PWM) to control the brightness of an external LED. Watch our video below!
 
 [![Demo of using potentiometer analog output to adjust LED brightness](http://img.youtube.com/vi/gkdc-MALRLY/default.jpg)](https://www.youtube.com/watch?v=gkdc-MALRLY)
 
@@ -107,8 +107,7 @@ delay(2);
 }
 ```
 
-Using the oscilloscope, we were able to determine that the frequency of the analog output signal was 50.02Hz. We could also observe the duty cycle of our PWM output vary as we tuned our potentiometer.
->>>>>>> 9a693777a182a7c26098e85e66da0a2e32d4d128
+Using the oscilloscope, we were able to determine that the frequency of the analog output signal was 50.02Hz. We could also observe the duty cycle of our PWM output vary as we tuned our potentiometer (see video below).
 
 [![PWM duty cycle varying with changing analog values](http://img.youtube.com/vi/FmR-_lkGAR0/default.jpg)](https://www.youtube.com/watch?v=FmR-_lkGAR0)
 
