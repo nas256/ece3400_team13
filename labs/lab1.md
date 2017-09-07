@@ -206,13 +206,13 @@ We used the following parts:
  - 2 Wheels
  - Chassis 
  - Velcro Tape For Mounting Components
- - Small Bread Board
+ - Small Breadboard
  - Battery Pack
  - Arduino Uno
- - Ball Barring
- - Ball Barring Mount
+ - Ball Bearing
+ - Ball Bearing Mount
 
-We constructed our robot using parts found around the lab. In order to make the wheels move, we took off the blade of the servo and attached the wheel to the rotor. We then attached the wheels to the main chassis. The Arduino board and breadboard were attached       to the top of the board using velcro tape, and the battery used to power the Arduino was velcroed to the bottom of the board. We soldered the usb cable to wires so that we could power the arduino. The way that the robot was assembled caused the chassis to be front heavy, as the wheels are located closer to the back. In order to prevent the front from dragging as we drive forward, we added a ball barring to the front of chassis with a 3-D printed mount.
+We constructed our robot using parts found around the lab. In order to make the wheels move, we took off the blade of the servo and attached the wheel to the rotor. We then attached the wheels to the main chassis. The Arduino board and breadboard were attached  to the top of the board using velcro tape, and the battery used to power the Arduino was velcroed to the bottom of the board. We soldered the usb cable to wires so that we could power the Arduino. The way that the robot was assembled caused the chassis to be front heavy, as the wheels are located closer to the back. In order to prevent the front from dragging as we drive forward, we added a ball bearing to the front of chassis with a 3-D printed mount.
 
 
 ### Driving Autonomously
