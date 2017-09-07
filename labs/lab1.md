@@ -113,7 +113,12 @@ Using the oscilloscope, we were able to determine that the frequency of the anal
 
 ### Driving a Servo
 
-A servo is a small motor that controls an output shaft based on an input digital signal. In this lab, we will program the Arduino Uno to control a servo and set it to rotate at different speeds. `
+A servo is a small motor that controls an output shaft based on an input digital signal. In this lab, we will program the Arduino Uno to control a rotating servo and set it to rotate at different speeds, as shown in the video below.
+
+https://youtu.be/O4gT8ND6gjU
+
+[![Driving a Servo](https://img.youtube.com/vi/O4gT8ND6gjU/0.jpg)](https://www.youtube.com/watch?v=O4gT8ND6gjU)
+
 
 The first step requires wiring the Servo to an analog pin and configuring it with the following code:
 
