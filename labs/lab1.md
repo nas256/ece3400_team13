@@ -115,12 +115,10 @@ Using the oscilloscope, we were able to determine that the frequency of the anal
 
 A servo is a small motor that controls an output shaft based on an input digital signal. In this lab, we will program the Arduino Uno to control a rotating servo and set it to rotate at different speeds, as shown in the video below.
 
-https://youtu.be/O4gT8ND6gjU
-
 [![Driving a Servo](https://img.youtube.com/vi/O4gT8ND6gjU/0.jpg)](https://www.youtube.com/watch?v=O4gT8ND6gjU)
 
 
-The first step requires wiring the Servo to an analog pin and configuring it with the following code:
+The first step requires wiring the Servo to an analog pin. The servo has three inputs that must be connected to pins on the board. As seen in the video - the red wire must be connected to the Arduino's Vcc and the black wire to ground. The white wire is connected to the PWM output that controls the digital signal. We then configured it with the following code:
 
 ```c
 #include "Servo.h" // include the servo library
@@ -130,20 +128,13 @@ Servo myservo; //declare the servo
 myservo.attach(PWM); //connect to the pin
 ```
 
-Inclusion of the Servo.h library allows use of functions that configure the servo. Specifically, we declare the servo, then use the "attach" function so that the Arduino can connect it to the pin we declared (pin 10). Then we can control the servo by calling:
+Inclusion of the Servo.h library allows use of functions that configure the servo. Specifically, we declare the servo, then use the "attach" function so that the Arduino can connect it to the PWM pin we declared (pin 10). Then we can control the servo by calling:
 
 ```c
 servo.write(a) //a is an integer on the range of 0 to 180
 ```
 
-where a is an integer in the range of 0 to 180.
-
 The value written to the servo controls the speed of rotation. Writing a value of 180 to the servo results in maximum rotation speed in the clockwise direction. Writing 0 to the servo results in maximum speed in the counterclockwise direction. A value of 90 keeps the servo still (approximately; the value varies slightly, and the servo we used in lab was found to stay still at 94. This must be determined for each unique servo.). The values between these linearly interpolate, so for example: 170 is a bit slower than 180, and 100 is much slower than 180 (both in the same direction); and 10 is a bit slower than 0, and 80 is much slower in the counterclockwise direction.
-
-TODO: Video
-
-TODO: Oscilloscope picture
-TODO: Oscilloscope video
 
 The digital signal that drives the servo uses pulse width modulation to produce a square wave between ground and Vdd, as shown here:
 
