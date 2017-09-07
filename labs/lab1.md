@@ -78,8 +78,9 @@ void loop() {
   delay(2);
 }
 ```
-Here is a video for reading a potentiometer:
-[Reading Potentiometer](https://youtu.be/aUDEQ5ryWt4)
+Here is a video of us reading a potentiometer and displaying its output on the serial monitor.
+
+[![Reading the potentiometer](http://img.youtube.com/vi/aUDEQ5ryWt4/default.jpg)](https://www.youtube.com/watch?v=aUDEQ5ryWt4)
 
 ### Analog Output
 
@@ -92,8 +93,7 @@ int analogPin = A0; // potentiometer output
 int LED = 11; // PWM, connected to anode of external LED int potValue;
 int brightness;
 
-void setup()
-{
+void setup(){
 pinMode(analogPin, INPUT); // initialize analog pin as an input
 pinMode(LED, OUTPUT); // initialize digital pin as an output
 Serial.begin(9600);
