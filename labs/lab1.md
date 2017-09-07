@@ -176,3 +176,10 @@ Now all we need to do is plug in the USB connector and power the arduino!
 <img src="http://i.imgur.com/6IJ7hyO.jpg" width="300">
 
 This isn't the clearest picture, but you should be able to see that the arduino is being powered solely by the usb power bank with no connection to the computer!
+
+### Assembling Our Robot
+Do we have pics of the different components?
+
+### Driving Autonomously
+--> attach code snippets and the videos
+
