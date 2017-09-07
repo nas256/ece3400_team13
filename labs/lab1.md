@@ -48,7 +48,7 @@ void loop() {
 ```
 Here's a video of our blinking LED in action:
 
-[![Blinking External LED](https://img.youtube.com/vi/Q5QZIRb2aYM/default.jpg)](https://youtu.be/Q5QZIRb2aYM)
+[![Blinking External LED](https://img.youtube.com/vi/Q5QZIRb2aYM/0.jpg)](https://youtu.be/Q5QZIRb2aYM)
 
 As you can see in our video, we added a 300 Ohm resistor in series with the LED in order to protect the output pin.
 
@@ -80,13 +80,13 @@ void loop() {
 ```
 Here is a video of us reading a potentiometer and displaying its output on the serial monitor.
 
-[![Reading the potentiometer](http://img.youtube.com/vi/aUDEQ5ryWt4/default.jpg)](https://www.youtube.com/watch?v=aUDEQ5ryWt4)
+[![Reading the potentiometer](http://img.youtube.com/vi/aUDEQ5ryWt4/0.jpg)](https://www.youtube.com/watch?v=aUDEQ5ryWt4)
 
 ### Analog Output
 
 Next, we used the Arduino's pulse-width modulator (PWM) to control the brightness of an external LED. Watch our video below!
 
-[![Demo of using potentiometer analog output to adjust LED brightness](http://img.youtube.com/vi/gkdc-MALRLY/default.jpg)](https://www.youtube.com/watch?v=gkdc-MALRLY)
+[![Demo of using potentiometer analog output to adjust LED brightness](http://img.youtube.com/vi/gkdc-MALRLY/0.jpg)](https://www.youtube.com/watch?v=gkdc-MALRLY)
 
 ```c
 int analogPin = A0; // potentiometer output
@@ -109,7 +109,7 @@ delay(2);
 
 Using the oscilloscope, we were able to determine that the frequency of the analog output signal was 50.02Hz. We could also observe the duty cycle of our PWM output vary as we tuned our potentiometer (see video below).
 
-[![PWM duty cycle varying with changing analog values](http://img.youtube.com/vi/FmR-_lkGAR0/default.jpg)](https://www.youtube.com/watch?v=FmR-_lkGAR0)
+[![PWM duty cycle varying with changing analog values](http://img.youtube.com/vi/FmR-_lkGAR0/0.jpg)](https://www.youtube.com/watch?v=FmR-_lkGAR0)
 
 ### Driving a Servo
 
@@ -229,4 +229,4 @@ void setup() {
 
 Here's a video of our robot going in a straight line!
 
-[![Robot driving](https://img.youtube.com/vi/PMXfH7eCFFc/default.jpg)](https://youtu.be/PMXfH7eCFFc)
+[![Robot driving](https://img.youtube.com/vi/PMXfH7eCFFc/0.jpg)](https://youtu.be/PMXfH7eCFFc)
