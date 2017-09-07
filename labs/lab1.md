@@ -119,14 +119,22 @@ A servo is a small motor that controls an output shaft based on an input digital
 The first step requires wiring the Servo to an analog pin and configuring it with the following code:
 
 '''cpp
-#include "Servo.h"
-int PWM = 10;
+#include "Servo.h" // include the servo library
+int PWM = 10; //set an int corresponding to a PWM pin
 
-Servo myservo;
-myservo.attach(PWM);
+Servo myservo; //declare the servo
+myservo.attach(PWM); //connect to the pin
 '''
 
-Inclusion of the Servo.h library allows use of functions that configure the servo. Specifically, we declare the servo, then use the "attach" function so that the Arduino can connect it to the pin we declared (pin 10). Then we 
+Inclusion of the Servo.h library allows use of functions that configure the servo. Specifically, we declare the servo, then use the "attach" function so that the Arduino can connect it to the pin we declared (pin 10). Then we can control the servo by calling:
+
+'''cpp
+servo.write(a) //a is an integer on the range of 0 to 180
+'''
+
+where a is an integer in the range of 0 to 180.
+
+The value written to the servo controls the speed of rotation. Writing a value of 180 to the servo results in maximum rotation speed in the clockwise direction. Writing 0 to the servo results in maximum speed in the counterclockwise direction. A value of 90 keeps the servo still (approximately; the value varies slightly, and the servo we used in lab was found to stay still at 94. This must be determined for each unique servo.). The values between these linearly interpolate, so for example: 170 is a bit slower than 180, and 100 is much slower than 180 (both in the same direction); and 10 is a bit slower than 0, and 80 is much slower in the counterclockwise direction.
 
 TODO: Code
 TODO: Video
