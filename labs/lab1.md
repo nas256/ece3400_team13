@@ -138,18 +138,20 @@ The value written to the servo controls the speed of rotation. Writing a value o
 
 TODO: Video
 
-Servo stops when servo1.write is 94 not 90
-(Aka some tuning was required)
-
-TODO: Talk about duty cycles
 TODO: Oscilloscope picture
 TODO: Oscilloscope video
-Duty Cycles
-Minimum 0.5ms \
-Stop at 1.5ms \
-Maximum 2.4ms
 
-(Datasheet says 1.3ms, 1.5ms, 1.7ms)
+The digital signal that drives the servo uses pulse width modulation to produce a square wave between ground and Vdd, as shown here:
+
+
+
+The width of this square wave in milliseconds, the "duty cycle", determines the speed at which the servo rotates. The above "servo.write()" function obscures the details in producing the signal. For the servos used, the duty cycles are as follows:
+
+Max reverse speed (servo.write(0)) = 1.3 ms
+Stop (servo.write(~90)) = 1.5 ms
+Max forward speed (servo.write(180)) = 1.7 ms
+
+
 
 ### Driving a servo using Potentiometer Input
 
