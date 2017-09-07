@@ -1,15 +1,15 @@
 # Lab 1
 
 ### Overview
-The Goal of this lab was to become accustomed with the arduino Uno and servo motors. These are important building blocks for creating our robot as the Arduino Uno serves as the brain. 
+The Goal of this lab was to become accustomed with the arduino Uno and servo motors. These are important building blocks for creating our robot as the Arduino Uno serves as the brain.
 
 The procedure for this lab includes the following steps:
  - Created a HeartBeat with an external LED with a 50% duty cycle
  - Reading Analog Input controlled by a potentiometer
  - Utilized PWM to control the brightness of an external LED
  - Controlled the speed of a servo motor using a potentiometer
- 
-After completing this procedure, we gathered parts to assemble a barebones frame that could mount the two servo motors, arduino, bread board, and power bank. This allowed us to successfully drive forward and backwards on the floor of the labratory. 
+
+After completing this procedure, we gathered parts to assemble a barebones frame that could mount the two servo motors, arduino, bread board, and power bank. This allowed us to successfully drive forward and backwards on the floor of the labratory.
 
 
 ### Modifying the Blink Sketch
@@ -59,7 +59,7 @@ Now, we want to play with Arduino's analog input pins and print out various anal
 
 <img src="https://media.digikey.com/pdf/Catalog%20Drawings/Pots/ART-3306F%20%5EA.jpg" width="300">
 
-By simply wiring up Potentiometer's output pin with Arduino's pin A5 (analog input), supply with GND, and input with Arduino's Vcc, we set up the circuit. After programming the code below to Arduino, we can see different voltage values printed out on the screen as we rotated the potentiometer. 
+By simply wiring up Potentiometer's output pin with Arduino's pin A5 (analog input), supply with GND, and input with Arduino's Vcc, we set up the circuit. After programming the code below to Arduino, we can see different voltage values printed out on the screen as we rotated the potentiometer.
 
 ```c
 int analogPin = A5;
@@ -83,29 +83,29 @@ Here is a video for reading a potentiometer:
 
 ### Analog Output
 
-Next, we used the Arduino's pulse-width modulator (PWM) to control the brightness of an external LED. 
+Next, we used the Arduino's pulse-width modulator (PWM) to control the brightness of an external LED.
 
 [![Demo of using potentiometer analog output to adjust LED brightness](http://img.youtube.com/vi/gkdc-MALRLY/default.jpg)](https://www.youtube.com/watch?v=gkdc-MALRLY)
 
 ```c
-int analogPin = A0; // potentiometer output 
-int LED = 11; // PWM, connected to anode of external LED int potValue; 
+int analogPin = A0; // potentiometer output
+int LED = 11; // PWM, connected to anode of external LED int potValue;
 int brightness;
 
-void setup() 
-{ 
+void setup()
+{
 pinMode(analogPin, INPUT); // initialize analog pin as an input
-pinMode(LED, OUTPUT); // initialize digital pin as an output 
-Serial.begin(9600); 
+pinMode(LED, OUTPUT); // initialize digital pin as an output
+Serial.begin(9600);
 }
 
-void loop() { 
-potValue = analogRead(analogPin); // read potentiometer output 
-brightness = map(potValue,0,1023,0,255); // map potentiometer value to brightness value 
-analogWrite(LED, brightness); // PWM output 
-delay(2); 
-} 
-``` 
+void loop() {
+potValue = analogRead(analogPin); // read potentiometer output
+brightness = map(potValue,0,1023,0,255); // map potentiometer value to brightness value
+analogWrite(LED, brightness); // PWM output
+delay(2);
+}
+```
 
 Using the oscilloscope, we were able to determine that the frequency of the analog output signal was 50.02Hz. We could also observe the duty cycle of our PWM output vary as we tuned our potentiometer.
 >>>>>>> 9a693777a182a7c26098e85e66da0a2e32d4d128
@@ -186,15 +186,13 @@ To make our robot drive in a straight line autonomously, we uploaded the followi
 ```cpp
 // the setup function runs once when you press reset or power the board
 void setup() {
-    myservo2.attach(PWM2); //Attach the servo input to pin 11 (set it up as a pwm output, 20Hz)
+    myservo2.attach(PWM2);
     myservo1.attach(PWM1);
-    myservo1.write(120);   //0 is full speed reverse, 90 no speed, 180 full speed ahead
+    myservo1.write(120);
     myservo2.write(120);
 }
 ```
 
 Here's a video of our robot going in a straight line!
-[![Robot driving](https://img.youtube.com/vi/PMXfH7eCFFc/0.jpg)](https://youtu.be/PMXfH7eCFFc)
 
-
-
+[![Robot driving](https://img.youtube.com/vi/PMXfH7eCFFc/default.jpg)](https://youtu.be/PMXfH7eCFFc)
