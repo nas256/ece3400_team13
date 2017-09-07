@@ -142,10 +142,6 @@ TODO: Oscilloscope video
 
 The digital signal that drives the servo uses pulse width modulation to produce a square wave between ground and Vdd, as shown here:
 
-
-
-https://youtu.be/tYYc33q33jk
-
 [![Servo Oscilloscope Reading](https://img.youtube.com/vi/tYYc33q33jk/0.jpg)](https://www.youtube.com/watch?v=tYYc33q33jk)
 
 
