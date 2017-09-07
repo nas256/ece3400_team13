@@ -181,5 +181,20 @@ This isn't the clearest picture, but you should be able to see that the arduino 
 Do we have pics of the different components?
 
 ### Driving Autonomously
---> attach code snippets and the videos
+To make our robot drive in a straight line autonomously, we uploaded the following code to our board.
+
+```cpp
+// the setup function runs once when you press reset or power the board
+void setup() {
+    myservo2.attach(PWM2); //Attach the servo input to pin 11 (set it up as a pwm output, 20Hz)
+    myservo1.attach(PWM1);
+    myservo1.write(120);   //0 is full speed reverse, 90 no speed, 180 full speed ahead
+    myservo2.write(120);
+}
+```
+
+Here's a video of our robot going in a straight line!
+[![Robot driving](https://img.youtube.com/vi/PMXfH7eCFFc/0.jpg)](https://youtu.be/PMXfH7eCFFc)
+
+
 
