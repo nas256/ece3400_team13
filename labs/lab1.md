@@ -144,10 +144,17 @@ The digital signal that drives the servo uses pulse width modulation to produce 
 
 
 
-The width of this square wave in milliseconds, the "duty cycle", determines the speed at which the servo rotates. The above "servo.write()" function obscures the details in producing the signal. For the servos used, the duty cycles are as follows:
+https://youtu.be/tYYc33q33jk
+
+[![Servo Oscilloscope Reading](https://img.youtube.com/vi/tYYc33q33jk/0.jpg)](https://www.youtube.com/watch?v=tYYc33q33jk)
+
+
+The width of this square wave in milliseconds, known as the "pulse width", determines the speed at which the servo rotates. The above "servo.write()" function obscures the details in producing the signal. For the servos used, the pulse widths are as follows:
 
 Max reverse speed (servo.write(0)) = 1.3 ms
+
 Stop (servo.write(~90)) = 1.5 ms
+
 Max forward speed (servo.write(180)) = 1.7 ms
 
 
