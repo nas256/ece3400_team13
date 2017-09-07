@@ -200,7 +200,20 @@ Now all we need to do is plug in the USB connector and power the arduino!
 This isn't the clearest picture, but you should be able to see that the arduino is being powered solely by the usb power bank with no connection to the computer!
 
 ### Assembling Our Robot
-Do we have pics of the different components?
+The barebones assembly of our robot consisted of grabbing pre-fabbed parts from the bin in lab. 
+We used the following parts:
+ - 2 Servo Motor Mounts
+ - 2 Wheels
+ - Chassis 
+ - Velcro Tape For Mounting Components
+ - Small Bread Board
+ - Battery Pack
+ - Arduino Uno
+ - Ball Barring
+ - Ball Barring Mount
+
+We constructed our robot using parts found around the lab. In order to make the wheels move, we took off the blade of the servo and attached the wheel to the rotor. We then attached the wheels to the main chassis. The Arduino board and breadboard were attached       to the top of the board using velcro tape, and the battery used to power the Arduino was velcroed to the bottom of the board. We soldered the usb cable to wires so that we could power the arduino. The way that the robot was assembled caused the chassis to be front heavy, as the wheels are located closer to the back. In order to prevent the front from dragging as we drive forward, we added a ball barring to the front of chassis with a 3-D printed mount.
+
 
 ### Driving Autonomously
 To make our robot drive in a straight line autonomously, we uploaded the following code to our board. Note that since the two servos were opposite each other, one had to be driven at 180 and the other at 0 so that they would turn in the same direction on the robot.
