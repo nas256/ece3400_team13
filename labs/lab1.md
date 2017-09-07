@@ -118,13 +118,13 @@ A servo is a small motor that controls an output shaft based on an input digital
 
 The first step requires wiring the Servo to an analog pin and configuring it with the following code:
 
-'''cpp
+```c
 #include "Servo.h" // include the servo library
 int PWM = 10; //set an int corresponding to a PWM pin
 
 Servo myservo; //declare the servo
 myservo.attach(PWM); //connect to the pin
-'''
+```
 
 Inclusion of the Servo.h library allows use of functions that configure the servo. Specifically, we declare the servo, then use the "attach" function so that the Arduino can connect it to the pin we declared (pin 10). Then we can control the servo by calling:
 
