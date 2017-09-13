@@ -13,6 +13,6 @@ Hello! Welcome to team Lucky 13's running webpage! We'll be documenting all of o
  - Norman Chen
  - Eric Cole
  - Julia Currie
- - Nicholas Sarkis
  - Divya Gupta
+ - Nicholas Sarkis
  - Whenhan Xia
