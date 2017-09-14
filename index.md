@@ -4,6 +4,7 @@ Hello! Welcome to team Lucky 13's running webpage! We'll be documenting all of o
 
 ## Lab Links
  - [Lab1](https://nas256.github.io/ece3400_team13/labs/lab1)
+ - [Lab2](https://nas256.github.io/ece3400_team13/labs/lab2)
 
 ## Meeting Minutes
  - [9-8-2017](https://nas256.github.io/ece3400_team13/minutes/9-8-2017)
