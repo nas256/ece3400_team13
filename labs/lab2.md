@@ -6,7 +6,7 @@
 Explanation of basic FFT algorithm \
 Open Music Labs Arduino FFT library \
 Example sketch test using signal generator \
-Compare ADC to AnalogRead \
+Compare ADC to AnalogRead 
 
 
 ## Acoustic Team: Assembling the Microphone Circuit
