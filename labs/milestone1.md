@@ -12,3 +12,4 @@ We placed two line sensors right next to each other in the forward center of the
 ## Traversing a Grid
 
 ## Figure Eight
+Video: https://youtu.be/ukufHEfCJcs
