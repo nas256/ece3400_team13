@@ -108,5 +108,4 @@ char figure_8[] = { RIGHT, LEFT, LEFT, LEFT, LEFT, RIGHT, RIGHT, RIGHT };
 The code loops through this array to find the next move it should make when it detects an intersection. 
 
 ### Turning Video
-
-Video: https://youtu.be/ukufHEfCJcs
+[![Driving In Figure 8](http://img.youtube.com/vi/ukufHEfCJcs/0.jpg)](https://www.youtube.com/watch?v=ukufHEfCJcs)
