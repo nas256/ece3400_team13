@@ -3,10 +3,14 @@
 ## Overview
 
 ## FFT & Arduino
-Explanation of basic FFT algorithm \
-Open Music Labs Arduino FFT library \
-Example sketch test using signal generator \
+Explanation of basic FFT algorithm 
+
+Open Music Labs Arduino FFT library 
+
+Example sketch test using signal generator 
+
 Compare ADC to AnalogRead 
+
 ## Pre-Lab: Amplifying and Filtering Design
 
 ## Acoustic Team: Assembling the Microphone Circuit
@@ -50,10 +54,12 @@ Circuit diagram and explanation
  -Include final diagram of our circuit.
 
 Arduino & FFT (include data from serial monitor) \
-Distinguishing 7kHz, 12kHz, 17kHz treasures
+Distinguishing 7kHz, 12kHz treasures
 - include code 
 
 Conclusion
 
-## Final Thoughts 
+## Conclusion
+Merged code
+
 Wrapping up and next steps
