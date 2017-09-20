@@ -51,7 +51,7 @@ Materials:
   
 ##### Adding a High Pass Filter 
   
-  Since we only wanted our sensor to detect light in the IR spectrum, we had to design a high pass filter to remove lower frequency signals. The lowest frequency signal we wanted to detect was 7kHz, and so we set a cutoff frequency of roughly 1kHz which be high enough to filter out the fluorescent light in the room (roughly 120Hz). Using this cutoff frequency, we chose resistor and capacitor values of 10kΩ and 0.01uF, respectively, and built a simple RC high pass filter into our circuit as shown below.
+  Since we only wanted our sensor to detect light in the IR spectrum, we had to design a high pass filter to remove lower frequency signals. The lowest frequency signal we wanted to detect was 7kHz, and so we set a cutoff frequency of roughly 1kHz which is high enough to filter out the fluorescent light in the room (roughly 120Hz). Using this cutoff frequency, we chose resistor and capacitor values of 10kΩ and 0.01uF, respectively, and built a simple RC high pass filter into our circuit as shown below.
   
   f<sub>c</sub> = 1/(2πRC)
 
@@ -141,7 +141,7 @@ void loop() {
 }
 ```
 
-TODO: Insert video
+[![Optical Distinguishing](http://img.youtube.com/vi/CBe-ef0GT4A/0.jpg)](https://www.youtube.com/watch?v=CBe-ef0GT4A)
 
 ## Conclusion
 Merged code
