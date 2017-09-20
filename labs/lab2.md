@@ -1,33 +1,51 @@
 # Lab 2: Analog Circuitry and FFTs
 
 ## Overview
-The goal of this singal-processing lab was to become familiar with the Open Music Lab FFT Library, analog filters, and op-amps. These three items were needed to implement both the IR sensors and the microphone circuitry. The microphone will be used for hearing the 660Hz starting signal in competition, while the use of the IR sensor is essential to finding and catagorizing the 'treasures' throughout the maze. 
-In order to accomplish this lab in the time given, we split up into two teams: the Acoustics Team and the Optical Team. The acoustics team was comprised of Norman Chen, Wenhan Xia, Eric Cole, and they were responsible for the pre-lab and the microphone circuitry. The optical team was comprised of Nick Sarkis, Divya Gupta, Julia Currie, and they were responsible for implementing the IR circuitry and merging of the code between groups. 
+The goal of this singal-processing lab was to become familiar with the Open Music Lab FFT Library, analog filters, and op-amps. These three items were needed to implement both the IR sensors and the microphone circuitry. The microphone will be used for hearing the 660Hz starting signal in competition, while the use of the IR sensor is essential to finding and catagorizing the 'treasures' throughout the maze.
+In order to accomplish this lab in the time given, we split up into two teams: the Acoustics Team and the Optical Team. The acoustics team was comprised of Norman Chen, Wenhan Xia, Eric Cole, and they were responsible for the pre-lab and the microphone circuitry. The optical team was comprised of Nick Sarkis, Divya Gupta, Julia Currie, and they were responsible for implementing the IR circuitry and merging of the code between groups.
 
 ## FFT & Arduino
-Explanation of basic FFT algorithm 
+Explanation of basic FFT algorithm
 
-Open Music Labs Arduino FFT library 
+Open Music Labs Arduino FFT library
 
-Example sketch test using signal generator 
+Example sketch test using signal generator
 
-Compare ADC to AnalogRead 
+Compare ADC to AnalogRead
 
 ## Pre-Lab: Amplifying and Filtering Design
 
 ## Acoustic Team: Assembling the Microphone Circuit
 
-Members: 
+Members: Norman, Wenhan, Eric
 
-Objective: 
+Objective: The objective of the acoustic team is to be able to have our robot detect a 660 Hz tone.
 
-Materials: (link to datasheets) 
-- Arduino Uno 
-- Electret microphone 
+Materials: (link to datasheets)
+
+- Arduino Uno
+
+- Electret microphone
+
 - 1 µF capacitor  
-- 300 Ω resistors 
-- ~3 kΩ resistor 
-- 
+
+- 300 Ω resistors
+- ~3 kΩ resistor
+
+###Opamp Circuit
+After doing the FFT analysis, we attempted to amplify the signal using a simple opamp circuit. At first, we thought that the microphone did not have any sort of filtering element, so we looked into band pass filters. However, once we found out that the microphone already had a high pass filter, we decided that all we need to do was try to amplify the signal. Here is the analysis we made for the frequency characteristic of the microphone.
+
+![Mic Frequency Characteristic](https://imgur.com/0UhMGos.jpg)
+
+We then tried to implement several different circuits to amplify our signal. We first tried to implement a non-inverting amplifier, but we had trouble getting our signal to pass through the circuit. We had a little more success with an inverting amplifier, but we were not able to get any gain. Here is a picture of one of the inverting amplifiers we wired up.
+
+![Amp](https://imgur.com/TMZBgdd.jpg)
+
+We decided not to use the amplifier in the detection of the 660 Hz tone, as we were not getting any gain from it, and it would take up unnecessary space.
+
+We tried to adjust our circuit in several ways to achieve gain. At first, we were using smaller resistors, 300 Ω and 100 Ω. Changing to larger resistors such as 3 kΩ  and 1 kΩ  gave us a cleaner signal, but still no gain. In fact, even with the resistors in the correct orientation, we sometimes got fractional gain. We also tried to feed V+ of our opamp with a smaller voltage, such as 2.5 V, but this did not help with our signal. We also tried putting a low pass filter at the input, but this did not help with our signal either.
+
+At the end, we decided to forgo the opamp circuit for now, and continue on with using the FFT to detect the 660 Hz tone. In the future, we may need to implement an amplifier in order to get a more distinct signal during competition.
 
 ## Optical Team: Assembling the IR Circuit
 
@@ -38,32 +56,32 @@ Objective: Be able to detect a 7, 12, 17kHz IR beacon with an Arduino using the 
 Materials:
 - Arduino Uno
 - IR receiver (phototransistor) ([datasheet](http://optoelectronics.liteon.com/upload/download/DS-50-93-0013/LTR-301.pdf))
-- Treasure board 
+- Treasure board
 - Resistors: 300, 1.8k, 5k, 16k, 100k
 - 0.01 uF capacitor
 - Operational amplifier ([datasheet](http://www.ti.com/lit/ds/symlink/lm358.pdf))
 
-#### Building a Basic Sensor using a Phototransistor 
+#### Building a Basic Sensor using a Phototransistor
   We started by building a basic sensor using a phototransistor in our circuit as shown below. As the phototransistor receives more light, it lets more current pass and the voltage drop across the resistor is larger. Therefore, the output voltage increases as a result.
-  
+
  <img src = "https://i.imgur.com/Pv4VCBv.png" width = "300">
- 
+
   
-##### Adding a High Pass Filter 
-  
+##### Adding a High Pass Filter
+
   Since we only wanted our sensor to detect light in the IR spectrum, we had to design a high pass filter to remove lower frequency signals. The lowest frequency signal we wanted to detect was 7kHz, and so we set a cutoff frequency of roughly 1kHz which is high enough to filter out the fluorescent light in the room (roughly 120Hz). Using this cutoff frequency, we chose resistor and capacitor values of 10kΩ and 0.01uF, respectively, and built a simple RC high pass filter into our circuit as shown below.
-  
+
   f<sub>c</sub> = 1/(2πRC)
 
-#### Preparing the Treasure 
-  
-  Our second step was to set up the treasure board. We powered the board with a 3.3V coin cell battery and turned on the power switch. In order to get our treasure board to flash at the desired frequency of either 7kHz or 12kHz (depending on the position of the switch), we had to measure the frequency output of the sensor on an oscilloscope and tune the according potentiometer until it reached the right value. 
-  
-![Treasure board](https://cei-lab.github.io/ece3400/images/Treasure_Pot.JPG)
-  
-#### Adding an Amplifier 
+#### Preparing the Treasure
 
-   We could see from our treasure board frequency measurements that the sensing circuit was working; it was only passing a signal when the treasure board was near it and not when light from our phones or from the fluorescent lights overhead shone on it. However, the amplitude of the sensor output was small and we had to hold our treasure board very close to the sensor in order to detect the signal. Therefore, we decided to build an amplifying circuit so that we could detect the board from a realistic distance that it would be in the maze. 
+  Our second step was to set up the treasure board. We powered the board with a 3.3V coin cell battery and turned on the power switch. In order to get our treasure board to flash at the desired frequency of either 7kHz or 12kHz (depending on the position of the switch), we had to measure the frequency output of the sensor on an oscilloscope and tune the according potentiometer until it reached the right value.
+
+![Treasure board](https://cei-lab.github.io/ece3400/images/Treasure_Pot.JPG)
+
+#### Adding an Amplifier
+
+   We could see from our treasure board frequency measurements that the sensing circuit was working; it was only passing a signal when the treasure board was near it and not when light from our phones or from the fluorescent lights overhead shone on it. However, the amplitude of the sensor output was small and we had to hold our treasure board very close to the sensor in order to detect the signal. Therefore, we decided to build an amplifying circuit so that we could detect the board from a realistic distance that it would be in the maze.
 
 To build our amplifying circuit, we used the LM358 dual operational amplifier chip. Our circuit is as follows:
 
@@ -71,12 +89,12 @@ To build our amplifying circuit, we used the LM358 dual operational amplifier ch
 
 Our circuit consists of 3 main stages: an input stage, a high pass filter stage, and an amplifying stage.
  - The input stage consists of a photostransistor that conducts current relative to the amount of IR light it is receiving. As it conducts more current, more current passes through the resistor creating a voltage that we can measure.
- - The high pass filter stage has a cutoff frequency of about 1kHz so that only AC signals pass through. This is to remove the DC offset caused by ambient light that would intefere with our amplification. It also blocks out the 60-120Hz oscillations due to many types of electric lighting. 
+ - The high pass filter stage has a cutoff frequency of about 1kHz so that only AC signals pass through. This is to remove the DC offset caused by ambient light that would intefere with our amplification. It also blocks out the 60-120Hz oscillations due to many types of electric lighting.
  - Finally, the gain stage allows us to read IR signals from farther distances. Empirically, we've found that 20x gain gives us about 4-5 inches of range. Should we find that our range is too small, we can always increase our circuit's gain by choosing a smaller resistance value for R3
 
 ### Arduino & FFT (include data from serial monitor)
 
-In order to distinuguish between different treasure frequencies, we need to perform a Fourier Transform on the input received from our sensing circuit. A common method that many digital systems use to compute this transform is called a FFT, or "Fast Fourier Transform," which is an algorithm that approximates the frequency components of a signal into "bins" of a discrete size, allowing the system to distinguish different frequencies. 
+In order to distinuguish between different treasure frequencies, we need to perform a Fourier Transform on the input received from our sensing circuit. A common method that many digital systems use to compute this transform is called a FFT, or "Fast Fourier Transform," which is an algorithm that approximates the frequency components of a signal into "bins" of a discrete size, allowing the system to distinguish different frequencies.
 
 A sample FFT output is shown below:
 
@@ -106,9 +124,9 @@ void setup() {
 
 void loop() {
   while(1) { // reduces jitter
-    
+
     cli();  // UDRE interrupt slows this way down on arduino1.0
-    
+
     for (int i = 0 ; i < 512 ; i += 2) { // save 256 samples
       while(!(ADCSRA & 0x10)); // wait for adc to be ready
       ADCSRA = 0xf5; // restart adc
@@ -124,19 +142,19 @@ void loop() {
     fft_reorder(); // reorder the data before doing the fft
     fft_run(); // process the data in the fft
     fft_mag_log(); // take the output of the fft
-    
+
     sei();
-    
+
     /*Serial.println("start");
-    for (byte i = 0 ; i < FFT_N/2 ; i++) { 
+    for (byte i = 0 ; i < FFT_N/2 ; i++) {
       Serial.println(fft_log_out[i]); // send out the data
     }*/
-    
+
     if ( fft_log_out[47] > 100 ) // threshold check
-      Serial.println("7kHz beacon dectected!"); 
+      Serial.println("7kHz beacon dectected!");
     else if ( fft_log_out[81] > 100 ) // threshold check
       Serial.println("12kHz beacon dectected!");
-    
+
   }
 }
 ```
@@ -200,21 +218,21 @@ void acoustic() {
     fft_run(); // process the data in the fft
     fft_mag_log(); // take the output of the fft
     sei();
-    
+
     Serial.println("start_a");
     /* for (byte i = 0 ; i < FFT_N/2 ; i++) { // uncomment to print FFT output to serial
       Serial.print(i);
       Serial.print(":");
       Serial.println(fft_log_out[i]); // send out the data
     } */
-    
+
     if (fft_log_out[18] > 150) { // threshold check AND
       if (fft_log_out[18] > fft_log_out[16] // distinguish 660Hz from 585Hz AND
           && fft_log_out[18] > fft_log_out[20]) { //distinguish 660Hz from 735Hz
-      Serial.println("660 detected"); 
+      Serial.println("660 detected");
           }
     }
-    
+
     if (Serial.available() && (Serial.read()=='o'|Serial.read()=='O')){ // switch to optical
       setup_optical();
       optical();
@@ -224,9 +242,9 @@ void acoustic() {
 
 void optical() {
   while(1) { // reduces jitter
-    
+
     cli();  // UDRE interrupt slows this way down on arduino1.0
-    
+
     for (int i = 0 ; i < 512 ; i += 2) { // save 256 samples
       while(!(ADCSRA & 0x10)); // wait for adc to be ready
       ADCSRA = 0xf5; // restart adc
@@ -242,19 +260,19 @@ void optical() {
     fft_reorder(); // reorder the data before doing the fft
     fft_run(); // process the data in the fft
     fft_mag_log(); // take the output of the fft
-    
+
     sei();
-    
+
     Serial.println("start_o");
     /*for (byte i = 0 ; i < FFT_N/2 ; i++) { // uncomment to print FFT output to serial
       Serial.println(fft_log_out[i]); // send out the data
     }*/
-    
+
     if ( fft_log_out[47] > 100 ) // threshold check
       Serial.println("7kHz beacon dectected!");
     else if ( fft_log_out[81] > 100 ) // threshold check
       Serial.println("12kHz beacon dectected!");
-      
+
     if (Serial.available() && (Serial.read()=='a'|Serial.read()=='A')){ // switch to acoustic
       setup_acoustic();
       acoustic();;
