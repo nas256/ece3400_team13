@@ -63,15 +63,14 @@ Materials: (link to datasheets)
 
    We could see from our treasure board frequency measurements that the sensing circuit was working; it was only passing a signal when the treasure board was near it and not when light from our phones or from the fluorescent lights overhead shone on it. However, the amplitude of the sensor output was small and we had to hold our treasure board very close to the sensor in order to detect the signal. Therefore, we decided to build an amplifying circuit so that we could detect the board from a realistic distance that it would be in the maze. 
 
-To build our amplifying circuit, we used the LM358 dual operational amplifier chip. 
+To build our amplifying circuit, we used the LM358 dual operational amplifier chip. Our circuit is as follows:
 
-Circuit diagram and explanation
-- Phototransistor
-- High pass filter (include oscilloscope capture)
- Cutoff frequency, whether affected by fluorscent lights
-- Amplifier (include oscilloscope capture)
- Gain, DC offset
- -Include final diagram of our circuit.
+![IR Amplifier Circuit](https://i.imgur.com/bbulIQy.png)
+
+Our circuit consists of 3 main stages: an input stage, a high pass filter stage, and an amplifying stage.
+ - The input stage consists of a photostransistor that conducts current relative to the amount of IR light it is receiving. As it conducts more current, more current passes through the resistor creating a voltage that we can measure.
+ - The high pass filter stage has a cutoff frequency of about 1kHz so that only AC signals pass through. This is to remove the DC offset caused by ambient light that would intefere with our amplification. It also blocks out the 60-120Hz oscillations due to many types of electric lighting. 
+ - Finally, the gain stage allows us to read IR signals from farther distances. Empirically, we've found that 20x gain gives us about 4-5 inches of range. Should we find that our range is too small, we can always increase our circuit's gain by choosing a smaller resistance value for R3
 
 Arduino & FFT (include data from serial monitor) \
 Distinguishing 7kHz, 12kHz treasures
