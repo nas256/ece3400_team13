@@ -39,7 +39,7 @@ Materials:
 - Arduino Uno
 - IR receiver (phototransistor) ([datasheet](http://optoelectronics.liteon.com/upload/download/DS-50-93-0013/LTR-301.pdf))
 - Treasure board 
-- 300Ω resistors, 16kΩ resistor
+- Resistors: 300, 1.8k, 5k, 16k, 100k
 - 0.01 uF capacitor
 - Operational amplifier ([datasheet](http://www.ti.com/lit/ds/symlink/lm358.pdf))
 
