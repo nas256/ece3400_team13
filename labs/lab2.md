@@ -54,13 +54,12 @@ Materials:
   Since we only wanted our sensor to detect light in the IR spectrum, we had to design a high pass filter to remove lower frequency signals. The lowest frequency signal we wanted to detect was 7kHz, and so we set a cutoff frequency of roughly 1kHz which be high enough to filter out the fluorescent light in the room (roughly 120Hz). Using this cutoff frequency, we chose resistor and capacitor values of 10kΩ and 0.01uF, respectively, and built a simple RC high pass filter into our circuit as shown below.
   
   f<sub>c</sub> = 1/(2πRC)
-  
-  TODO: insert image
 
 #### Preparing the Treasure 
-  ![Treasure board](https://cei-lab.github.io/ece3400/images/Treasure_Pot.JPG)
   
   Our second step was to set up the treasure board. We powered the board with a 3.3V coin cell battery and turned on the power switch. In order to get our treasure board to flash at the desired frequency of either 7kHz or 12kHz (depending on the position of the switch), we had to measure the frequency output of the sensor on an oscilloscope and tune the according potentiometer until it reached the right value. 
+  
+![Treasure board](https://cei-lab.github.io/ece3400/images/Treasure_Pot.JPG)
   
 #### Adding an Amplifier 
 
@@ -75,15 +74,8 @@ Our circuit consists of 3 main stages: an input stage, a high pass filter stage,
  - The high pass filter stage has a cutoff frequency of about 1kHz so that only AC signals pass through. This is to remove the DC offset caused by ambient light that would intefere with our amplification. It also blocks out the 60-120Hz oscillations due to many types of electric lighting. 
  - Finally, the gain stage allows us to read IR signals from farther distances. Empirically, we've found that 20x gain gives us about 4-5 inches of range. Should we find that our range is too small, we can always increase our circuit's gain by choosing a smaller resistance value for R3
 
-### Arduino & FFT (include data from serial monitor)
-
-In order to distinuguish between different treasure frequencies, we need to perform a Fourier Transform on the input received from our sensing circuit. A common method that many digital systems use to compute this transform is called a FFT, or "Fast Fourier Transform," which is an algorithm that approximates the frequency components of a signal into "bins" of a discrete size, allowing the system to distinguish different frequencies. 
-
-A sample FFT output is shown below:
-
-![FFT](https://i.imgur.com/HgkH4CI.png)
-
-### Distinguishing 7kHz, 12kHz treasures
+Arduino & FFT (include data from serial monitor) \
+Distinguishing 7kHz, 12kHz treasures
 - include code 
 
 Conclusion
