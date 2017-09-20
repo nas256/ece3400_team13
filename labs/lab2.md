@@ -132,9 +132,9 @@ void loop() {
       Serial.println(fft_log_out[i]); // send out the data
     }*/
     
-    if ( fft_log_out[47] > 100 )
-      Serial.println("7kHz beacon dectected!");
-    else if ( fft_log_out[81] > 100 )
+    if ( fft_log_out[47] > 100 ) // threshold check
+      Serial.println("7kHz beacon dectected!"); 
+    else if ( fft_log_out[81] > 100 ) // threshold check
       Serial.println("12kHz beacon dectected!");
     
   }
@@ -144,6 +144,123 @@ void loop() {
 [![Optical Distinguishing](http://img.youtube.com/vi/CBe-ef0GT4A/0.jpg)](https://www.youtube.com/watch?v=CBe-ef0GT4A)
 
 ## Conclusion
-Merged code
+
+We merged the optical and acoustic FFT code by placing the setup and loop code for each program in separate functions and switching between each mode of operation by writing either an "a" or "A" for run acoustic FFT and "o" or "O" to run optical FFT in the serial monitor.
+
+Merged Code:
+```cpp
+/*
+  adapted from OpenMusic's fft_adc_serial.pde
+*/
+
+#define LOG_OUT 1 // use the log output function
+#define FFT_N 256 // set to 256 point fft
+
+#include <FFT.h> // include the library
+
+void setup(){
+  Serial.begin(115200); // use the serial port
+  setup_acoustic();
+  acoustic();
+}
+
+void setup_acoustic(){
+  TIMSK0 = 0; // turn off timer0 for lower jitter
+  ADCSRA = 0xe7; // set the adc to free running mode
+  ADMUX = 0x40; // use adc0
+  DIDR0 = 0x01; // turn off the digital input for adc0
+}
+
+void setup_optical() {
+  TIMSK0 = 0; // turn off timer0 for lower jitter
+  ADCSRA = 0xe5; // set the adc to free running mode
+  ADMUX = 0x41; // use adc0 //40
+  DIDR0 = 0x01; // turn off the digital input for adc0 //01
+}
+
+void loop(){ // don't need because while() loops in acoustic, optical functions
+}
+
+void acoustic() {
+  while(1) { // reduces jitter
+    cli();  // UDRE interrupt slows this way down on arduino1.0
+    for (int i = 0 ; i < 512 ; i += 2) { // save 256 samples
+      while(!(ADCSRA & 0x10)); // wait for adc to be ready
+      ADCSRA = 0xf7; // restart adc
+      byte m = ADCL; // fetch adc data
+      byte j = ADCH;
+      int k = (j << 8) | m; // form into an int
+      k -= 0x0200; // form into a signed int
+      k <<= 6; // form into a 16b signed int
+      fft_input[i] = k; // put real data into even bins
+      fft_input[i+1] = 0; // set odd bins to 0
+    }
+    fft_window(); // window the data for better frequency response
+    fft_reorder(); // reorder the data before doing the fft
+    fft_run(); // process the data in the fft
+    fft_mag_log(); // take the output of the fft
+    sei();
+    
+    Serial.println("start_a");
+    /* for (byte i = 0 ; i < FFT_N/2 ; i++) { // uncomment to print FFT output to serial
+      Serial.print(i);
+      Serial.print(":");
+      Serial.println(fft_log_out[i]); // send out the data
+    } */
+    
+    if (fft_log_out[18] > 150) { // threshold check AND
+      if (fft_log_out[18] > fft_log_out[16] // distinguish 660Hz from 585Hz AND
+          && fft_log_out[18] > fft_log_out[20]) { //distinguish 660Hz from 735Hz
+      Serial.println("660 detected"); 
+          }
+    }
+    
+    if (Serial.available() && (Serial.read()=='o'|Serial.read()=='O')){ // switch to optical
+      setup_optical();
+      optical();
+    }  
+  }
+}
+
+void optical() {
+  while(1) { // reduces jitter
+    
+    cli();  // UDRE interrupt slows this way down on arduino1.0
+    
+    for (int i = 0 ; i < 512 ; i += 2) { // save 256 samples
+      while(!(ADCSRA & 0x10)); // wait for adc to be ready
+      ADCSRA = 0xf5; // restart adc
+      byte m = ADCL; // fetch adc data
+      byte j = ADCH;
+      int k = (j << 8) | m; // form into an int
+      k -= 0x0200; // form into a signed int
+      k <<= 6; // form into a 16b signed int
+      fft_input[i] = k; // put real data into even bins
+      fft_input[i+1] = 0; // set odd bins to 0
+    }
+    fft_window(); // window the data for better frequency response
+    fft_reorder(); // reorder the data before doing the fft
+    fft_run(); // process the data in the fft
+    fft_mag_log(); // take the output of the fft
+    
+    sei();
+    
+    Serial.println("start_o");
+    /*for (byte i = 0 ; i < FFT_N/2 ; i++) { // uncomment to print FFT output to serial
+      Serial.println(fft_log_out[i]); // send out the data
+    }*/
+    
+    if ( fft_log_out[47] > 100 ) // threshold check
+      Serial.println("7kHz beacon dectected!");
+    else if ( fft_log_out[81] > 100 ) // threshold check
+      Serial.println("12kHz beacon dectected!");
+      
+    if (Serial.available() && (Serial.read()=='a'|Serial.read()=='A')){ // switch to acoustic
+      setup_acoustic();
+      acoustic();;
+    }  
+  }
+}
+```
 
 Wrapping up and next steps
