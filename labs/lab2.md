@@ -46,7 +46,7 @@ Materials:
 #### Building a Basic Sensor using a Phototransistor 
   We started by building a basic sensor using a phototransistor in our circuit as shown below. As the phototransistor receives more light, it lets more current pass and the voltage drop across the resistor is larger. Therefore, the output voltage increases as a result.
   
- ![Basic Phototransistor Circuit](https://imgur.com/a/vSyra)
+ ![Basic Phototransistor Circuit](https://i.imgur.com/Pv4VCBv.png)
   
 ##### Adding a High Pass Filter 
   
