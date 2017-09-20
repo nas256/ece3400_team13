@@ -33,7 +33,7 @@ Materials: (link to datasheets)
 
 Members: Nick, Julia, Divya
 
-Objective: Be able to detect a 7kHz IR beacon with an Arduino using the FFT library.
+Objective: Be able to detect a 7, 12, 17kHz IR beacon with an Arduino using the FFT library.
 
 Materials:
 - Arduino Uno
@@ -46,8 +46,8 @@ Materials:
 #### Building a Basic Sensor using a Phototransistor 
   We started by building a basic sensor using a phototransistor in our circuit as shown below. As the phototransistor receives more light, it lets more current pass and the voltage drop across the resistor is larger. Therefore, the output voltage increases as a result.
   
-  TODO: insert image
-  
+ 
+  
 ##### Adding a High Pass Filter 
   
   Since we only wanted our sensor to detect light in the IR spectrum, we had to design a high pass filter to remove lower frequency signals. The lowest frequency signal we wanted to detect was 7kHz, and so we set a cutoff frequency of roughly 1kHz which be high enough to filter out the fluorescent light in the room (roughly 120Hz). Using this cutoff frequency, we chose resistor and capacitor values of 10kΩ and 0.01uF, respectively, and built a simple RC high pass filter into our circuit as shown below.
