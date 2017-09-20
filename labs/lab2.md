@@ -35,7 +35,7 @@ Members: Nick, Julia, Divya
 
 Objective: Be able to detect a 7kHz IR beacon with an Arduino using the FFT library.
 
-Materials: (link to datasheets)
+Materials:
 - Arduino Uno
 - IR receiver (phototransistor) ([datasheet](http://optoelectronics.liteon.com/upload/download/DS-50-93-0013/LTR-301.pdf))
 - Treasure board 
