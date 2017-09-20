@@ -101,6 +101,9 @@ Our circuit consists of 3 main stages: an input stage, a high pass filter stage,
  - The input stage consists of a photostransistor that conducts current relative to the amount of IR light it is receiving. As it conducts more current, more current passes through the resistor creating a voltage that we can measure.
  - The high pass filter stage has a cutoff frequency of about 1kHz so that only AC signals pass through. This is to remove the DC offset caused by ambient light that would intefere with our amplification. It also blocks out the 60-120Hz oscillations due to many types of electric lighting.
  - Finally, the gain stage allows us to read IR signals from farther distances. Empirically, we've found that 20x gain gives us about 4-5 inches of range. Should we find that our range is too small, we can always increase our circuit's gain by choosing a smaller resistance value for R3.
+ 
+You can see the improvement from our amplifying circuit by comparing the regular and amplified signals from the output of the IR sensor in the following oscilloscope capture:
+ ![Oscilloscope op amp gain](https://imgur.com/dkEMGmB.png)
 
 ### Arduino & FFT 
 
