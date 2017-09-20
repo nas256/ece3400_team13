@@ -1,6 +1,8 @@
 # Lab 2: Analog Circuitry and FFTs
 
 ## Overview
+The goal of this singal-processing lab was to become familiar with the Open Music Lab FFT Library, analog filters, and op-amps. These three items were needed to implement both the IR sensors and the microphone circuitry. The microphone will be used for hearing the 660Hz starting signal in competition, while the use of the IR sensor is essential to finding and catagorizing the 'treasures' throughout the maze. 
+In order to accomplish this lab in the time given, we split up into two teams: the Acoustics Team and the Optical Team. The acoustics team was comprised of Norman Chen, Wenhan Xia, Eric Cole, and they were responsible for the pre-lab and the microphone circuitry. The optical team was comprised of Nick Sarkis, Divya Gupta, Julia Currie, and they were responsible for implementing the IR circuitry and merging of the code between groups. 
 
 ## FFT & Arduino
 Explanation of basic FFT algorithm 
