@@ -21,7 +21,7 @@ Members: Norman, Wenhan, Eric
 
 Objective: The objective of the acoustic team is to be able to have our robot detect a 660 Hz tone.
 
-Materials: (link to datasheets)
+Materials: ![ATmega328](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf)
 
 - Arduino Uno
 
