@@ -1,10 +1,10 @@
 # Milestone 1
 
 ## Introduction
-The main goal of this milestone is to prove the basic functionality of the robot. 
+The main goal of this milestone is to prove the basic functionality of the robot, by proving that we can follow a line and navigate a figure eight on a grid.
 
 ## Following a Line
-Following a line was a fun challenge. In the end, we were able to follow both straight and reasonably curvy lines. If the curves were to harsh, our robot wouldn't be able to react fast enough. We were able to solve that problem by decreasing the speed of our motors, but for the purposes of straight line following, faster is better so we sacrificed this functionality.
+Following a line was a fun challenge. In the end, we were able to follow both straight and reasonably curvy lines. If the curves were too harsh, our robot wouldn't be able to react fast enough. We were able to solve that problem by decreasing the speed of our motors, but for the purposes of straight line following, faster is better so we sacrificed this functionality.
 
 ### Hardware
 We placed two line sensors right next to each other in the forward center of the chassis and two more sensors placed about 1.5cm farther out and about 1cm in front of the two center ones. We used this arrangment so that we would be able to continue line sensing while also being able to detect upcoming intersections in the grid. This layout also makes turning easier, because we are able to lock back onto the line much faster. 
@@ -85,14 +85,11 @@ loop
       set mode: line following
 ```
 
-### Turning Video
-
-**TODO**: TURNING VIDEO
 
 ## Figure Eight
 
-
 Now that we can turn reliably, its time to do something cool with it! We managed to get our robot to do figure 8s for indefinentaly. 
+
 
 ### Code
 
@@ -108,7 +105,6 @@ char figure_8[] = { RIGHT, LEFT, LEFT, LEFT, LEFT, RIGHT, RIGHT, RIGHT };
 ```
 
 The code loops through this array to find the next move it should make when it detects an intersection. 
-### Following A Line
-### Turning Video
+
 ### Figure Eight Video
 [![Driving In Figure 8](http://img.youtube.com/vi/ukufHEfCJcs/0.jpg)](https://www.youtube.com/watch?v=ukufHEfCJcs)
