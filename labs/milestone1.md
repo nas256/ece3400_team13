@@ -7,7 +7,7 @@ The main goal of this milestone is to prove the basic functionality of the robot
 Following a line was a fun challenge. In the end, we were able to follow both straight and reasonably curvy lines. If the curves were to harsh, our robot wouldn't be able to react fast enough. We were able to solve that problem by decreasing the speed of our motors, but for the purposes of straight line following, faster is better so we sacrificed this functionality.
 
 ### Hardware
-We placed two line sensors right next to each other in the forward center of the chassis and two more sensors placed about 1cm farther out and about 1cm in front of the two center ones. We used this arrangment so that we would be able to continue line sensing while also being able to detect upcoming intersections in the grid. This layout also makes turning easier, because we are able to lock back onto the line much faster. 
+We placed two line sensors right next to each other in the forward center of the chassis and two more sensors placed about 1.5cm farther out and about 1cm in front of the two center ones. We used this arrangment so that we would be able to continue line sensing while also being able to detect upcoming intersections in the grid. This layout also makes turning easier, because we are able to lock back onto the line much faster. 
 
 ### Code
 Our main strategy for line following is to scale the motor speeds based on the relative darkness of the light sensor. In order to maximize speed, we run the motors at max speed, and subtract a value from one side's motor if we need to realign on the black line.
@@ -106,6 +106,7 @@ char figure_8[] = { RIGHT, LEFT, LEFT, LEFT, LEFT, RIGHT, RIGHT, RIGHT };
 ```
 
 The code loops through this array to find the next move it should make when it detects an intersection. 
-
+### Following A Line
 ### Turning Video
+### Figure Eight Video
 [![Driving In Figure 8](http://img.youtube.com/vi/ukufHEfCJcs/0.jpg)](https://www.youtube.com/watch?v=ukufHEfCJcs)
