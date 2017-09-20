@@ -99,7 +99,7 @@ In order to distinuguish between different treasure frequencies, we need to perf
 A sample FFT output is shown below:
 
 ![FFT](https://i.imgur.com/HgkH4CI.png)
-![FFT_overlay](https://imgur.com/EkLIUwH.png)
+![FFT_overlay](https://imgur.com/zSGeQq6.png)
 
 ###  Distinguishing between 7 and 12 kHz
 
