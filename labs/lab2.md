@@ -82,7 +82,66 @@ A sample FFT output is shown below:
 
 ![FFT](https://i.imgur.com/HgkH4CI.png)
 
-Conclusion
+###  Distinguishing between 7 and 12 kHz
+
+There are many ways to distinguish between 7 and 12 kHz. One solution could be performing peak detection on the FFT output and seeing if either of the two frequencies are large peaks. However, since during the competition we will want this FFT to be as fast as possible, we deemed a simple threshold check would be enough for our purposes. Therefore, if either of the bins corresponding to these two frequencies is above a certain threshold, the Arduino registers that as a tresure find. The code and a video of its operation can be found below:
+
+```cpp
+/*
+  adapted from OpenMusic's fft_adc_serial.pde
+*/
+
+#define LOG_OUT 1 // use the log output function
+#define FFT_N 256 // set to 256 point fft
+
+#include <FFT.h> // include the library
+
+void setup() {
+  Serial.begin(115200); // use the serial port
+  TIMSK0 = 0; // turn off timer0 for lower jitter
+  ADCSRA = 0xe5; // set the adc to free running mode
+  ADMUX = 0x40; // use adc0
+  DIDR0 = 0x01; // turn off the digital input for adc0
+}
+
+void loop() {
+  while(1) { // reduces jitter
+    
+    cli();  // UDRE interrupt slows this way down on arduino1.0
+    
+    for (int i = 0 ; i < 512 ; i += 2) { // save 256 samples
+      while(!(ADCSRA & 0x10)); // wait for adc to be ready
+      ADCSRA = 0xf5; // restart adc
+      byte m = ADCL; // fetch adc data
+      byte j = ADCH;
+      int k = (j << 8) | m; // form into an int
+      k -= 0x0200; // form into a signed int
+      k <<= 6; // form into a 16b signed int
+      fft_input[i] = k; // put real data into even bins
+      fft_input[i+1] = 0; // set odd bins to 0
+    }
+    fft_window(); // window the data for better frequency response
+    fft_reorder(); // reorder the data before doing the fft
+    fft_run(); // process the data in the fft
+    fft_mag_log(); // take the output of the fft
+    
+    sei();
+    
+    /*Serial.println("start");
+    for (byte i = 0 ; i < FFT_N/2 ; i++) { 
+      Serial.println(fft_log_out[i]); // send out the data
+    }*/
+    
+    if ( fft_log_out[47] > 100 )
+      Serial.println("7kHz beacon dectected!");
+    else if ( fft_log_out[81] > 100 )
+      Serial.println("12kHz beacon dectected!");
+    
+  }
+}
+```
+
+TODO: Insert video
 
 ## Conclusion
 Merged code
