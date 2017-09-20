@@ -17,9 +17,9 @@ Open Music Labs Arduino FFT library
 - The division factor can be changed by the last three bits (prescalar select) of ADCSRA
 - Input clock to ADC = system clock frequency / division factor
 - The ADC conversion runs continuously in free running mode 
-- By increasing the prescalar value, we can achieve higher frequency resolution. At the same time, the fft sampling frequency decreases, which may be an issue when we are sampling high frequency component according to Nyquist Theorem
+- By increasing the prescalar value, we can achieve higher frequency resolution. At the same time, the fft sampling frequency decreases, which may be an issue when we are sampling high frequency component according to Nyquist Theorem.
   
-# In the sketch example, ADCSRA is set to 0xe5, which means ADC is in free running mode and the division factor is set to 32 for prescalar. We then see that the fft sampling frequency is 16MHz/32 prescalar/13 ADC cycles ≈ 38461 Hz. Therefore, the fft bin width is 38461 Hz/ 256 ≈ 150 Hz. If we input a 660Hz signal, it is supposed to be near bin 5 (660Hz/150 ≈4.4).  
+  In the sketch example, ADCSRA is set to 0xe5, which means ADC is in free running mode and the division factor is set to 32 for prescalar. We then see that the fft sampling frequency is 16MHz/32 prescalar/13 ADC cycles ≈ 38461 Hz. Therefore, the fft bin width is 38461 Hz/ 256 ≈ 150 Hz. If we input a 660Hz signal, it is supposed to be near bin 5 (660Hz/150 ≈4.4).  
  
   To test our assumption, we used a function generator to input a 660 Hz sinusoid with 1.65Vpp and 0.825V offset to the Arduino's pin A0 and read the printed fft output. The graph below shows that the peak of 660 Hz appears at bin 5, which corresponds to our prediction. We then increased our sinusoid frequency to 1320 Hz, 1980Hz, 2640Hz, and so forth, and found that the corresponding peak occurred at bin 10, 15, 20, etc., respectively.  
   
