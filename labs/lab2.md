@@ -74,9 +74,13 @@ Our circuit consists of 3 main stages: an input stage, a high pass filter stage,
  - The high pass filter stage has a cutoff frequency of about 1kHz so that only AC signals pass through. This is to remove the DC offset caused by ambient light that would intefere with our amplification. It also blocks out the 60-120Hz oscillations due to many types of electric lighting. 
  - Finally, the gain stage allows us to read IR signals from farther distances. Empirically, we've found that 20x gain gives us about 4-5 inches of range. Should we find that our range is too small, we can always increase our circuit's gain by choosing a smaller resistance value for R3
 
-Arduino & FFT (include data from serial monitor) \
-Distinguishing 7kHz, 12kHz treasures
-- include code 
+### Arduino & FFT (include data from serial monitor)
+
+In order to distinuguish between different treasure frequencies, we need to perform a Fourier Transform on the input received from our sensing circuit. A common method that many digital systems use to compute this transform is called a FFT, or "Fast Fourier Transform," which is an algorithm that approximates the frequency components of a signal into "bins" of a discrete size, allowing the system to distinguish different frequencies. 
+
+A sample FFT output is shown below:
+
+![FFT](https://i.imgur.com/HgkH4CI.png)
 
 Conclusion
 
