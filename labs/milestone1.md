@@ -41,9 +41,11 @@ if ( abs(line_left_value - line_right_value) < LIGHT_TOLERANCE ){
 
 The above code uses the `map()` function to convert a different in line sensor readings to a motor slowdown value, so that the robot can adjust its position in realtime to follow the line while maintaining as close to max speed as possible.
 
-### Line Following Video
+### Line Following Videos
+Watch our robot follow both a straight line and a curvy line!
 
-**TODO**: LINE FOLLOWING VIDEO
+[![Line Following](http://img.youtube.com/vi/coHGV5OTJF0/0.jpg)](https://www.youtube.com/watch?v=coHGV5OTJF0)
+[![Following a Curve](http://img.youtube.com/vi/6YNuYDZxIUI/0.jpg)](https://www.youtube.com/watch?v=6YNuYDZxIUI)
 
 ## Traversing a Grid
 
