@@ -9,11 +9,20 @@ Explanation of basic FFT algorithm
 
 Open Music Labs Arduino FFT library
 
-For this lab, we will use the Arduino's FFT libray. To better understand how Arduino's fft works, we downloaded and tested  Open Music Lab's "Arduino fft" [Example Sketch](http://wiki.openmusiclabs.com/wiki/Example)
-
-
-
-Example sketch test using signal generator
+  For this lab, we will use the Arduino's FFT libray. To better understand how Arduino's fft works, we downloaded Open Music Lab's "Arduino fft" [Example Sketch](http://wiki.openmusiclabs.com/wiki/Example). Next, we checked the Arduino's datasheet to better understand the sketch code. We learned the following:
+ 
+  1.) The Arduino microcontroller's clock frequency was 16 MHz
+  2.) The ADC converts an analog input voltage to a 10-bit digital value (this line is copied directly from datasheet)
+  3.) A normal ADC conversion takes 13 ADC clock cycles and the first conversion takes 25 cycles.
+  4.) The division factor can be changed by the last three bits (prescalar select) of ADCSRA. 
+  5.) Input clock to ADC = system clock frequency / division factor
+  6.) ADC conversion run continuously in free running mode 
+  7.) By increase the prescalar value, we can achieve higher frequency resolution. At the same time, the fft sampling frequency decreases, which may be an issue when we are sampling high frequency component according to Nyquist Theorem.
+  
+  In the sketch example, ADCSRA is set to 0xe5, which means ADC is at free running mode and division factor is set to 32 for presclar. Then we can get the fft sampling frequency is 16MHz/32 prescalar/13 ADC cycles ≈ 38461 Hz. Therefore, the fft bin width is 38461 Hz/ 256 ≈ 150 Hz. If we input a 660Hz signal, it is supposed to be near bin 5 (660Hz/150 ≈4.4).  
+ 
+  To test our assumption, we used a function generator to input a 660 Hz sinusoid with 1.65Vpp and 0.825V offset to the Arduino's pin A0 and read the printed fft output. The graph below shows that the peak of 660 Hz appears at bin 5. We then increased our sinusoid frequency to 1320 Hz, 1980Hz, 2640Hz, and so forth, and found that the corresponding peak occurred at bin 10, 15, 20, etc., respectively. This result suggests that our bin width was around 660Hz/5 ≈ 130Hz. 
+  
 
 Compare ADC to AnalogRead
 
@@ -53,7 +62,7 @@ At the end, we decided to forgo the op-amp circuit for now, and continue on with
 
 #### Distinguish a 660Hz tone (from tones at 585Hz and 735Hz)
 
-  As analysed previously, the fft bin width in the fft library example is 16MHz/32 prescalers/13 clock cycles/256 samples =  150.2 Hz. A higher resolution is required to distinguish between the 660, 585, and 735 Hz tones, since the current resolution is coarser than their frequency difference of 75 Hz. To achieve this, we set the last three bits of ADCSRA to 111, resulting in 128 prescalars. Our bin width then became 16MHz/128 prescalars/13 clock cycles/256 samples =  37.56 Hz. 
+  As analysed previously, the fft bin width in the fft library example is 16MHz/32 prescaler/13 ADC cycles/256 samples =  150.2 Hz. A higher resolution is required to distinguish between the 660, 585, and 735 Hz tones, since the current resolution is coarser than their frequency difference of 75 Hz. To achieve this, we set the last three bits of ADCSRA to 111, resulting in 128 prescalar. Our bin width then became 16MHz/128 prescalar/13 ADC cycles/256 samples =  37.56 Hz. 
   
   By calculation, we predicted that the desired frequency of 660Hz should appear at bin 18 (660Hz/37.56Hz = 17.57), while the other two frequencies should appear at bin 16 (585Hz/37.56Hz = 15.57) and bin 20 (735Hz/37.56Hz = 19.56). This assumption was supported later when we indiidually played the three tones to the microphone, and found that the maximum magnitudes appeared at these three bin numbers.
   
