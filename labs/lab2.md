@@ -1,7 +1,7 @@
 # Lab 2: Analog Circuitry and FFTs
 
 ## Overview
-The goal of this singal-processing lab was to become familiar with the Open Music Lab FFT Library, analog filters, and op-amps. These three items were needed to implement both the IR sensors and the microphone circuitry. The microphone will be used for hearing the 660Hz starting signal in competition, while the use of the IR sensor is essential to finding and catagorizing the 'treasures' throughout the maze.
+The goal of this signal-processing lab was to become familiar with the Open Music Lab FFT Library, analog filters, and op-amps. These three items were needed to implement both the IR sensors and the microphone circuitry. The microphone will be used for hearing the 660Hz starting signal in competition, while the use of the IR sensor is essential to finding and catagorizing the 'treasures' throughout the maze.
 In order to accomplish this lab in the time given, we split up into two teams: the Acoustics Team and the Optical Team. The acoustics team was comprised of Norman Chen, Wenhan Xia, Eric Cole, and they were responsible for the pre-lab and the microphone circuitry. The optical team was comprised of Nick Sarkis, Divya Gupta, Julia Currie, and they were responsible for implementing the IR circuitry and merging of the code between groups.
 
 ## FFT & Arduino
@@ -32,8 +32,8 @@ Materials: (link to datasheets)
 - 300 Ω resistors
 - ~3 kΩ resistor
 
-###Opamp Circuit
-After doing the FFT analysis, we attempted to amplify the signal using a simple opamp circuit. At first, we thought that the microphone did not have any sort of filtering element, so we looked into band pass filters. However, once we found out that the microphone already had a high pass filter, we decided that all we need to do was try to amplify the signal. Here is the analysis we made for the frequency characteristic of the microphone.
+### Op-Amp Circuit
+After doing the FFT analysis, we attempted to amplify the signal using a simple op-amp circuit. At first, we thought that the microphone did not have any sort of filtering element, so we looked into band pass filters. However, once we found out that the microphone already had a high pass filter, we decided that all we need to do was try to amplify the signal. Here is the analysis we made for the frequency characteristic of the microphone.
 
 ![Mic Frequency Characteristic](https://imgur.com/0UhMGos.jpg)
 
@@ -43,9 +43,9 @@ We then tried to implement several different circuits to amplify our signal. We 
 
 We decided not to use the amplifier in the detection of the 660 Hz tone, as we were not getting any gain from it, and it would take up unnecessary space.
 
-We tried to adjust our circuit in several ways to achieve gain. At first, we were using smaller resistors, 300 Ω and 100 Ω. Changing to larger resistors such as 3 kΩ  and 1 kΩ  gave us a cleaner signal, but still no gain. In fact, even with the resistors in the correct orientation, we sometimes got fractional gain. We also tried to feed V+ of our opamp with a smaller voltage, such as 2.5 V, but this did not help with our signal. We also tried putting a low pass filter at the input, but this did not help with our signal either.
+We tried to adjust our circuit in several ways to achieve gain. At first, we were using smaller resistors, 300 Ω and 100 Ω. Changing to larger resistors such as 3 kΩ  and 1 kΩ  gave us a cleaner signal, but still no gain. In fact, even with the resistors in the correct orientation, we sometimes got fractional gain. We also tried to feed V+ of our op-amp with a smaller voltage, such as 2.5 V, but this did not help with our signal. We also tried putting a low pass filter at the input, but this did not help with our signal either.
 
-At the end, we decided to forgo the opamp circuit for now, and continue on with using the FFT to detect the 660 Hz tone. In the future, we may need to implement an amplifier in order to get a more distinct signal during competition.
+At the end, we decided to forgo the op-amp circuit for now, and continue on with using the FFT to detect the 660 Hz tone. In the future, we may need to implement an amplifier in order to get a more distinct signal during competition.
 
 #### Distinguish a 660Hz tone (from tones at 585Hz and 735Hz)
 
@@ -55,6 +55,7 @@ At the end, we decided to forgo the opamp circuit for now, and continue on with 
   
   We first determined if we could detect the 660 Hz tone by comparing fft_log_out[18] with the threshold of 150. If we could detect this tone, we sought to distinguish it from the 585 Hz and 735 Hz tones by comparing fft_log_out[18] with fft_log_out[20] and fft_log_out[16]. If fft_log_out[18] was greater than the other two values, then we printed "660 Hz detected." This result indicated successful identification of the 660 Hz tone. The code for this section may be found in the "Merged Code" section of "Conclusion."
   
+  ![Microphone FFT overlay](https://imgur.com/MU1Exov.png) 
   
 ## Optical Team: Assembling the IR Circuit
 
@@ -78,7 +79,7 @@ Materials:
   
 ##### Adding a High Pass Filter
 
-  Since we only wanted our sensor to detect light in the IR spectrum, we had to design a high pass filter to remove lower frequency signals. The lowest frequency signal we wanted to detect was 7kHz, and so we set a cutoff frequency of roughly 1kHz which is high enough to filter out the fluorescent light in the room (roughly 120Hz). Using this cutoff frequency, we chose resistor and capacitor values of 10kΩ and 0.01uF, respectively, and built a simple RC high pass filter into our circuit as shown below.
+  Since we only wanted our sensor to detect light in the IR spectrum, we had to design a high pass filter to remove lower frequency signals. The lowest frequency signal we wanted to detect was 7kHz, and so we set a cutoff frequency of about 1kHz, which is high enough to filter out the fluorescent light in the room at roughly 120Hz. Using this cutoff frequency, we chose resistor and capacitor values of 10kΩ and 0.01uF, respectively, and built a simple RC high pass filter into our circuit as shown below.
 
   f<sub>c</sub> = 1/(2πRC)
 
@@ -99,15 +100,16 @@ To build our amplifying circuit, we used the LM358 dual operational amplifier ch
 Our circuit consists of 3 main stages: an input stage, a high pass filter stage, and an amplifying stage.
  - The input stage consists of a photostransistor that conducts current relative to the amount of IR light it is receiving. As it conducts more current, more current passes through the resistor creating a voltage that we can measure.
  - The high pass filter stage has a cutoff frequency of about 1kHz so that only AC signals pass through. This is to remove the DC offset caused by ambient light that would intefere with our amplification. It also blocks out the 60-120Hz oscillations due to many types of electric lighting.
- - Finally, the gain stage allows us to read IR signals from farther distances. Empirically, we've found that 20x gain gives us about 4-5 inches of range. Should we find that our range is too small, we can always increase our circuit's gain by choosing a smaller resistance value for R3
+ - Finally, the gain stage allows us to read IR signals from farther distances. Empirically, we've found that 20x gain gives us about 4-5 inches of range. Should we find that our range is too small, we can always increase our circuit's gain by choosing a smaller resistance value for R3.
 
-### Arduino & FFT (include data from serial monitor)
+### Arduino & FFT 
 
 In order to distinuguish between different treasure frequencies, we need to perform a Fourier Transform on the input received from our sensing circuit. A common method that many digital systems use to compute this transform is called a FFT, or "Fast Fourier Transform," which is an algorithm that approximates the frequency components of a signal into "bins" of a discrete size, allowing the system to distinguish different frequencies.
 
 A sample FFT output is shown below:
 
 ![FFT](https://i.imgur.com/HgkH4CI.png)
+![FFT_overlay](https://imgur.com/zSGeQq6.png)
 
 ###  Distinguishing between 7 and 12 kHz
 
@@ -172,7 +174,7 @@ void loop() {
 
 ## Conclusion
 
-We merged the optical and acoustic FFT code by placing the setup and loop code for each program in separate functions and switching between each mode of operation by writing either an "a" or "A" for run acoustic FFT and "o" or "O" to run optical FFT in the serial monitor.
+We merged the optical and acoustic FFT code by placing the setup and loop code for each program in separate functions and switching between each mode of operation by writing either an "a" or "A" to the serial monitor in order to run acoustic FFT and an "o" or "O" to run optical FFT .
 
 Merged Code:
 ```cpp
@@ -290,4 +292,4 @@ void optical() {
 }
 ```
 
-Wrapping up and next steps
+TODO: Wrapping up and next steps
