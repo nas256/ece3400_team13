@@ -23,6 +23,7 @@ Open Music Labs Arduino FFT library
 
   To test our assumption, we used a function generator to input a 660 Hz sinusoid with 1.65Vpp and 0.825V offset to the Arduino's pin A0 and read the printed fft output. The graph below shows that the peak of 660 Hz appears at bin 5, which corresponds to our prediction. We then increased our sinusoid frequency to 1320 Hz, 1980Hz, 2640Hz, and so forth, and found that the corresponding peak occurred at bin 10, 15, 20, etc., respectively.  
 
+![FFT Mic](https://imgur.com/ulj2tSD.png)
 
 Compare ADC to AnalogRead
 
@@ -123,7 +124,6 @@ A sample FFT output is shown below:
 
 ![FFT](https://i.imgur.com/HgkH4CI.png)
 ![FFT_overlay](https://imgur.com/zSGeQq6.png)
-![FFT Mic](https://imgur.com/jlBHJmq.png)
 
 ###  Distinguishing between 7 and 12 kHz
 
