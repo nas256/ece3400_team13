@@ -10,19 +10,19 @@ Explanation of basic FFT algorithm
 Open Music Labs Arduino FFT library
 
   For this lab, we will use the Arduino's FFT libray. To better understand how Arduino's fft works, we downloaded Open Music Lab's "Arduino fft" [Example Sketch](http://wiki.openmusiclabs.com/wiki/Example). Next, we checked the Arduino's datasheet to better understand the sketch code. We learned the following:
- 
+
 1) The Arduino microcontroller's clock frequency is 16 MHz
 2) The ADC converts an analog input voltage to a 10-bit digital value (this line is copied directly from datasheet)
 3) A normal ADC conversion takes 13 ADC clock cycles and the first conversion takes 25 cycles
 4) The division factor can be changed by the last three bits (prescalar select) of ADCSRA
 5) Input clock to ADC = system clock frequency / division factor
-6) The ADC conversion runs continuously in free running mode 
+6) The ADC conversion runs continuously in free running mode
 7) By increasing the prescalar value, we can achieve higher frequency resolution. At the same time, the fft sampling frequency decreases, which may be an issue when we are sampling high frequency component according to Nyquist Theorem.
-  
+
   In the sketch example, ADCSRA is set to 0xe5, which means ADC is in free running mode and the division factor is set to 32 for prescalar. We then see that the fft sampling frequency is 16MHz/32 prescalar/13 ADC cycles ≈ 38461 Hz. Therefore, the fft bin width is 38461 Hz/ 256 ≈ 150 Hz. If we input a 660Hz signal, it is supposed to be near bin 5 (660Hz/150 ≈4.4).  
- 
+
   To test our assumption, we used a function generator to input a 660 Hz sinusoid with 1.65Vpp and 0.825V offset to the Arduino's pin A0 and read the printed fft output. The graph below shows that the peak of 660 Hz appears at bin 5, which corresponds to our prediction. We then increased our sinusoid frequency to 1320 Hz, 1980Hz, 2640Hz, and so forth, and found that the corresponding peak occurred at bin 10, 15, 20, etc., respectively.  
-  
+
 
 Compare ADC to AnalogRead
 
@@ -62,14 +62,14 @@ At the end, we decided to forgo the op-amp circuit for now, and continue on with
 
 #### Distinguish a 660Hz tone (from tones at 585Hz and 735Hz)
 
-  As analysed previously, the fft bin width in the fft library example is 16MHz/32 prescaler/13 ADC cycles/256 samples =  150.2 Hz. A higher resolution is required to distinguish between the 660, 585, and 735 Hz tones, since the current resolution is coarser than their frequency difference of 75 Hz. To achieve this, we set the last three bits of ADCSRA to 111, resulting in 128 prescalar. Our bin width then became 16MHz/128 prescalar/13 ADC cycles/256 samples =  37.56 Hz. 
-  
+  As analysed previously, the fft bin width in the fft library example is 16MHz/32 prescaler/13 ADC cycles/256 samples =  150.2 Hz. A higher resolution is required to distinguish between the 660, 585, and 735 Hz tones, since the current resolution is coarser than their frequency difference of 75 Hz. To achieve this, we set the last three bits of ADCSRA to 111, resulting in 128 prescalar. Our bin width then became 16MHz/128 prescalar/13 ADC cycles/256 samples =  37.56 Hz.
+
   By calculation, we predicted that the desired frequency of 660Hz should appear at bin 18 (660Hz/37.56Hz = 17.57), while the other two frequencies should appear at bin 16 (585Hz/37.56Hz = 15.57) and bin 20 (735Hz/37.56Hz = 19.56). This assumption was supported later when we indiidually played the three tones to the microphone, and found that the maximum magnitudes appeared at these three bin numbers.
-  
+
   We first determined if we could detect the 660 Hz tone by comparing fft_log_out[18] with the threshold of 150. If we could detect this tone, we sought to distinguish it from the 585 Hz and 735 Hz tones by comparing fft_log_out[18] with fft_log_out[20] and fft_log_out[16]. If fft_log_out[18] was greater than the other two values, then we printed "660 Hz detected." This result indicated successful identification of the 660 Hz tone. The code for this section may be found in the "Merged Code" section of "Conclusion."
-  
-  ![Microphone FFT overlay](https://imgur.com/MU1Exov.png) 
-  
+
+  ![Microphone FFT overlay](https://imgur.com/MU1Exov.png)
+
 ## Optical Team: Assembling the IR Circuit
 
 Members: Nick, Julia, Divya
@@ -115,7 +115,7 @@ Our circuit consists of 3 main stages: an input stage, a high pass filter stage,
  - The high pass filter stage has a cutoff frequency of about 1kHz so that only AC signals pass through. This is to remove the DC offset caused by ambient light that would intefere with our amplification. It also blocks out the 60-120Hz oscillations due to many types of electric lighting.
  - Finally, the gain stage allows us to read IR signals from farther distances. Empirically, we've found that 20x gain gives us about 4-5 inches of range. Should we find that our range is too small, we can always increase our circuit's gain by choosing a smaller resistance value for R3.
 
-### Arduino & FFT 
+### Arduino & FFT
 
 In order to distinuguish between different treasure frequencies, we need to perform a Fourier Transform on the input received from our sensing circuit. A common method that many digital systems use to compute this transform is called a FFT, or "Fast Fourier Transform," which is an algorithm that approximates the frequency components of a signal into "bins" of a discrete size, allowing the system to distinguish different frequencies.
 
@@ -123,6 +123,7 @@ A sample FFT output is shown below:
 
 ![FFT](https://i.imgur.com/HgkH4CI.png)
 ![FFT_overlay](https://imgur.com/zSGeQq6.png)
+![FFT Mic](https://imgur.com/jlBHJmq.png)
 
 ###  Distinguishing between 7 and 12 kHz
 
