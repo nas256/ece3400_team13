@@ -52,11 +52,8 @@ Objective: The objective of the acoustic team is to be able to have our robot de
 Materials: [ATmega328](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf)(Arduino Microcontroller)
 
 - Arduino Uno
-
 - Electret microphone
-
 - 1 µF capacitor  
-
 - 300 Ω resistors
 - ~3 kΩ resistor
 
