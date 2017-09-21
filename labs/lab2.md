@@ -42,7 +42,6 @@ The output of the FFT algorithm is the discrete Fourier transform, indicating th
 
 ![FFT Mic](https://imgur.com/ulj2tSD.png)
 
-Compare ADC to AnalogRead
 
 ## Acoustic Team: Assembling the Microphone Circuit
 
@@ -61,9 +60,12 @@ Materials: [ATmega328](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microco
 - 300 Ω resistors
 - ~3 kΩ resistor
 
-### Op-Amp Circuit
-
+### Microphone and FFT Analysis
 The goal of this part of the lab is to detect and distinguish a 660 Hz tone. This must also be done in the presence of noise. In order to do this, we will use a microphone to collect a time domain sound recording, and analyze its Fourier transform to detect the strength of only the 660 Hz frequency. 
+
+Out first step was to wire a microphone to an analog input pin and use an ADC converter to read its output as a sampled analog time signal.  
+
+### Op-Amp Circuit
 
 After doing the FFT analysis, we attempted to amplify the signal using a simple op-amp circuit. At first, we thought that the microphone did not have any sort of filtering element, so we looked into band pass filters. However, once we found out that the microphone already had a high pass filter, we decided that all we need to do was try to amplify the signal. Here is the analysis we made for the frequency characteristic of the microphone.
 
@@ -324,4 +326,5 @@ void optical() {
 }
 ```
 
+### Conclusion
 TODO: Wrapping up and next steps
