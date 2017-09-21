@@ -22,7 +22,7 @@ In order to hear a 660 Hz tone and identify IR signals, we will record sound and
 
 This explanation is a bit simplistic, as it ignores complex numbers and computational details of FFT that make it efficient. Essentially FFT exploits the property of Discrete Time Fourier Transform that, to compute a Fourier transform of a signal, one can combine the transforms of simpler signals. The use of recursion in this respect reduces a very computationally complex problem to a complexity of only O(n*log(n)).
 
-###Open Music Labs Arduino FFT library
+## Open Music Labs Arduino FFT library
 
   For this lab, we will use the Arduino's FFT library. To better understand how Arduino's FFT works, we downloaded Open Music Lab's "Arduino FFT" [Example Sketch](http://wiki.openmusiclabs.com/wiki/Example). Next, we checked the Arduino's datasheet to better understand the sketch code. We learned the following:
 
