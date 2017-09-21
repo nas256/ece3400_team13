@@ -116,7 +116,7 @@ At the end, we decided to forgo the op-amp circuit for now, and continue on with
 
 #### Distinguish a 660Hz tone (from tones at 585Hz and 735Hz)
 
-  As analysed previously, the fft bin width in the fft library example is 16MHz/32 prescaler/13 ADC cycles/256 samples =  150.2 Hz. A higher resolution is required to distinguish between the 660, 585, and 735 Hz tones, since the current resolution is coarser than their frequency difference of 75 Hz. To achieve this, we set the last three bits of ADCSRA to 111, resulting in 128 prescalar. Our bin width then became 16MHz/128 prescalar/13 ADC cycles/256 samples =  37.56 Hz.
+  As described previously, the FFT bin width in the FFT library example is 150.2 Hz. A higher resolution is required to distinguish between the 660, 585, and 735 Hz tones, since the current resolution is coarser than their frequency difference of 75 Hz. To achieve this, we set the last three bits of ADCSRA to 111, resulting in a prescalar value of 128. Our bin width then became 16MHz/128 prescalar/13 ADC cycles/256 samples =  37.56 Hz.
 
   By calculation, we predicted that the desired frequency of 660Hz should appear at bin 18 (660Hz/37.56Hz = 17.57), while the other two frequencies should appear at bin 16 (585Hz/37.56Hz = 15.57) and bin 20 (735Hz/37.56Hz = 19.56). This assumption was supported later when we indiidually played the three tones to the microphone, and found that the maximum magnitudes appeared at these three bin numbers.
 
@@ -171,7 +171,7 @@ Our circuit consists of 3 main stages: an input stage, a high pass filter stage,
 
 ### Arduino & FFT
 
-In order to distinuguish between different treasure frequencies, we need to perform a Fourier Transform on the input received from our sensing circuit. A common method that many digital systems use to compute this transform is called a FFT, or "Fast Fourier Transform," which is an algorithm that approximates the frequency components of a signal into "bins" of a discrete size, allowing the system to distinguish different frequencies.
+In order to distinuguish between different treasure frequencies, we need to perform a Fourier Transform on the input received from our sensing circuit. We will also use the FFT algorithm and analysis process as described above to detect the treasure's IR signal.
 
 A sample FFT output is shown below:
 
