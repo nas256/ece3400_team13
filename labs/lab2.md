@@ -359,5 +359,4 @@ void optical() {
 }
 ```
 
-### Conclusion
-TODO: Wrapping up and next steps
+Both subteams' designs were largely successful in accomplishing each respective task. Looking toward the future, we plan on more rigorously testing our implementations for performance in competition conditions. We may choose to order a microphone without its own amplifier and filter, and develop our own circuit if needed.
