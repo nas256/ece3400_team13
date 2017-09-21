@@ -2,10 +2,31 @@
 
 ## Overview
 The goal of this signal-processing lab was to become familiar with the Open Music Lab FFT Library, analog filters, and op-amps. These three items were needed to implement both the IR sensors and the microphone circuitry. The microphone will be used for hearing the 660Hz starting signal in competition, while the use of the IR sensor is essential to finding and catagorizing the 'treasures' throughout the maze.
+
 In order to accomplish this lab in the time given, we split up into two teams: the Acoustics Team and the Optical Team. The acoustics team was comprised of Norman Chen, Wenhan Xia, Eric Cole, and they were responsible for the pre-lab and the microphone circuitry. The optical team was comprised of Nick Sarkis, Divya Gupta, Julia Currie, and they were responsible for implementing the IR circuitry and merging of the code between groups.
 
 ## FFT & Arduino
-Explanation of basic FFT algorithm
+
+The first important part of performing such a frequency analysis is the fast Fourier transform (FFT) algorithm, which converts a sampled time signal into its Fourier transform. The simplest, most common form of the FFT algorithm is called the Cooley-Tukey Algorithm, which works as follows:
+
+1) For a time domain signal of N samples, separate the signal into N different time signals, each with only one sample. This is done recursively, by breaking the signal into two halves on each iteration: one signal containing the samples for even indices, one for odd indices. Here is an example:
+
+    i. 1 2 3 4 5 6 7 8
+    ii. 1 3 5 7, 2 4 6 8
+    iii. 1 5, 3 7, 2 6, 4 8
+    iv. 1, 5, 3, 7, 2, 6, 4, 8
+
+2) Take the frequency component of each of these 1-sample time signals, a very easy step. Each frequency signal is just equal to the time signal when there is only one sample.
+
+3) The individual frequency domain signals must be recontructed, in the reverse order that the time signal was separated.
+
+This explanation is a bit simplistic, as it ignores complex numbers and computational details of FFT that make it efficient. Essentially FFT exploits the property of Discrete Time Fourier Transform that, to compute a Fourier transform of a signal, one can combine the transforms of simpler signals. The use of recursion in this respect reduces a very computationally complex problem to a complexity of only O(n*log(n)).
+
+Our implementation of the FFT algorithm will be provided by the Arduino FFT library. The output of the algorithm is the discrete Fourier transform, indicating the power present in 256 frequency "bins". The total frequency range analyzed is the sampling frequency, and each bin describes the power present in a range of 1/256 of the sampling frequency. Here is an example output, using Excel to plot the values:
+
+
+
+Here, we are using a sampling frequency of 40 kHz, and so each bin has a range of 40,000/256 = 156 Hz. 660 Hz should appear in the 5th bin, as shown.
 
 Open Music Labs Arduino FFT library
 
@@ -46,32 +67,10 @@ Materials: [ATmega328](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microco
 - 300 Ω resistors
 - ~3 kΩ resistor
 
-### FFT Analysis
+### Op-Amp Circuit
 
 The goal of this part of the lab is to detect and distinguish a 660 Hz tone. This must also be done in the presence of noise. In order to do this, we will use a microphone to collect a time domain sound recording, and analyze its Fourier transform to detect the strength of only the 660 Hz frequency. 
 
-The first important part of performing such a frequency analysis is the fast Fourier transform (FFT) algorithm, which converts a sampled time signal into its Fourier transform. The simplest, most common form of the FFT algorithm is called the Cooley-Tukey Algorithm, which works as follows:
-
-1) For a time domain signal of N samples, separate the signal into N different time signals, each with only one sample. This is done recursively, by breaking the signal into two halves on each iteration: one signal containing the samples for even indices, one for odd indices. Here is an example:
-
-    i. 1 2 3 4 5 6 7 8
-    ii. 1 3 5 7, 2 4 6 8
-    iii. 1 5, 3 7, 2 6, 4 8
-    iv. 1, 5, 3, 7, 2, 6, 4, 8
-
-2) Take the frequency component of each of these 1-sample time signals, a very easy step. Each frequency signal is just equal to the time signal when there is only one sample.
-
-3) The individual frequency domain signals must be recontructed, in the reverse order that the time signal was separated.
-
-This explanation is a bit simplistic, as it ignores complex numbers and computational details of FFT that make it efficient. Essentially FFT exploits the property of Discrete Time Fourier Transform that, to compute a Fourier transform of a signal, one can combine the transforms of simpler signals. The use of recursion in this respect reduces a very computationally complex problem to a complexity of only O(n*log(n)).
-
-Our implementation of the FFT algorithm will be provided by the Arduino FFT library. The output of the algorithm is the discrete Fourier transform, indicating the power present in 256 frequency "bins". The total frequency range analyzed is the sampling frequency, and each bin describes the power present in a range of 1/256 of the sampling frequency. Here is an example output, using Excel to plot the values:
-
-
-
-Here, we are using a sampling frequency of 40 kHz, and so each bin has a range of 40,000/256 = 156 Hz. 660 Hz should appear in the 5th bin, as shown.
-
-### Op-Amp Circuit
 After doing the FFT analysis, we attempted to amplify the signal using a simple op-amp circuit. At first, we thought that the microphone did not have any sort of filtering element, so we looked into band pass filters. However, once we found out that the microphone already had a high pass filter, we decided that all we need to do was try to amplify the signal. Here is the analysis we made for the frequency characteristic of the microphone.
 
 ![Mic Frequency Characteristic](https://imgur.com/0UhMGos.jpg)
