@@ -63,7 +63,16 @@ Materials: [ATmega328](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microco
 ### Microphone and FFT Analysis
 The goal of this part of the lab is to detect and distinguish a 660 Hz tone. This must also be done in the presence of noise. In order to do this, we will use a microphone to collect a time domain sound recording, and analyze its Fourier transform to detect the strength of only the 660 Hz frequency. 
 
-Out first step was to wire a microphone to an analog input pin and use an ADC converter to read its output as a sampled analog time signal.  
+Out first step was to wire a microphone to an analog input pin and use an ADC converter to read its output as a sampled analog time signal. The microphone was setup using the following code:
+
+```cpp
+void setup_acoustic(){
+  TIMSK0 = 0; // turn off timer0 for lower jitter
+  ADCSRA = 0xe7; // set the adc to free running mode
+  ADMUX = 0x40; // use adc0
+  DIDR0 = 0x01; // turn off the digital input for adc0
+}
+```
 
 ### Op-Amp Circuit
 
