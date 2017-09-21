@@ -74,9 +74,33 @@ void setup_acoustic(){
 }
 ```
 
+The following code was then used to read the microphone signal's FFT:
+
+```cpp
+    cli();  // UDRE interrupt slows this way down on arduino1.0
+    for (int i = 0 ; i < 512 ; i += 2) { // save 256 samples
+      while(!(ADCSRA & 0x10)); // wait for adc to be ready
+      ADCSRA = 0xf7; // restart adc
+      byte m = ADCL; // fetch adc data
+      byte j = ADCH;
+      int k = (j << 8) | m; // form into an int
+      k -= 0x0200; // form into a signed int
+      k <<= 6; // form into a 16b signed int
+      fft_input[i] = k; // put real data into even bins
+      fft_input[i+1] = 0; // set odd bins to 0
+    }
+    fft_window(); // window the data for better frequency response
+    fft_reorder(); // reorder the data before doing the fft
+    fft_run(); // process the data in the fft
+    fft_mag_log(); // take the output of the fft
+    sei();
+```
+
+Both of these examples were developed by following the example code provided in the Open Music Labs FFT library, fft_adc_serial.pde. While the microphone appeared to function well, we found that its voltage signal did not span the full range of possible analog input voltages. For more precision and to reduce noise, we found that it may be useful to amplify and filter the microphone's output.
+
 ### Op-Amp Circuit
 
-After doing the FFT analysis, we attempted to amplify the signal using a simple op-amp circuit. At first, we thought that the microphone did not have any sort of filtering element, so we looked into band pass filters. However, once we found out that the microphone already had a high pass filter, we decided that all we need to do was try to amplify the signal. Here is the analysis we made for the frequency characteristic of the microphone.
+After performing the FFT analysis, we attempted to amplify the signal using a simple op-amp circuit. At first, we thought that the microphone did not have any sort of filtering element, so we looked into band pass filters. However, once we found out that the microphone already had a high pass filter, we decided that all we need to do was try to amplify the signal. Here is the analysis we made for the frequency characteristic of the microphone.
 
 ![Mic Frequency Characteristic](https://imgur.com/0UhMGos.jpg)
 
