@@ -7,7 +7,7 @@ In order to accomplish this lab in the time given, we split up into two teams: t
 
 ## FFT & Arduino
 
-The first important part of performing such a frequency analysis is the fast Fourier transform (FFT) algorithm, which converts a sampled time signal into its Fourier transform. The simplest, most common form of the FFT algorithm is called the Cooley-Tukey Algorithm, which works as follows:
+In order to hear a 660 Hz tone and identify IR signals, we will record sound and light signals and analyze their frequency components. The first important part of performing such a frequency analysis is the fast Fourier transform (FFT) algorithm, which converts a sampled time signal into its Fourier transform. The simplest, most common form of the FFT algorithm is called the Cooley-Tukey Algorithm, which works as follows:
 
 1) For a time domain signal of N samples, separate the signal into N different time signals, each with only one sample. This is done recursively, by breaking the signal into two halves on each iteration: one signal containing the samples for even indices, one for odd indices. Here is an example:
 
@@ -22,15 +22,9 @@ The first important part of performing such a frequency analysis is the fast Fou
 
 This explanation is a bit simplistic, as it ignores complex numbers and computational details of FFT that make it efficient. Essentially FFT exploits the property of Discrete Time Fourier Transform that, to compute a Fourier transform of a signal, one can combine the transforms of simpler signals. The use of recursion in this respect reduces a very computationally complex problem to a complexity of only O(n*log(n)).
 
-Our implementation of the FFT algorithm will be provided by the Arduino FFT library. The output of the algorithm is the discrete Fourier transform, indicating the power present in 256 frequency "bins". The total frequency range analyzed is the sampling frequency, and each bin describes the power present in a range of 1/256 of the sampling frequency. Here is an example output, using Excel to plot the values:
+##Open Music Labs Arduino FFT library
 
-
-
-Here, we are using a sampling frequency of 40 kHz, and so each bin has a range of 40,000/256 = 156 Hz. 660 Hz should appear in the 5th bin, as shown.
-
-Open Music Labs Arduino FFT library
-
-  For this lab, we will use the Arduino's FFT libray. To better understand how Arduino's fft works, we downloaded Open Music Lab's "Arduino fft" [Example Sketch](http://wiki.openmusiclabs.com/wiki/Example). Next, we checked the Arduino's datasheet to better understand the sketch code. We learned the following:
+  For this lab, we will use the Arduino's FFT library. To better understand how Arduino's FFT works, we downloaded Open Music Lab's "Arduino FFT" [Example Sketch](http://wiki.openmusiclabs.com/wiki/Example). Next, we checked the Arduino's datasheet to better understand the sketch code. We learned the following:
 
 1) The Arduino microcontroller's clock frequency is 16 MHz
 2) The ADC converts an analog input voltage to a 10-bit digital value (this line is copied directly from datasheet)
@@ -40,7 +34,10 @@ Open Music Labs Arduino FFT library
 6) The ADC conversion runs continuously in free running mode
 7) By increasing the prescalar value, we can achieve higher frequency resolution. At the same time, the fft sampling frequency decreases, which may be an issue when we are sampling high frequency component according to Nyquist Theorem.
 
-  In the sketch example, ADCSRA is set to 0xe5, which means ADC is in free running mode and the division factor is set to 32 for prescalar. We then see that the fft sampling frequency is 16MHz/32 prescalar/13 ADC cycles ≈ 38461 Hz. Therefore, the fft bin width is 38461 Hz/ 256 ≈ 150 Hz. If we input a 660Hz signal, it is supposed to be near bin 5 (660Hz/150 ≈4.4).  
+
+  Our implementation of the FFT algorithm will be provided by the Arduino FFT library. The output of the algorithm is the discrete Fourier transform, indicating the power present in 256 frequency "bins". The total frequency range analyzed is the sampling frequency, and each bin describes the power present in a range of 1/256 of the sampling frequency.
+
+  In the sketch example, ADCSRA is set to 0xe5, which means ADC is in free running mode and the division factor is set to 32 for prescalar. We then see that the fft sampling frequency is 16MHz/32 prescalar/13 ADC cycles ≈ 38461 Hz. Therefore, the FFT bin width is 38461 Hz/ 256 ≈ 150 Hz. If we input a 660Hz signal, it is supposed to be near bin 5 (660Hz/150 ≈4.4).  
 
   To test our assumption, we used a function generator to input a 660 Hz sinusoid with 1.65Vpp and 0.825V offset to the Arduino's pin A0 and read the printed fft output. The graph below shows that the peak of 660 Hz appears at bin 5, which corresponds to our prediction. We then increased our sinusoid frequency to 1320 Hz, 1980Hz, 2640Hz, and so forth, and found that the corresponding peak occurred at bin 10, 15, 20, etc., respectively.  
 
