@@ -24,7 +24,7 @@ This explanation is a bit simplistic, as it ignores complex numbers and computat
 
 ## Open Music Labs Arduino FFT library
 
-  For this lab, we will use the Arduino's FFT library. To better understand how Arduino's FFT works, we downloaded Open Music Lab's "Arduino FFT" [Example Sketch](http://wiki.openmusiclabs.com/wiki/Example). Next, we checked the Arduino's datasheet to better understand the sketch code. We learned the following:
+  For this lab, we will use the Arduino's FFT library for our FFT implementation. To better understand how Arduino's FFT works, we downloaded Open Music Lab's "Arduino FFT" [Example Sketch](http://wiki.openmusiclabs.com/wiki/Example). Next, we checked the Arduino's datasheet to better understand the sketch code. We learned the following:
 
 1) The Arduino microcontroller's clock frequency is 16 MHz
 2) The ADC converts an analog input voltage to a 10-bit digital value (this line is copied directly from datasheet)
@@ -34,8 +34,7 @@ This explanation is a bit simplistic, as it ignores complex numbers and computat
 6) The ADC conversion runs continuously in free running mode
 7) By increasing the prescalar value, we can achieve higher frequency resolution. At the same time, the fft sampling frequency decreases, which may be an issue when we are sampling high frequency component according to Nyquist Theorem.
 
-
-  Our implementation of the FFT algorithm will be provided by the Arduino FFT library. The output of the algorithm is the discrete Fourier transform, indicating the power present in 256 frequency "bins". The total frequency range analyzed is the sampling frequency, and each bin describes the power present in a range of 1/256 of the sampling frequency.
+The output of the FFT algorithm is the discrete Fourier transform, indicating the power present in 256 frequency "bins". The total frequency range analyzed is the sampling frequency, and each bin describes the power present in a range of 1/256 of the sampling frequency.
 
   In the sketch example, ADCSRA is set to 0xe5, which means ADC is in free running mode and the division factor is set to 32 for prescalar. We then see that the fft sampling frequency is 16MHz/32 prescalar/13 ADC cycles ≈ 38461 Hz. Therefore, the FFT bin width is 38461 Hz/ 256 ≈ 150 Hz. If we input a 660Hz signal, it is supposed to be near bin 5 (660Hz/150 ≈4.4).  
 
@@ -44,8 +43,6 @@ This explanation is a bit simplistic, as it ignores complex numbers and computat
 ![FFT Mic](https://imgur.com/ulj2tSD.png)
 
 Compare ADC to AnalogRead
-
-## Pre-Lab: Amplifying and Filtering Design
 
 ## Acoustic Team: Assembling the Microphone Circuit
 
