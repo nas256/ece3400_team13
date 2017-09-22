@@ -47,6 +47,8 @@ Watch our robot follow both a straight line and a curvy line!
 [![Line Following](http://img.youtube.com/vi/coHGV5OTJF0/0.jpg)](https://www.youtube.com/watch?v=coHGV5OTJF0)
 [![Following a Curve](http://img.youtube.com/vi/6YNuYDZxIUI/0.jpg)](https://www.youtube.com/watch?v=6YNuYDZxIUI)
 
+Our robot is a little nervous and jittery in these videos, and so we tuned our mapping values to achieve a more gradual slowdown. You can see the improvement in our figure eight video below.
+
 ## Traversing a Grid
 
 Now that we can follow a line, it's time to traverse a grid! We have two extra line sensors towards the edge of the robot to detect intersections. For each intersection we detect, the robot decides whether or not it wants to turn. 
@@ -110,4 +112,4 @@ The code loops through this array to find the next move it should make when it d
 [![Driving In Figure 8](http://img.youtube.com/vi/ukufHEfCJcs/0.jpg)](https://www.youtube.com/watch?v=ukufHEfCJcs)
 
 ## Conclusion
-Our team was successful in our Milestone 1 goal to achieve line following and be able to navigate a figure eight on a grid. In the future, we may try to implement a more robust line following algorithm that doesn't have to use a fixed turning time. We might also try to incorporate PID feedback control principles into our algorithm to reduce jitter and reduce error.
+Our team was successful in our Milestone 1 goal to achieve line following and be able to navigate a figure eight on a grid. In the future, we may try to implement a more robust line following algorithm that doesn't have to use a fixed turning time. We also want to increase our speed and might also try to incorporate PID feedback control principles into our algorithm to reduce jitter and reduce error.
