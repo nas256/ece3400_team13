@@ -108,3 +108,6 @@ The code loops through this array to find the next move it should make when it d
 
 ### Figure Eight Video
 [![Driving In Figure 8](http://img.youtube.com/vi/ukufHEfCJcs/0.jpg)](https://www.youtube.com/watch?v=ukufHEfCJcs)
+
+## Conclusion
+Our team was successful in our Milestone 1 goal to achieve line following and be able to navigate a figure eight on a grid. In the future, we may try to implement a more robust line following algorithm that doesn't have to use a fixed turning time. We might also try to incorporate PID feedback control principles into our algorithm to reduce jitter and reduce error.
