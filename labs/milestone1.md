@@ -47,7 +47,7 @@ Watch our robot follow both a straight line and a curvy line!
 [![Line Following](http://img.youtube.com/vi/coHGV5OTJF0/0.jpg)](https://www.youtube.com/watch?v=coHGV5OTJF0)
 [![Following a Curve](http://img.youtube.com/vi/6YNuYDZxIUI/0.jpg)](https://www.youtube.com/watch?v=6YNuYDZxIUI)
 
-Our robot is a little nervous and jittery in these videos, and so we tuned our mapping values to achieve a more gradual slowdown. You can see the improvement in our figure eight video below.
+Our robot is a little shakey in these videos, beause the line sensor readings are being mapped to a large range of motor slowdown values. To make our line following smoother when following a grid, we tuned our mapping values to achieve a more gradual slowdown. You can see the improvement in our figure eight video below.
 
 ## Traversing a Grid
 
