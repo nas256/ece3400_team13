@@ -6,7 +6,7 @@ The goal of this milestone is to add wall sensors to the robot and distinguish b
 ## Wall Detection
 We have chosen to use the short range ir sensors 	GP2Y0A41SK0F. In order to detect walls around the robot. We began by first testing our sensor, and based off of the following relationship between output voltage and distance of an obstacle listed in the [datasheet](http://www.sharp-world.com/products/device/lineup/data/pdf/datasheet/gp2y0a41sk_e.pdf)
 
-![Voltage vs. Distance](https://i.imgur.com/zoSwWbM.png)
+<img src=https://i.imgur.com/zoSwWbM.png width=200px />
 
 After testing a formula based off this graph to convert the analog voltage read by the sensor into a distance in centimeters, we performed some calibration on our sensor by placing a wooden plank a known distance from the sensor and comparing what the Arduino read versus the actual distance. We discovered there was a small offset, but since it was fairly constant over the entire sensing range, we deemed it insignificant in the long run.
 
