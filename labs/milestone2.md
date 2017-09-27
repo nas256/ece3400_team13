@@ -1,4 +1,4 @@
-# Milestone 1
+# Milestone 2
 
 ## Introduction
 The goal of this milestone is to add wall sensors to the robot and distinguish between 7, 12, and 17 kHz IR treasures.
