@@ -12,7 +12,7 @@ After testing a formula based off this graph to convert the analog voltage read 
 
 In conjunction with the TAs, we found the minimum distance between an intersection and a wall, which we used as a threshold for wall detection in our code. In order to demonstrate that our robot could actually sense walls, we programmed the robot to turn right at any intersection with a wall in front of it. The video of this code in use is below: 
 
-![Wall Avoidance Video](https://www.youtube.com/embed/n1C5XcRkyyI)
+[![Wall Avoidance Video](https://img.youtube.com/vi/n1C5XcRkyyI/0.jpg)](https://youtu.be/n1C5XcRkyyI)
 
 In the future, we also plan to implement left and right wall sensors to determine whether we can actually turn left or right. Unfortunately, the Arduino cannot accommodate more inputs, since the Arduino only has six analog input pins, and we already have nine input signals, including three for the wall sensors, four for the line sensors, one for the IR sensor, and one for the microphone. We will need to implement a CMOS multiplexer so that we can route various low-priority sensors to a single analog pin on the Arduino. This will allow us to follow a line, detect intersections, detect walls in front, to the left of, and to the right of our robot, detect IR beacons on both sides of our robot, and listen for a 660 Hz tone, all without any hardware changes.
 
