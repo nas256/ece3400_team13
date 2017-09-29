@@ -103,3 +103,6 @@ void loop() {
   }
 }
 ```
+
+## Conclusion
+We were successful in our goal to add wall sensors to the robot and distinguish between 7, 12, and 17 kHz IR treasures. Looking forward, we will aim to improve the range of our optical circuit, especially when detecting the 17 kHz treasure, possibly by increasing the gain of our amplifying circuit. Additionally, we plan to integrate our optical circuit on both the left and right sides of our robot for treasure detection on walls. 
