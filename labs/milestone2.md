@@ -4,7 +4,7 @@
 The goal of this milestone is to add wall sensors to the robot and distinguish between 7, 12, and 17 kHz IR treasures.
 
 ## Wall Detection
-We have chosen to use the short range IR sensors (part number	GP2Y0A41SK0F) in order to detect walls around the robot. We began by first testing our sensor, and based off of the following relationship between output voltage and distance of an obstacle listed in the [datasheet](http://www.sharp-world.com/products/device/lineup/data/pdf/datasheet/gp2y0a41sk_e.pdf).
+In order to navigate the maze, we need to periodically check for the presence of walls beside and in front of our robot. The first step in achieving this goal is to detect a single wall in front of the robot. We have chosen to use the short range IR sensors (part number	GP2Y0A41SK0F) in order to detect walls around the robot. We began by first testing our sensor and using the following plot of output voltage and obstacle distance listed in the [datasheet](http://www.sharp-world.com/products/device/lineup/data/pdf/datasheet/gp2y0a41sk_e.pdf).
 
 <img src="https://i.imgur.com/zoSwWbM.png" width="400px" />
 
