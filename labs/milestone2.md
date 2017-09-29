@@ -4,7 +4,7 @@
 The goal of this milestone is to add wall sensors to the robot and distinguish between 7, 12, and 17 kHz IR treasures.
 
 ## Wall Detection
-We have chosen to use the short range IR sensors (part number	GP2Y0A41SK0F) in order to detect walls around the robot. We began by first testing our sensor, and based off of the following relationship between output voltage and distance of an obstacle listed in the [datasheet](http://www.sharp-world.com/products/device/lineup/data/pdf/datasheet/gp2y0a41sk_e.pdf)
+We have chosen to use the short range IR sensors (part number	GP2Y0A41SK0F) in order to detect walls around the robot. We began by first testing our sensor, and based off of the following relationship between output voltage and distance of an obstacle listed in the [datasheet](http://www.sharp-world.com/products/device/lineup/data/pdf/datasheet/gp2y0a41sk_e.pdf).
 
 <img src="https://i.imgur.com/zoSwWbM.png" width="400px" />
 
@@ -105,4 +105,4 @@ void loop() {
 ```
 
 ## Conclusion
-We were successful in our goal to add wall sensors to the robot and distinguish between 7, 12, and 17 kHz IR treasures. Looking forward, we will aim to improve the range of our optical circuit, especially when detecting the 17 kHz treasure, possibly by increasing the gain of our amplifying circuit. Additionally, we plan to integrate our optical circuit on both the left and right sides of our robot for treasure detection on walls. 
+We were successful in our goal to add wall sensors to the robot and distinguish between 7, 12, and 17 kHz IR treasures. Looking forward, we will need to implement the CMOS multiplexer for our analog pins. We will also try to improve the range of our optical circuit, especially when detecting the 17 kHz treasure, possibly by increasing the gain of our amplifying circuit. Additionally, we plan to integrate our optical circuit on both the left and right sides of our robot for treasure detection on walls. 
