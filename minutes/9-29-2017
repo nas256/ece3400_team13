@@ -1,0 +1,15 @@
+9-29-17
+11:21AM
+Everyone in attendance
+
+Status:
+-square wave and sawtooth wave
+-switched mounts for servos, robot is more steady now
+-got VGA and grid functionality to work
+
+
+Todo: 
+- acoustic team: need to make 3 tones from sine wave
+- need to test the mux
+- spi protocall to work
+- everyone needs to finish evaluations for tomorrow
