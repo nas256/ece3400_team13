@@ -18,9 +18,11 @@ In the future, we also plan to implement left and right wall sensors to determin
 
 
 ## Distinguishing 7, 12, and 17 kHz IR Signals
-Last week, we showed that our optical circuit could distinguish between a 7 and 12 kHz signal output from the treasure board. We did this by establishing a simple threshold check for the bins corresponding to a 7 kHz and 12 kHz signal at our sampling rate, which were bins 47 and 81 respectively. To be able to distinguish a 17 kHz signal as well, all we had to do was add another condition to our code which checked the bin corresponding to a 17 kHz signal. We expected this to be bin 14 (17,000 Hz/ 148.4 Hz/bin = 14) and confirmed by checking the FFT output on the serial monitor. The updated code and a video showing our optical circuit distinguishing a 17 kHz signal from a 7 kHz signal are shown below.
+Last week, we showed that our optical circuit could distinguish between a 7 and 12 kHz signal output from the treasure board. We did this by establishing a simple threshold check for the bins corresponding to a 7 kHz and 12 kHz signal at our sampling rate, which were bins 47 and 81 respectively. To be able to distinguish a 17 kHz signal as well, all we had to do was add another condition to our code which checked the bin corresponding to a 17 kHz signal. We expected this to be bin 14 (17,000 Hz/ 148.4 Hz/bin = 14) and confirmed by checking the FFT output on the serial monitor. 
 
-##<Insert video>
+To demonstrate that our optical circuit could distinguish between the three different signals in a more visual way, we decided to add three different color LEDs with each corresponding to one signal frequency. When a treasure at that frequency is brought near the sensor, the corresponding LED turns on. We chose to pair the 7 kHz signal with the blue LED, the 12 kHz signal with the red LED, and the 17 kHz signal with the green LED. The updated code and our video demonstration are shown below.
+
+[![Optical Distinguishing LED Video](https://img.youtube.com/vi/9IOaoV1_FxU/0.jpg)](https://www.youtube.com/watch?v=9IOaoV1_FxU)
  
 ```cpp
 /*
@@ -31,6 +33,10 @@ Last week, we showed that our optical circuit could distinguish between a 7 and 
 #define FFT_N 256 // set to 256 point fft
 
 #include <FFT.h> // include the library
+
+int LED1 = 13;
+int LED2 = 8;
+int LED3 = 7;
 
 void setup() {
   Serial.begin(115200); // use the serial port
@@ -70,4 +76,30 @@ void loop() {
       Serial.println(fft_log_out[i]); // send out the data
     } */
     delay(200); 
+    
+    if ( fft_log_out[47] > 100 ){
+      Serial.println("7kHz beacon dectected!");
+      digitalWrite(LED1,HIGH);
+      digitalWrite(LED2,LOW);
+      digitalWrite(LED3,LOW);
+    }
+    else if ( fft_log_out[81] > 100 ){
+      Serial.println("12kHz beacon dectected!");
+      digitalWrite(LED1,LOW);
+      digitalWrite(LED2,HIGH);
+      digitalWrite(LED3,LOW);
+    }
+    else if (fft_log_out[114] > 95 ){
+      Serial.println("17kHz beacon dectected!"); 
+      digitalWrite(LED1,LOW);
+      digitalWrite(LED2,LOW);
+      digitalWrite(LED3,HIGH);
+    }
+    else{
+      digitalWrite(LED1,LOW);
+      digitalWrite(LED2,LOW);
+      digitalWrite(LED3,LOW);
+    }
+  }
+}
 ```
