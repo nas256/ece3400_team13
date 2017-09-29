@@ -4,11 +4,11 @@
 The goal of this milestone is to add wall sensors to the robot and distinguish between 7, 12, and 17 kHz IR treasures.
 
 ## Wall Detection
-We have chosen to use the short range ir sensors 	GP2Y0A41SK0F. In order to detect walls around the robot. We began by first testing our sensor, and based off of the following relationship between output voltage and distance of an obstacle listed in the [datasheet](http://www.sharp-world.com/products/device/lineup/data/pdf/datasheet/gp2y0a41sk_e.pdf)
+We have chosen to use the short range IR sensors (part number	GP2Y0A41SK0F) in order to detect walls around the robot. We began by first testing our sensor, and based off of the following relationship between output voltage and distance of an obstacle listed in the [datasheet](http://www.sharp-world.com/products/device/lineup/data/pdf/datasheet/gp2y0a41sk_e.pdf)
 
 <img src="https://i.imgur.com/zoSwWbM.png" width="400px" />
 
-After testing a formula based off this graph to convert the analog voltage read by the sensor into a distance in centimeters, we performed some calibration on our sensor by placing a wooden plank a known distance from the sensor and comparing what the Arduino read versus the actual distance. We discovered there was a small offset, but since it was fairly constant over the entire sensing range, we deemed it insignificant in the long run.
+After testing the relationship based off this graph to convert the analog voltage read by the sensor into a distance in centimeters, we performed some calibration on our sensor by placing a wooden plank a known distance from the sensor and comparing what the Arduino read versus the actual distance. We discovered there was a small offset, but since it was fairly constant over the entire sensing range, we deemed it insignificant in the long run.
 
 In conjunction with the TAs, we found the minimum distance between an intersection and a wall, which we used as a threshold for wall detection in our code. In order to demonstrate that our robot could actually sense walls, we programmed the robot to turn right at any intersection with a wall in front of it. The video of this code in use is below: 
 
@@ -20,7 +20,7 @@ In the future, we also plan to implement left and right wall sensors to determin
 ## Distinguishing 7, 12, and 17 kHz IR Signals
 Last week, we showed that our optical circuit could distinguish between a 7 and 12 kHz signal output from the treasure board. We did this by establishing a simple threshold check for the bins corresponding to a 7 kHz and 12 kHz signal at our sampling rate, which were bins 47 and 81 respectively. To be able to distinguish a 17 kHz signal as well, all we had to do was add another condition to our code which checked the bin corresponding to a 17 kHz signal. We expected this to be bin 14 (17,000 Hz/ 148.4 Hz/bin = 14) and confirmed by checking the FFT output on the serial monitor. 
 
-To demonstrate that our optical circuit could distinguish between the three different signals in a more visual way, we decided to add three different color LEDs with each corresponding to one signal frequency. When a treasure at that frequency is brought near the sensor, the corresponding LED turns on. We chose to pair the 7 kHz signal with the blue LED, the 12 kHz signal with the red LED, and the 17 kHz signal with the green LED. The updated code and our video demonstration are shown below.
+To demonstrate that our optical circuit could distinguish between the three different signals in a more visual way, we decided to add three different color LEDs, each corresponding a different signal frequency. When a treasure at that frequency is brought near the sensor, the corresponding LED turns on. We chose to pair the 7 kHz signal with the blue LED, the 12 kHz signal with the red LED, and the 17 kHz signal with the green LED. The updated code and our video demonstration are shown below.
 
 [![Optical Distinguishing LED Video](https://img.youtube.com/vi/9IOaoV1_FxU/0.jpg)](https://www.youtube.com/watch?v=9IOaoV1_FxU)
  
