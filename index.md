@@ -13,6 +13,7 @@ Hello! Welcome to team Lucky 13's running webpage! We'll be documenting all of o
  - [9-8-2017](https://nas256.github.io/ece3400_team13/minutes/9-8-2017)
  - [9-15-2017](https://nas256.github.io/ece3400_team13/minutes/9-15-2017)
  - [9-22-2017](https://nas256.github.io/ece3400_team13/minutes/9-22-2017)
+ - [9-29-2017](https://nas256.github.io/ece3400_team13/minutes/9-29-2017)
 
 ## Who We Are
  (Alphabetically)
