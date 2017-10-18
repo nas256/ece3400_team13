@@ -130,8 +130,18 @@ wire done = (bitcounter == 16);
 
 The data from the shift register and this done bit are fed into the controller to properly update the memory after a sucessful SPI transaction.
 
-
 ## SPI Protocol
+
+We've designed an SPI protocol based off 16-bit transactions to allow us to communicate data about the maze to the FPGA. The first 8 bits describe the position inside the grid that the transaction describes. The next 8 bits describe the color of the grid tile.
+
+A 16-bit transaction is shown below:
+
+|(15-12) Y coord|(11-8) X coord |(7-0) color    |
+| ------------- | ------------- | ------------- |
+
+_(We know this protocol is wasteful and can be compressed, however we chose it to align with a hex value, so that the first hexadecimal digit is the first coord, and the next digit is the next cord, for easy debugging)_
+
+In the future, we aim to make this protocol more functional, transmitting information about the grid rather than colors, and plan to increase the transaction to 24 bits if required.
 
 ### Arduino Side:
 Arduino Code:
