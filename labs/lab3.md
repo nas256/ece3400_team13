@@ -1,6 +1,6 @@
 # Lab 3
 
-### Overview
+## Overview
 
 The goal of this lab was to become familiar with using the DE0-Nano Development Board and complete two tasks that will help towards the design of our final system. During competition, our base station Arduino will transmit all maze information recorded by our robot to an FPGA, which will then draw a map of the maze on a VGA monitor. The FPGA will also generate a sound when the maze-mapping is finished.
 
