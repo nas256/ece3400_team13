@@ -57,28 +57,30 @@ Gif of dance party: https://media.giphy.com/media/3ohhwlafpV8BoABa24/giphy.gif
 Video of hardware and screen: https://youtu.be/fSFf5c4tUkI
 
 # Acoustic Team
-Members: Divya, Wenhan, Norman
+###Members: Divya, Wenhan, Norman
 
-Objectives: Our ultimate goal was to play a short tune of at least three frequencies our our speakers when a switch on the FPGA is turned on. We broke this down into the following sequence of smaller steps:
+##Objectives: Our ultimate goal was to play a short tune of at least three frequencies our our speakers when a switch on the FPGA is turned on. We broke this down into the following sequence of smaller steps:
 Prepare the stereo phone jack socket in order to connect FPGA output to the speaker
-Output a square wave to the speaker
-Output a triangle and sawtooth wave to the speaker via an 8-bit DAC
-Output a sine wave to the speaker
-Output a tune of at least three different frequencies to the speaker
+- Output a square wave to the speaker
+- Output a triangle and sawtooth wave to the speaker via an 8-bit DAC
+- Output a sine wave to the speaker
+- Output a tune of at least three different frequencies to the speaker
 
-Materials:
-FPGA DE0_nano development board
-8-bit R2R DAC (datasheet:http://www.bourns.com/docs/Product-Datasheets/R2R.pdf)
-Lab speakers
-Stereo phone jack socket
-Male to female jumper wires
-Soldering the stereo phone jack socket
+##Materials:
+- FPGA DE0_nano development board
+- 8-bit R2R DAC (datasheet:http://www.bourns.com/docs/Product-Datasheets/R2R.pdf)
+- Lab speakers
+- Stereo phone jack socket
+- Male to female jumper wires
+
+## Procedure: 
+### Soldering the stereo phone jack socket
 
 The stereo phone jack socket has three terminals. Both exterior pins are inputs and the center pin is ground. To prepare the socket to be integrated into our circuit so that we could connect the FPGA output to the speakers, we soldered the two socket input pins together and to a red wire. We also soldered a black wire to the ground pin of the socket.
 
 PIC OF SOLDERED 3.5MM JACK
 
-**Outputting a square wave to the speaker**
+### Outputting a square wave to the speaker
 In this section, we generated a simple square wave with frequency 700 Hz and output it to a GPIO pin. The implementation idea is simple: for half of the signal’s period, the output is 1, for another half of the period, the output is toggled to 0. A parameter CLKDIVIDER_700 is set to the total number of clock cycles in half of the square wave’s period, 1/700/2. Since the system clock’s frequency is 25MHz, one period requires 25000000/700 cycles; thus CLKDIVDER_700 is set to 25000000/700/2 to represent half of a period. A counter was used to count down the clock cycles in half of a period. If the counter reaches 0, the counter is reset and the square wave’s value is toggled. Otherwise, the counter keeps counting down and the register “wave” retains the old value.
 
 The code is attached below.
@@ -113,7 +115,7 @@ With the above implementation, we were able to see a correct square wave with fr
 [![Square Wave](https://img.youtube.com/vi/vv4YD9C_X_A/0.jpg)](https://youtu.be/vv4YD9C_X_A)  
 
 
-**Setting up the DAC**
+### Setting up the DAC
 
 We wanted to use Verilog and the FPGA to generate a tune that included at least three different frequencies. Before we did this, we had to set up the 8-bit DAC to take in the digital signal from the FPGA and convert it to an analog signal for the 3.5mm auxiliary output. Our digital signal is outputted through GPIO_1 pins 7 to 0, which requires us to connect each of these pins to an input on the 8 bit DAC.
 
@@ -121,7 +123,7 @@ We wanted to use Verilog and the FPGA to generate a tune that included at least 
 
 In the picture above, you can see eight wires connecting each of the output pins to a input on the DAC, with the output connected to positive end of the scope probe.
 
-**Outputting a triangle wave**
+### Outputting a triangle wave
 
 In order to test this connection, we added a simple triangle wave to the Verilog module provided in the lab writeup.
 ```verilog
@@ -158,7 +160,7 @@ INSERT TRIANGLE PIC
 INSERT TRIANGLE VIDEO
 
 
-**Outputting a simple sine wave**
+### Outputting a simple sine wave
 
 With the triangle wave working, we knew that our DAC circuit was correct and that we could move on to generating a sine wave. To do this, we had to first implement a sine table ROM within our Verilog module. We first created a Matlab script which would generate the sine table and print it out in Verilog syntax.
 
@@ -209,7 +211,7 @@ To listen to what the sine wave sounded like, we again connected the output of t
 [![single sine wave](https://img.youtube.com/vi/WbqZ9BlY6jg/0.jpg)](https://youtu.be/WbqZ9BlY6jg)
 
 
-**Outputting 3 different frequencies**
+### Outputting 3 different frequencies
 
 With the simple sine wave working, we could move on to generating the three tones. We decided to have a repeating sequence of three tones, with the second tone lower in frequency than the first and the third lower than the second, and to have each tone last a duration of one second. We wrote our Verilog code such that it would walk through this sine table at different frequencies.
 
@@ -245,7 +247,7 @@ To listen to the sound of the three-frequency tune, we again connected the outpu
 [![three tone sine wave](https://img.youtube.com/vi/EllUivv1c50/0.jpg)](https://youtu.be/EllUivv1c50)
 
 
-**Conclusion**
+## Conclusion
 
 Our team was able to successfully complete both tasks in Lab 3. The acoustic team was able to react to an external input to the FPGA (turning a switch on) and play a short three-frequency tune on the lab speakers. And the graphics team ….  <insert here>
 
