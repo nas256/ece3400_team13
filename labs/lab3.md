@@ -25,13 +25,12 @@ Our goal was to begin building a fully-functional base station for our robot, wi
 - VGA Monitor
 - VGA Switch
 
-## Procedure:
-### VGA Setup
+## VGA Setup
 The VGA display has an internal resistance of 50 Ohms,therefore the VGA connector has the following resistor values...were chosen because…
 Because the VGA cable that connects the FPGA to the monitor only has 1 wire for each color (red, green, and blue), which has only transmit values from 0 to 1 V. We need to convert our FPGA 3.3V digital output, which represents the color in 8 bits, to 1V analog signals for each color. The VGA connector takes care of this conversion for us with the Digital-to-Analog-Converter (DAC). 
 [double check and get part numbers]
 
-## FPGA: Verilog VGA Implementation
+## FPGA: Verilog Implementation
 
 ### The provided VGA Driver
 
@@ -145,13 +144,33 @@ _(We know this protocol is wasteful and can be compressed, however we chose it t
 
 In the future, we aim to make this protocol more functional, transmitting information about the grid rather than colors, and plan to increase the transaction to 24 bits if required.
 
-### Arduino Side:
+## Arduino Side:
 Arduino Code:
-SPI protocol
 How we sent information to create the dance party
 
 ### Maze Representation: (how we plan to further implement this)
 “You will need to represent both the full maze (4 by 5 squares) and walls, empty spaces, unexplored spaces, a robot, and treasures within it. Be sure to include a description of your plan on your team website.”
+
+We have already implemented a 4x5 repreesntation of our maze. However, we only have a very simple representation of colors that will need to be further developed to a great extent. We plan to assign a color to each state of the maze:
+ - Unexplored
+ - Explored
+ - Path ignored temporarily for another path
+
+Once we have the colors down, we need to represent the walls and other attributes. Walls will be drawn with black bars at the corresponding edge of the tile matching how the robot perceived them. We also need to display the location and frequency of the IR beacon. Currently, the plan is to draw the frequency on the square where the beacon is located when it is detected. Finally, we will have some symbolic or pictoral representation for the position of our robot that relays current positive and direction. 
+
+We will have to modify our SPI communication protocol to relay all this information, but it is an interesting and fun challenge that we are excited to to take on.
+
+## Results
+
+In the end, we were able to get a cool demo that we like to call the "VGA Dance Party" where the Arduino would periodically randomly update the colors of the grid every few hundred milliseconds:
+
+A GIF of the result is shown here:
+<br>
+![Dance Party](https://media.giphy.com/media/3ohhwlafpV8BoABa24/giphy.gif)
+<br>
+A video of this system working can also be seen below:
+<br>
+[![Dance Party Video](http://img.youtube.com/vi/fSFf5c4tUkI/0.jpg)](https://www.youtube.com/watch?v=fSFf5c4tUkI)
 
 ### Rubric: -->(temporary)
 1 point: Reading external inputs to FPGA
@@ -160,15 +179,6 @@ How we sent information to create the dance party
 1 point: Description of how the DAC on the provided VGA connectors works and how the resistor values were chosen.
 4 points: Mapping external inputs to four different outputs on the screen
 
-## Results
-
-In the end, we were able to get a cool demo that we like to call the "VGA Dance Party" where the Arduino would periodically randomly update the colors of the grid every few hundred milliseconds:
-
-![Dance Party](https://media.giphy.com/media/3ohhwlafpV8BoABa24/giphy.gif)
-
-A video of this system working can also be seen below:
-
-[![Dance Party Video](http://img.youtube.com/vi/fSFf5c4tUkI/0.jpg)](https://www.youtube.com/watch?v=fSFf5c4tUkI)
 
 # Acoustic Team
 ###Members: Divya, Wenhan, Norman
