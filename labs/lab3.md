@@ -188,16 +188,17 @@ A video of this system working can also be seen below:
 
 
 # Acoustic Team
-###Members: Divya, Wenhan, Norman
+### Members: Divya, Wenhan, Norman
 
-##Objectives: Our ultimate goal was to play a short tune of at least three frequencies our our speakers when a switch on the FPGA is turned on. We broke this down into the following sequence of smaller steps:
+## Objectives: 
+Our ultimate goal was to play a short tune of at least three frequencies our our speakers when a switch on the FPGA is turned on. We broke this down into the following sequence of smaller steps:
 Prepare the stereo phone jack socket in order to connect FPGA output to the speaker
 - Output a square wave to the speaker
 - Output a triangle and sawtooth wave to the speaker via an 8-bit DAC
 - Output a sine wave to the speaker
 - Output a tune of at least three different frequencies to the speaker
 
-##Materials:
+## Materials:
 - FPGA DE0_nano development board
 - 8-bit R2R DAC (datasheet:http://www.bourns.com/docs/Product-Datasheets/R2R.pdf)
 - Lab speakers
