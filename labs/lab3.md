@@ -7,15 +7,15 @@ The goal of this lab was to become familiar with using the DE0-Nano Development 
 In order to accomplish this lab in the time given, we split up into two teams: the Graphics Team and the Acoustic Team. The graphics team worked towards the first task, which was to take at least two external inputs of the FPGA and display them on a VGA monitor. This team was comprised of Nick Sarkis, Eric Cole, and Julia Currie. The acoustics team worked towards the second task, which was to output a short tune of at least three frequencies to a speaker via an 8-bit DAC after prompted by an external input to the FPGA. This team was comprised of Norman Chen, Wenhan Xia, and Divya Gupta.
 
 ### Graphics Team
-#Members: Eric, Nick, Julia
+# Members: Eric, Nick, Julia
 
-##Objectives: 
+## Objectives: 
 Our goal was to begin building a fully-functional base station for our robot, with displaying a simplified version of the final maze grid. To accomplish this, we needed to display graphics on a VGA monitor using a FPGA. We had to write our own VGA controller and SPI protocol in order for the Arduino Uno to control the state of the grid displayed on the VGA monitor. While implementing this, we familiarized ourselves with the DE0-Nano FPGA board, SPI protocol, and how to interact with video memory and a VGA driver.
 - Understand example code and building upon it → should i include block diagram or should we make our own???
 - Design and code a memory system to draw blocks in a grid
 - Create a communication method between the Arduino and FPGA
 
-##Materials:
+## Materials:
 - FPGA DE0_nano development board
 - Arduino Uno Board
 - ? Ohm Resistors for voltage divider
@@ -25,34 +25,34 @@ Our goal was to begin building a fully-functional base station for our robot, wi
 - VGA Monitor
 - VGA Switch
 
-##Procedure:
-#VGA Setup
+## Procedure:
+# VGA Setup
 The VGA display has an internal resistance of 50 Ohms,therefore the VGA connector has the following resistor values...were chosen because…
 Because the VGA cable that connects the FPGA to the monitor only has 1 wire for each color (red, green, and blue), which has only transmit values from 0 to 1 V. We need to convert our FPGA 3.3V digital output, which represents the color in 8 bits, to 1V analog signals for each color. The VGA connector takes care of this conversion for us with the Digital-to-Analog-Converter (DAC). 
 [double check and get part numbers]
 
-#FPGA Side:
+# FPGA Side:
 Verilog Code:
 VGA driver
 SPI protocol
 How we stored Color and Location
 
-#Arduino Side:
+# Arduino Side:
 Arduino Code:
 SPI protocol
 How we sent information to create the dance party
 
-#Maze Representation: (how we plan to further implement this)
+# Maze Representation: (how we plan to further implement this)
 “You will need to represent both the full maze (4 by 5 squares) and walls, empty spaces, unexplored spaces, a robot, and treasures within it. Be sure to include a description of your plan on your team website.”
 
-#Rubric: -->(temporary)
+# Rubric: -->(temporary)
 1 point: Reading external inputs to FPGA
 1 point: Correctly updating a 4-bit array dependent on the inputs
 1 point: Drawing one box on the screen
 1 point: Description of how the DAC on the provided VGA connectors works and how the resistor values were chosen.
 4 points: Mapping external inputs to four different outputs on the screen
 
-##Resources:
+## Resources:
 Gif of dance party: https://media.giphy.com/media/3ohhwlafpV8BoABa24/giphy.gif
 Video of hardware and screen: https://youtu.be/fSFf5c4tUkI
 
