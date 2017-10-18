@@ -166,8 +166,9 @@ In the end, we were able to get a cool demo that we like to call the "VGA Dance 
 
 ![Dance Party](https://media.giphy.com/media/3ohhwlafpV8BoABa24/giphy.gif)
 
-[![Dance Party Video](http://img.youtube.com/vi/fSFf5c4tUkI/0.jpg)](https://www.youtube.com/watch?v=fSFf5c4tUkI)
 A video of this system working can also be seen below:
+
+[![Dance Party Video](http://img.youtube.com/vi/fSFf5c4tUkI/0.jpg)](https://www.youtube.com/watch?v=fSFf5c4tUkI)
 
 # Acoustic Team
 ###Members: Divya, Wenhan, Norman
