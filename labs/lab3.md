@@ -33,9 +33,11 @@ Because the VGA cable that connects the FPGA to the monitor only has 1 wire for 
 
 ## FPGA: Verilog VGA Implementation
 
-### Overall Design
-
 ### The provided VGA Driver
+
+The provided VGA driver abstracts away most of the details of implementing VGA at a low level, and allows us to display a color given a set of x and y coordinates on the screen. 
+
+The driver is run at 25 MHz in order to refresh the screen at 60 Hz. Each cycle, it outputs the desired color on the `PIXEL_COLOR_OUT` line which is mapped to the gpio pins connected to the RR DAC (described in a separate section). The driver updates each pixel along a line, and then advances to the next line, overflowing to the first line after finishing the last pixel of the last line.
 
 ### Memory Block & Controller
 
@@ -158,9 +160,14 @@ How we sent information to create the dance party
 1 point: Description of how the DAC on the provided VGA connectors works and how the resistor values were chosen.
 4 points: Mapping external inputs to four different outputs on the screen
 
-## Resources:
-Gif of dance party: https://media.giphy.com/media/3ohhwlafpV8BoABa24/giphy.gif
-Video of hardware and screen: https://youtu.be/fSFf5c4tUkI
+## Results
+
+In the end, we were able to get a cool demo that we like to call the "VGA Dance Party" where the Arduino would periodically randomly update the colors of the grid every few hundred milliseconds:
+
+![Dance Party](https://media.giphy.com/media/3ohhwlafpV8BoABa24/giphy.gif)
+
+[![Dance Party Video](http://img.youtube.com/vi/fSFf5c4tUkI/0.jpg)](https://www.youtube.com/watch?v=fSFf5c4tUkI)
+A video of this system working can also be seen below:
 
 # Acoustic Team
 ###Members: Divya, Wenhan, Norman
