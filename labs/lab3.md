@@ -139,7 +139,7 @@ A 16-bit transaction is shown below:
 
 |(15-12)        |(11-8)         |(7-0)          |
 | ------------- | ------------- | ------------- |
-|               |               |               |
+| Y Coordinate  | X coordinate  | 8-bit color   |
 
 _(We know this protocol is wasteful and can be compressed, however we chose it to align with a hex value, so that the first hexadecimal digit is the first coord, and the next digit is the next cord, for easy debugging)_
 
