@@ -137,14 +137,22 @@ We've designed an SPI protocol based off 16-bit transactions to allow us to comm
 
 A 16-bit transaction is shown below:
 
-|(15-12) Y coord|(11-8) X coord |(7-0) color    |
+|(15-12)        |(11-8)         |(7-0)          |
 | ------------- | ------------- | ------------- |
+|               |               |               |
 
 _(We know this protocol is wasteful and can be compressed, however we chose it to align with a hex value, so that the first hexadecimal digit is the first coord, and the next digit is the next cord, for easy debugging)_
+
+Here's an example of our protocol in action:
+
+![SPI Waveform](https://i.imgur.com/X6iE5FM.png)
+
+In this waveform, channel 1 is SCK and channel 2 is MOSI. The first 8 bits are 0, which denote that we wish to update the grid at (0,0). The next 8 bits are 11010000 which is a mix of red and green.
 
 In the future, we aim to make this protocol more functional, transmitting information about the grid rather than colors, and plan to increase the transaction to 24 bits if required.
 
 ## Arduino Side:
+*TODO*
 Arduino Code:
 How we sent information to create the dance party
 
