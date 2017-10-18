@@ -31,11 +31,107 @@ The VGA display has an internal resistance of 50 Ohms,therefore the VGA connecto
 Because the VGA cable that connects the FPGA to the monitor only has 1 wire for each color (red, green, and blue), which has only transmit values from 0 to 1 V. We need to convert our FPGA 3.3V digital output, which represents the color in 8 bits, to 1V analog signals for each color. The VGA connector takes care of this conversion for us with the Digital-to-Analog-Converter (DAC). 
 [double check and get part numbers]
 
-### FPGA Side:
-Verilog Code:
-VGA driver
-SPI protocol
-How we stored Color and Location
+## FPGA: Verilog VGA Implementation
+
+### Overall Design
+
+### The provided VGA Driver
+
+### Memory Block & Controller
+
+The `MAZE_MAPPER` module is responsible for storing a 5x4 array of 8 bit colors in a volatile memory block, communicating these values to the VGA module to correctly display them in a 5x4 grid on our screen, and to provide a write port to the data block to allow our SPI module to update its internal data.
+
+Storing the data is simple, and in order to do that we use a 4x5 multidimensional array of registers:
+```verilog
+reg [7:0] grid_array [3:0][4:0];
+```
+
+In order to communicate this data back to the VGA driver, we need to provide an 8-bit COLOR_OUT value for any PIXEL_X or PIXEL_Y input. We do this by mapping every 100 pixels to an element in this array, so that each tile is 100 pixels tall and 100 pixels wide. To do this, we can integer divide the pixel inputs by 100 to turn them into array indecies. We recognize that a more efficient way to do this would be to make the tiles the size of a power of 2 and use a left-shift to divide, the fpga is more than capable of doing this divide quickly enough:
+
+```verilog
+always @ (*) begin   
+  if ( PIXEL_X >= 9'd500 || PIXEL_Y >= 9'd400 ) begin
+    COLOR_OUT = 8'b000_000_00;
+  end else begin
+    COLOR_OUT = grid_array[PIXEL_Y / 9'd100][PIXEL_X / 9'd100];
+  end  
+end
+```
+
+Finally, we need to provide a write port to this memory. To do this, we have exposed DATA_IN and DATA_VAL inputs. Whenever DATA_VAL (data valid) goes high, the data present in DATA_IN is written to memory. The target memory address is encoded into our data protocol that will be talked about in a later section. The implementation of our write port is very simple:
+
+```verilog
+always @ (posedge clk) begin
+  if (DATA_VAL) begin
+    grid_array[ DATA_IN[14:12] ][ DATA_IN[10:8] ] = DATA_IN[7:0];
+  end
+end
+```
+
+### SPI Module
+In order to allow communication between the arduino and our FPGA, we decided to use the already well-documented and widely-used protocol SPI. It uses clock, master in slave out, master out slave in, and chip select lines to perform this communication. Since the FPGA will only be receiving data from the Arduino master, we only use the clock, master out slave in, and chip select lines. 
+
+Our SPI slave module only works with 16-bit transactions in `CPOL=0` and `CPHA=0` mode (commonly referred to as SPI mode 0), meaning that the clock is not inverted and we only sample on the rising edge of the clock.
+
+To begin our implementation, we instantiate an SPI_SLAVE module with that takes in clock reset, the appropriate SPI signals (directly reading the GPIO pins) and a set of outputs containing the data of the transaction and whether or not the current transaction is completed.
+
+```verilog
+input clk;    // System Clock
+input reset;  // System Reset
+
+input sck;    // SPI slave clock
+input mosi;   // Data input
+input cs;     // Chip select
+
+output [15:0] input_shiftreg; // Data in shift register
+output        done;           // Transaction completed
+```
+Now we need to poll the chip select and clock lines to determine their rising edges. Using `posedge` with GPIO pins in verilog can be unreliable and error-prone, so we chose to implement a simple edge detection method ourselves (even though it is unreliable in theory, but works great in practice):
+
+```verilog
+reg [2:0] sck_record; // store 3 previous states of SCK
+always @(posedge clk)
+  sck_record <= { sck_record[1:0], sck };
+  
+reg [2:0] cs_record; // store 3 previous states of CS
+always @(posedge clk)
+  cs_record <= { cs_record[1:0], cs };
+```
+
+When `sck_record` contains `01x` we know we've just seen a rising edge, and when it contains `10x` we know we've just seen a falling edge (where x is a don't care). Same goes for `cs_record`. Once we have these values, we're ready for the real meat of the module. Here, every time the chip select line goes low, we prepare to receive a message. When we detect the rising edge of a clock, we poll the value of `mosi` and relay it to our input shift register. When chip select goes high we ignore all other SPI signals until this signal goes low again. 
+
+```verilog
+// Sample mosi at each sclk rising edge
+//  and Handle start/stop of messages
+always @(posedge clk) begin
+  if (cs_record[2:1] == 2'b01) begin // rising edge (end)
+    current_state <= 0; // stop listening
+    bitcounter <= 0;
+  end else if (cs_record[2:1] == 2'b10) begin // falling edge (start)
+    bitcounter <= 0; // reset bit counter
+    current_state <= 1; // start listening	
+  end else if (current_state == 1'b1 && sck_record[2:1] == 2'b01) begin
+    input_shiftreg = input_shiftreg << 1;
+    input_shiftreg[0] = mosi;
+    bitcounter <= bitcounter + 1;
+    if (bitcounter == 16)
+      current_state <= 0;	
+  end else begin
+    input_shiftreg <= input_shiftreg;
+  end
+end
+```
+
+Determining when a transaction is done is simple. Since we know all of our transactions are 16 bits long, our data valid bit (transaction complete bit) logic is extremely simple:
+
+```verilog
+wire done = (bitcounter == 16);
+```
+
+The data from the shift register and this done bit are fed into the controller to properly update the memory after a sucessful SPI transaction.
+
+
+## SPI Protocol
 
 ### Arduino Side:
 Arduino Code:
