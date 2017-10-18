@@ -157,7 +157,6 @@ Arduino Code:
 How we sent information to create the dance party
 
 ### Maze Representation: (how we plan to further implement this)
-“You will need to represent both the full maze (4 by 5 squares) and walls, empty spaces, unexplored spaces, a robot, and treasures within it. Be sure to include a description of your plan on your team website.”
 
 We have already implemented a 4x5 repreesntation of our maze. However, we only have a very simple representation of colors that will need to be further developed to a great extent. We plan to assign a color to each state of the maze:
  - Unexplored
