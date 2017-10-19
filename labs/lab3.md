@@ -11,7 +11,7 @@ In order to accomplish this lab in the time given, we split up into two teams: t
 
 ## Objectives: 
 Our goal was to begin building a fully-functional base station for our robot, with displaying a simplified version of the final maze grid. To accomplish this, we needed to display graphics on a VGA monitor using a FPGA. We had to write our own VGA controller and SPI protocol in order for the Arduino Uno to control the state of the grid displayed on the VGA monitor. While implementing this, we familiarized ourselves with the DE0-Nano FPGA board, SPI protocol, and how to interact with video memory and a VGA driver.
-- Understand example code and building upon it → should i include block diagram or should we make our own???
+- Understand example code and building upon it
 - Design and code a memory system to draw blocks in a grid
 - Create a communication method between the Arduino and FPGA
 
