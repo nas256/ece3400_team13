@@ -27,6 +27,7 @@ Our goal was to begin building a fully-functional base station for our robot, wi
 
 ## VGA Setup
 Because the VGA cable that connects the FPGA to the monitor only has 1 wire for each color (red, green, and blue) which only transmits values from 0 to 1 V. We need to convert our FPGA 3.3V digital output, which represents the color in 8 bits, to 1V analog signals for each color. The VGA connector takes care of this conversion for us with Digital-to-Analog-Converter (DAC) implemented with resistors. The VGA display has an internal resistance of 50 Ohms, so we needed to calculate specific values for each resistor for color based on this. The 3 bits comprise the red and green colors, whereas only 2 bits represent the blue color. So in order to scale, each resistor value needs to be a power of 2 above the other- with the the MSB having the smallest resistance and has the largest voltage. The values of the resistors as follows: (MSB left to LSB right)
+
 	RED: 270, 560, 1200 Ohms, Green: 270, 560, 1200 Ohms, Blue: 270, 560 Ohms
 These values in addition to the 50 ohm load divide the voltage down to acceptable analog voltages. 
 
