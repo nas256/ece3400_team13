@@ -156,10 +156,33 @@ In this waveform, channel 1 is SCK and channel 2 is MOSI. The first 8 bits are 0
 In the future, we aim to make this protocol more functional, transmitting information about the grid rather than colors, and plan to increase the transaction to 24 bits if required.
 
 ## Arduino Side:
-*TODO*
-Arduino Code:
-How we sent information to create the dance party
-How we divided the voltage from the arduino to the fpga (using 1.8k and 1.2k resistor, the 1.8k one goes to ground)
+
+Implementing SPI between the Arduino and FPGA also required programming on the Arduino. Fortunately, Arduino has implemented a library for SPI, making this setup much easier than with the FPGA. After including the header file for the library, SPI.h, only a few simple functions are needed to complete the SPI connection. In our setup function, we only need call pinMode(10,OUTPUT) which sets pin 10 on the Arduino Uno as a chip select output for the FPGA. Then SPI.begin() enables the SPI for data transfer later.
+
+```#include <SPI.h>
+//pin 13 is SCK
+//pin 11 is MOSI
+//pin 10 is ~SS
+
+#define X_SIZE 5
+#define Y_SIZE 4
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(10, OUTPUT); // Slave select pin
+  SPI.begin();
+}
+```
+
+In our main loop, SPI.beginTransaction enables the SPI transfer. This function uses an “SPISettings” object. Here, 10 MHz represents the SPI clock speed, MSBFIRST declares that the data transferred will be ordered by the most significant bits sent first (because SPI is a serial communication protocol, we need to indicate the order in which the bits of our data was sent), and SPI_MODE0 indicates the synchrony between the Arduino clock and the FPGA clock - there will be no phase offset, and the FPGA will have a rising edge for every Arduino rising edge.
+In our implementation of the actual data transfer, we have defined a 5x4 grid on the FPGA. Again, our data being transferred is a 2-byte sequence of the following format:
+
+YYYYXXXXCCCCCCCC
+
+The first hexadecimal value is the y-coordinate in the grid, second hex value is the x-coordinate, and the least significant byte is the color (a value on 0-255). This example code loops through the set of different grid spots, and assigns a random color for each square. To generate the actual 2-byte sequence sent via SPI, we start with a uint16_t “result”, set to 0. We OR this value with the y-coordinate left-shifted by 12 bits and the x-coordinate left-shifted by 8 bits to get the left half of the sequence (all the bits of result are 0, so by the OR identity operation this byte will be the exact values of x and y). We then generate a random byte value from 0-255 to indicate the color and OR this value with result - first performing an AND with 0x00FF to ensure that this operation doesn’t change the coordinate sequence.
+
+Transferring our sequence to the FPGA is disabled until we select it as the slave to receive the transfer. Therefore we call “digitalWrite(10, LOW)” to set the FPGA’s chip select to 0, enabling transfer to the FPGA. Then SPI.transfer16(result) performs the serial communication, and we return the chip select to high when we’re done. 
+
 
 ### Maze Representation: (how we plan to further implement this)
 
