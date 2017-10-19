@@ -182,6 +182,31 @@ YYYYXXXXCCCCCCCC
 
 The first hexadecimal value is the y-coordinate in the grid, second hex value is the x-coordinate, and the least significant byte is the color (a value on 0-255). This example code loops through the set of different grid spots, and assigns a random color for each square. To generate the actual 2-byte sequence sent via SPI, we start with a uint16_t “result”, set to 0. We OR this value with the y-coordinate left-shifted by 12 bits and the x-coordinate left-shifted by 8 bits to get the left half of the sequence (all the bits of result are 0, so by the OR identity operation this byte will be the exact values of x and y). We then generate a random byte value from 0-255 to indicate the color and OR this value with result - first performing an AND with 0x00FF to ensure that this operation doesn’t change the coordinate sequence.
 
+```c
+void loop() {
+  delay(250); // Its supposed to be a dance party, not an epilepsy party
+
+  // Doesn't work well at < 10MHz
+  SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0)); //10MHz
+
+  for (uint16_t x = 0; x < X_SIZE; x++){
+    for (uint16_t y = 0; y < Y_SIZE; y++){
+      uint16_t result = 0;
+      result |= (x << 8) | (y << 12); // Write coords
+      result |= random(0, 255) & 0x00FF; // Write random color
+
+      // Write result out
+      digitalWrite(10, LOW);
+      SPI.transfer16(result);
+      digitalWrite(10, HIGH);
+    }
+  }
+  
+  SPI.endTransaction();
+}
+```
+
+
 Transferring our sequence to the FPGA is disabled until we select it as the slave to receive the transfer. Therefore we call “digitalWrite(10, LOW)” to set the FPGA’s chip select to 0, enabling transfer to the FPGA. Then SPI.transfer16(result) performs the serial communication, and we return the chip select to high when we’re done. 
 
 
