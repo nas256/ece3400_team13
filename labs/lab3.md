@@ -155,6 +155,7 @@ In the future, we aim to make this protocol more functional, transmitting inform
 *TODO*
 Arduino Code:
 How we sent information to create the dance party
+How we divided the voltage from the arduino to the fpga
 
 ### Maze Representation: (how we plan to further implement this)
 
