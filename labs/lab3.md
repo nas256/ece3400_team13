@@ -18,7 +18,7 @@ Our goal was to begin building a fully-functional base station for our robot, wi
 ## Materials:
 - FPGA DE0_nano development board
 - Arduino Uno Board
-- ? Ohm Resistors for voltage divider
+- Variety of resistors for voltage divider and VGA connector
 - Bread Board
 - VGA Connector
 - VGA Cable
@@ -27,9 +27,13 @@ Our goal was to begin building a fully-functional base station for our robot, wi
 
 ## VGA Setup
 The VGA display has an internal resistance of 50 Ohms,therefore the VGA connector has the following resistor values...were chosen because…
+need to be small enough such that 
 Because the VGA cable that connects the FPGA to the monitor only has 1 wire for each color (red, green, and blue), which has only transmit values from 0 to 1 V. We need to convert our FPGA 3.3V digital output, which represents the color in 8 bits, to 1V analog signals for each color. The VGA connector takes care of this conversion for us with the Digital-to-Analog-Converter (DAC). 
-[double check and get part numbers]
 
+Each resistor is value a power of 2 above the other one --> mimic 2 bit value
+MSB:red, purple, brown, gold : 270 Ohms
+Middle: green, blue, brown: 560 Ohms
+LSB: brown, red, red?: 1200 Ohms
 ## FPGA: Verilog Implementation
 
 ### The provided VGA Driver
@@ -155,7 +159,7 @@ In the future, we aim to make this protocol more functional, transmitting inform
 *TODO*
 Arduino Code:
 How we sent information to create the dance party
-How we divided the voltage from the arduino to the fpga
+How we divided the voltage from the arduino to the fpga (using 1.8k and 1.2k resistor, the 1.8k one goes to ground)
 
 ### Maze Representation: (how we plan to further implement this)
 
@@ -180,12 +184,6 @@ A video of this system working can also be seen below:
 <br>
 [![Dance Party Video](http://img.youtube.com/vi/fSFf5c4tUkI/0.jpg)](https://www.youtube.com/watch?v=fSFf5c4tUkI)
 
-### Rubric: -->(temporary)
-1 point: Reading external inputs to FPGA
-1 point: Correctly updating a 4-bit array dependent on the inputs
-1 point: Drawing one box on the screen
-1 point: Description of how the DAC on the provided VGA connectors works and how the resistor values were chosen.
-4 points: Mapping external inputs to four different outputs on the screen
 
 
 # Acoustic Team
