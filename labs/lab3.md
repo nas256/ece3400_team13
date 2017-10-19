@@ -159,7 +159,8 @@ In the future, we aim to make this protocol more functional, transmitting inform
 
 Implementing SPI between the Arduino and FPGA also required programming on the Arduino. Fortunately, Arduino has implemented a library for SPI, making this setup much easier than with the FPGA. After including the header file for the library, SPI.h, only a few simple functions are needed to complete the SPI connection. In our setup function, we only need call pinMode(10,OUTPUT) which sets pin 10 on the Arduino Uno as a chip select output for the FPGA. Then SPI.begin() enables the SPI for data transfer later.
 
-```#include <SPI.h>
+```c
+#include <SPI.h>
 //pin 13 is SCK
 //pin 11 is MOSI
 //pin 10 is ~SS
