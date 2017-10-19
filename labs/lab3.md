@@ -341,11 +341,6 @@ With this code, we were able to get a clean triangle wave on the scope display.
 
 Once we had verified the correct triangle wave on the oscilloscope, we connected the output (pin 16) of the DAC to the input of the stereo phone jack socket (one of the exterior pins) and again connected one of the FPGA ground pins to the ground pin of the socket (setup shown below). We plugged the speaker jack into the socket and were able to hear the sound of the triangle wave.
 
-INSERT TRIANGLE PIC
-
-INSERT TRIANGLE VIDEO
-
-
 ### Outputting a simple sine wave
 
 With the triangle wave working, we knew that our DAC circuit was correct and that we could move on to generating a sine wave. To do this, we had to first implement a sine table ROM within our Verilog module. We first created a Matlab script which would generate the sine table and print it out in Verilog syntax.
@@ -374,14 +369,14 @@ initial begin
 end
 ```
 
-Now that we had this sine table, it was relatively simple for us to generate the sine wave. We wanted to generate a XX Hz sine wave, and so we had to increment the index of the 1024-entry sine table by one every 74 clock cycles. This is implemented with the following code. Note that we use a switch on the FPGA so that it outputs the sine wave when in the “ON” position and outputs nothing when “OFF”. This is the external input to the FPGA (during competition, this indicates that maze-mapping is complete!) that will prompt it to generate a sound.
+Now that we had this sine table, it was relatively simple for us to generate the sine wave. We wanted to generate a 500 Hz sine wave, and so we had to increment the index of the 1024-entry sine table by one every 100 clock cycles. This is implemented with the following code. Note that we use a switch on the FPGA so that it outputs the sine wave when in the “ON” position and outputs nothing when “OFF”. This is the external input to the FPGA (during competition, this indicates that maze-mapping is complete!) that will prompt it to generate a sound.
 
 ```verilog
 always@ (posedge(CLOCK_50)) begin
     if (~SW[3]) begin
 freq <= freq + 1; // freq acts as a counter
-// Changing the value from 74 will change the tone frequency 	
-if (freq == 74) begin
+// Changing the value from 100 will change the tone frequency 	
+if (freq == 100) begin
            freq <= 0;
            data_out <= sin_table[i];
            i <= i+ 1;
@@ -392,7 +387,7 @@ if (freq == 74) begin
 end
 ```
 
-To listen to what the sine wave sounded like, we again connected the output of the DAC to the stereo phone jack socket and plugged in the speakers. We could hear the sine wave at a constant frequency of XX Hz.
+To listen to what the sine wave sounded like, we again connected the output of the DAC to the stereo phone jack socket and plugged in the speakers. We could hear the sine wave at a constant frequency of 500 Hz.
 
 [![single sine wave](https://img.youtube.com/vi/WbqZ9BlY6jg/0.jpg)](https://youtu.be/WbqZ9BlY6jg)
 
