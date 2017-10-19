@@ -157,7 +157,13 @@ In the future, we aim to make this protocol more functional, transmitting inform
 
 ## Arduino Side:
 
-Implementing SPI between the Arduino and FPGA also required programming on the Arduino. Fortunately, Arduino has implemented a library for SPI, making this setup much easier than with the FPGA. After including the header file for the library, SPI.h, only a few simple functions are needed to complete the SPI connection. In our setup function, we only need call pinMode(10,OUTPUT) which sets pin 10 on the Arduino Uno as a chip select output for the FPGA. Then SPI.begin() enables the SPI for data transfer later.
+Implementing SPI between the Arduino and FPGA also required programming on the Arduino. Fortunately, Arduino has implemented a library for SPI, making this setup much easier than with the FPGA. 
+
+In order to communicate between the arduino and the FPGA we used a voltage divider circuit to divide the 5V from the Arduino to about 3.3V for the FPGA. Putting 5V into an FPGA pin could damage or destroy the device depending on the pin. The values we used for our voltage divider circuit and 1.2k ohms (connected to the Arduino signal and the FPGA signal) and 1.8k ohms, connected to the FPGA signal and ground, giving us a dividing factor of 0.6, which divided the 5V from the Arduino to 3.3V. Below is a screenshot of the SPI clock signal out of the Arduino (CH 1) and into the FPGA (CH 2):
+
+![Voltage Divider](https://i.imgur.com/yrUrAsA.png)
+
+After including the header file for the library, SPI.h, only a few simple functions are needed to complete the SPI connection. In our setup function, we only need call pinMode(10,OUTPUT) which sets pin 10 on the Arduino Uno as a chip select output for the FPGA. Then SPI.begin() enables the SPI for data transfer later.
 
 ```c
 #include <SPI.h>
