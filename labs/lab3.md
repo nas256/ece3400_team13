@@ -143,7 +143,7 @@ A 16-bit transaction is shown below:
 | ------------- | ------------- | ------------- |
 | Y Coordinate  | X coordinate  | 8-bit color   |
 
-_(We know this protocol is wasteful and can be compressed, however we chose it to align with a hex value, so that the first hexadecimal digit is the first coord, and the next digit is the next cord, for easy debugging)_
+_(We know this protocol is wasteful and can be compressed, however we chose it to align with a hex value, so that the first hexadecimal digit is the first coordinate and the next digit is the next coordinate, for easy debugging)_
 
 Here's an example of our protocol in action:
 
@@ -157,7 +157,7 @@ In the future, we aim to make this protocol more functional, transmitting inform
 
 Implementing SPI between the Arduino and FPGA also required programming on the Arduino. Fortunately, Arduino has implemented a library for SPI, making this setup much easier than with the FPGA. 
 
-In order to communicate between the arduino and the FPGA we used a voltage divider circuit to divide the 5V from the Arduino to about 3.3V for the FPGA. Putting 5V into an FPGA pin could damage or destroy the device depending on the pin. The values we used for our voltage divider circuit and 1.2k ohms (connected to the Arduino signal and the FPGA signal) and 1.8k ohms, connected to the FPGA signal and ground, giving us a dividing factor of 0.6, which divided the 5V from the Arduino to 3.3V. Below is a screenshot of the SPI clock signal out of the Arduino (CH 1) and into the FPGA (CH 2):
+In order to communicate between the Arduino and the FPGA, we used a voltage divider circuit to divide the 5V output from the Arduino to about 3.3V for the FPGA input. Putting 5V into an FPGA pin could damage or destroy the device depending on the pin. The values we used for our voltage divider circuit were 1.2k ohms (connected to the Arduino signal and the FPGA signal) and 1.8k ohms (connected to the FPGA signal and ground), giving us a dividing factor of 0.6, which divided the 5V from the Arduino to 3.3V. Below is a screenshot of the SPI clock signal out of the Arduino (CH 1) and into the FPGA (CH 2):
 
 ![Voltage Divider](https://i.imgur.com/yrUrAsA.png)
 
@@ -179,12 +179,12 @@ void setup() {
 }
 ```
 
-In our main loop, SPI.beginTransaction enables the SPI transfer. This function uses an “SPISettings” object. Here, 10 MHz represents the SPI clock speed, MSBFIRST declares that the data transferred will be ordered by the most significant bits sent first (because SPI is a serial communication protocol, we need to indicate the order in which the bits of our data was sent), and SPI_MODE0 indicates the synchrony between the Arduino clock and the FPGA clock - there will be no phase offset, and the FPGA will have a rising edge for every Arduino rising edge.
+In our main loop, SPI.beginTransaction function enables the SPI transfer. This function uses an “SPISettings” object. Here, 10 MHz represents the SPI clock speed, MSBFIRST declares that the data transferred will be ordered by the most significant bits sent first (because SPI is a serial communication protocol, we need to indicate the order in which the bits of our data was sent), and SPI_MODE0 indicates the synchrony between the Arduino clock and the FPGA clock (there will be no phase offset, and the FPGA will have a rising edge for every Arduino rising edge).
 In our implementation of the actual data transfer, we have defined a 5x4 grid on the FPGA. Again, our data being transferred is a 2-byte sequence of the following format:
 
 YYYYXXXXCCCCCCCC
 
-The first hexadecimal value is the y-coordinate in the grid, second hex value is the x-coordinate, and the least significant byte is the color (a value on 0-255). This example code loops through the set of different grid spots, and assigns a random color for each square. To generate the actual 2-byte sequence sent via SPI, we start with a uint16_t “result”, set to 0. We OR this value with the y-coordinate left-shifted by 12 bits and the x-coordinate left-shifted by 8 bits to get the left half of the sequence (all the bits of result are 0, so by the OR identity operation this byte will be the exact values of x and y). We then generate a random byte value from 0-255 to indicate the color and OR this value with result - first performing an AND with 0x00FF to ensure that this operation doesn’t change the coordinate sequence.
+The first hexadecimal value is the y-coordinate in the grid, the second hex value is the x-coordinate, and the least significant byte is the color (a value from 0 to 255). This example code loops through the set of different grid spots, and assigns a random color for each square. To generate the actual 2-byte sequence sent via SPI, we start with a uint16_t “result”, set to 0. We OR this value with the y-coordinate left-shifted by 12 bits and the x-coordinate left-shifted by 8 bits to get the left half of the sequence (all the bits of result are 0, so by the OR identity operation this byte will be the exact values of x and y). We then generate a random byte value from 0-255 to indicate the color and OR this value with result - first performing an AND with 0x00FF to ensure that this operation doesn’t change the coordinate sequence. The code is shown below.
 
 ```c
 void loop() {
@@ -216,7 +216,7 @@ Transferring our sequence to the FPGA is disabled until we select it as the slav
 
 ### Maze Representation: (how we plan to further implement this)
 
-We have already implemented a 4x5 repreesntation of our maze. However, we only have a very simple representation of colors that will need to be further developed to a great extent. We plan to assign a color to each state of the maze:
+We have already implemented a 4x5 repreesntation of our maze. However, we only have a very simple representation of colors that will need to be further developed to a great extent. We plan to assign a color to each state of the maze, which will be one of the following options:
  - Unexplored
  - Explored
  - Path ignored temporarily for another path
