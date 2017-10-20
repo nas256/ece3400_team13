@@ -262,7 +262,8 @@ Prepare the stereo phone jack socket in order to connect FPGA output to the spea
 
 The stereo phone jack socket has three terminals. Both exterior pins are inputs and the center pin is ground. To prepare the socket to be integrated into our circuit so that we could connect the FPGA output to the speakers, we soldered the two socket input pins together and to a red wire. We also soldered a black wire to the ground pin of the socket.
 
-![stereo jack](https://imgur.com/a/FTFc8.png)
+<img src="https://imgur.com/a/FTFc8.png" width="300">
+
 
 ### Outputting a square wave to the speaker
 In this section, we generated a simple square wave with frequency 700 Hz and output it to a GPIO pin. The implementation idea is simple: for half of the signal’s period, the output is 1, for another half of the period, the output is toggled to 0. A parameter CLKDIVIDER_700 is set to the total number of clock cycles in half of the square wave’s period, 1/700/2. Since the system clock’s frequency is 25MHz, one period requires 25000000/700 cycles; thus CLKDIVDER_700 is set to 25000000/700/2 to represent half of a period. A counter was used to count down the clock cycles in half of a period. If the counter reaches 0, the counter is reset and the square wave’s value is toggled. Otherwise, the counter keeps counting down and the register “wave” retains the old value.
