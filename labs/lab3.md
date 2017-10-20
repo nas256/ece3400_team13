@@ -262,7 +262,7 @@ Prepare the stereo phone jack socket in order to connect FPGA output to the spea
 
 The stereo phone jack socket has three terminals. Both exterior pins are inputs and the center pin is ground. To prepare the socket to be integrated into our circuit so that we could connect the FPGA output to the speakers, we soldered the two socket input pins together and to a red wire. We also soldered a black wire to the ground pin of the socket.
 
-<img src="https://imgur.com/a/FTFc8.png" width="300">
+<img src="https://imgur.com/nIgT7E9.jpg" width="300">
 
 
 ### Outputting a square wave to the speaker
