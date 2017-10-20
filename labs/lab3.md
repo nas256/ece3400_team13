@@ -38,13 +38,13 @@ These values in addition to the 50 ohm load divide the voltage down to acceptabl
 
 The provided VGA driver abstracts away most of the details of implementing VGA at a low level, and allows us to display a color given a set of x and y coordinates on the screen. 
 
-The driver is run at 25 MHz in order to refresh the screen at 60 Hz. Each cycle, it outputs the desired color on the `PIXEL_COLOR_OUT` line which is mapped to the gpio pins connected to the RR DAC (described in a separate section). The driver updates each pixel along a line, and then advances to the next line, overflowing to the first line after finishing the last pixel of the last line.
+The driver is run at 25 MHz in order to refresh the screen at 60 Hz. Each cycle, it outputs the desired color on the `PIXEL_COLOR_OUT` line which is mapped to the GPIO pins connected to the RR DAC (described in a separate section). The driver updates each pixel along a line, and then advances to the next line, overflowing to the first line after finishing the last pixel of the last line.
 
 ### Memory Block & Controller
 
 The `MAZE_MAPPER` module is responsible for storing a 5x4 array of 8 bit colors in a volatile memory block, communicating these values to the VGA module to correctly display them in a 5x4 grid on our screen, and to provide a write port to the data block to allow our SPI module to update its internal data.
 
-Storing the data is simple, and in order to do that we use a 4x5 multidimensional array of registers:
+Storing the data is simple, and in order to do that we use a 5x4 multidimensional array of registers:
 ```verilog
 reg [7:0] grid_array [3:0][4:0];
 ```
@@ -216,7 +216,7 @@ Transferring our sequence to the FPGA is disabled until we select it as the slav
 
 ### Maze Representation: (how we plan to further implement this)
 
-We have already implemented a 4x5 repreesntation of our maze. However, we only have a very simple representation of colors that will need to be further developed to a great extent. We plan to assign a color to each state of the maze, which will be one of the following options:
+We have already implemented a 5x4 representation of our maze. However, we only have a very simple representation of colors that will need to be further developed to a great extent. We plan to assign a color to each state of the maze, which will be one of the following options:
  - Unexplored
  - Explored
  - Path ignored temporarily for another path
@@ -244,7 +244,7 @@ A video of this system working can also be seen below:
 
 ## Objectives: 
 Our ultimate goal was to play a short tune of at least three frequencies our our speakers when a switch on the FPGA is turned on. We broke this down into the following sequence of smaller steps:
-Prepare the stereo phone jack socket in order to connect FPGA output to the speaker
+- Prepare the stereo phone jack socket in order to connect FPGA output to the speaker
 - Output a square wave to the speaker
 - Output a triangle and sawtooth wave to the speaker via an 8-bit DAC
 - Output a sine wave to the speaker
@@ -338,7 +338,7 @@ With this code, we were able to get a clean triangle wave on the scope display.
 
 <img src="https://imgur.com/6DjoHtC.jpg" width="300">
 
-Once we had verified the correct triangle wave on the oscilloscope, we connected the output (pin 16) of the DAC to the input of the stereo phone jack socket (one of the exterior pins) and again connected one of the FPGA ground pins to the ground pin of the socket (setup shown below). We plugged the speaker jack into the socket and were able to hear the sound of the triangle wave.
+Once we had verified the correct triangle wave on the oscilloscope, we connected the output (pin 16) of the DAC to the input of the stereo phone jack socket (one of the exterior pins) and again connected one of the FPGA ground pins to the ground pin of the socket. We plugged the speaker jack into the socket and were able to hear the sound of the triangle wave.
 
 ### Outputting a simple sine wave
 
@@ -429,6 +429,6 @@ To listen to the sound of the three-frequency tune, we again connected the outpu
 
 ## Conclusion
 
-Our team was able to successfully complete both tasks in Lab 3. The acoustic team was able to react to an external input to the FPGA (turning a switch on) and play a short three-frequency tune on the lab speakers. And the graphics team was able to implement a custom SPI protocol between the Arduino and the FPGA in order to control a 4x5 grid of tiles on a screen via VGA.
+Our team was able to successfully complete both tasks in Lab 3. The acoustic team was able to react to an external input to the FPGA (turning a switch on) and play a short three-frequency tune on the lab speakers. And the graphics team was able to implement a custom SPI protocol between the Arduino and the FPGA in order to control a 5x4 grid of tiles on a screen via VGA.
 
 Completing these two tasks was good practice with using the DE0-Nano Development Board and gave us a good start on the base station design for our final system. One the acoustic side, we still need to implement a way for the base station Arduino to trigger the three-tone sound instead of using a physical switch on the FPGA as we did in this lab. This should be relatively easy to implement by having the FPGA either poll an output pin from the Arduino or receive an interrupt when maze-mapping is complete. On the graphics side, we need to finalize the SPI protocol that we will use to communicate the maze state to screen. We will also need to finalize how we are going to represent each element of the maze visually.
