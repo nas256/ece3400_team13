@@ -10,7 +10,8 @@ In order to accomplish this lab in the time given, we split up into two teams: t
 ### Members: Eric, Nick, Julia
 
 ## Objectives: 
-Our goal was to begin building a fully-functional base station for our robot, with displaying a simplified version of the final maze grid. To accomplish this, we needed to display graphics on a VGA monitor using a FPGA. We had to write our own VGA controller and SPI protocol in order for the Arduino Uno to control the state of the grid displayed on the VGA monitor. While implementing this, we familiarized ourselves with the DE0-Nano FPGA board, SPI protocol, and how to interact with video memory and a VGA driver.
+Our goal was to begin building a fully-functional base station for our robot, with a display of a simplified version of the final maze grid. To accomplish this, we needed to display graphics on a VGA monitor using a FPGA. We had to write our own VGA controller and SPI protocol in order for the Arduino Uno to control the state of the grid displayed on the VGA monitor. While implementing this, we familiarized ourselves with the DE0-Nano FPGA board, SPI protocol, and how to interact with video memory and a VGA driver.
+
 - Understand example code and building upon it
 - Design and code a memory system to draw blocks in a grid
 - Create a communication method between the Arduino and FPGA
@@ -26,7 +27,7 @@ Our goal was to begin building a fully-functional base station for our robot, wi
 - VGA Switch
 
 ## VGA Setup
-Because the VGA cable that connects the FPGA to the monitor only has 1 wire for each color (red, green, and blue) which only transmits values from 0 to 1 V. We need to convert our FPGA 3.3V digital output, which represents the color in 8 bits, to 1V analog signals for each color. The VGA connector takes care of this conversion for us with Digital-to-Analog-Converter (DAC) implemented with resistors. The VGA display has an internal resistance of 50 Ohms, so we needed to calculate specific values for each resistor for color based on this. The 3 bits comprise the red and green colors, whereas only 2 bits represent the blue color. So in order to scale, each resistor value needs to be a power of 2 above the other- with the the MSB having the smallest resistance and has the largest voltage. The values of the resistors as follows: (MSB left to LSB right)
+The VGA cable that connects the FPGA to the monitor only has 1 wire for each color (red, green, and blue) which only transmits values from 0 to 1 V. We need to convert our FPGA 3.3V digital output, which represents the color in 8 bits, to 1V analog signals for each color. The VGA connector takes care of this conversion for us with Digital-to-Analog-Converter (DAC) implemented through resistors. The VGA display has an internal resistance of 50 Ohms, so we needed to calculate specific values for each resistor for color based on this. The 3 bits comprise the red and green colors, whereas only 2 bits represent the blue color. So in order to scale, each resistor value needs to be a power of 2 above the other - with the the MSB having the smallest resistance and the largest voltage. The values of the resistors as follows (MSB left to LSB right):
 
 	RED: 270, 560, 1200 Ohms, Green: 270, 560, 1200 Ohms, Blue: 270, 560 Ohms
 These values in addition to the 50 ohm load divide the voltage down to acceptable analog voltages. 
@@ -42,14 +43,15 @@ The driver is run at 25 MHz in order to refresh the screen at 60 Hz. Each cycle,
 
 ### Memory Block & Controller
 
-The `MAZE_MAPPER` module is responsible for storing a 5x4 array of 8 bit colors in a volatile memory block, communicating these values to the VGA module to correctly display them in a 5x4 grid on our screen, and to provide a write port to the data block to allow our SPI module to update its internal data.
+The `MAZE_MAPPER` module is responsible for storing a 5x4 array of 8 bit colors in a volatile memory block, communicating these values to the VGA module to correctly display them in a 5x4 grid on our screen. It provides a write port to the data block to allow our SPI module to update its internal data.
 
 Storing the data is simple, and in order to do that we use a 5x4 multidimensional array of registers:
+
 ```verilog
 reg [7:0] grid_array [3:0][4:0];
 ```
 
-In order to communicate this data back to the VGA driver, we need to provide an 8-bit COLOR_OUT value for any PIXEL_X or PIXEL_Y input. We do this by mapping every 100 pixels to an element in this array, so that each tile is 100 pixels tall and 100 pixels wide. To do this, we can integer divide the pixel inputs by 100 to turn them into array indecies. We recognize that a more efficient way to do this would be to make the tiles the size of a power of 2 and use a left-shift to divide, the fpga is more than capable of doing this divide quickly enough:
+In order to communicate this data back to the VGA driver, we need to provide an 8-bit COLOR_OUT value for any PIXEL_X or PIXEL_Y input. We do this by mapping every 100 pixels to an element in this array, so that each tile is 100 pixels tall and 100 pixels wide. To do this, we can integer divide the pixel inputs by 100 to turn them into array indecies. We recognize that a more efficient way to do this would be to make the tiles the size of a power of 2 and use a left-shift to divide. However, the FPGA is more than capable of doing this divide quickly enough:
 
 ```verilog
 always @ (*) begin   
