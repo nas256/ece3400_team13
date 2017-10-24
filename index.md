@@ -5,6 +5,7 @@ Hello! Welcome to team Lucky 13's running webpage! We'll be documenting all of o
  - [Lab1](https://nas256.github.io/ece3400_team13/labs/lab1)
  - [Lab2](https://nas256.github.io/ece3400_team13/labs/lab2)
  - [Lab3](https://nas256.github.io/ece3400_team13/labs/lab3)
+ - [Lab4](https://nas256.github.io/ece3400_team13/labs/lab4)
 
 ## Milestones
 - [Milestone 1](https://nas256.github.io/ece3400_team13/labs/milestone1)
