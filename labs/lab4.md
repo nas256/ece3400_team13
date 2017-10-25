@@ -1,5 +1,8 @@
 # Lab 4: Radio Communication and Map Drawing
 ## Objective
+The objective of this lab was to build off of the work we did in Lab 3 to draw a full maze on a VGA monitor while updating it in real time with information recieved from our robot. This information is transmitted through radio communication from our robot to our base station.
+While we had similair teams as the previous Lab, we all came together to agree on a communication protocol and worked together to combine the code. So all members gained experience with the VGA and radio communication elements.
+In the end we were succesful in implementing a protocol for the robot to accurately communicate to the base station about the current state of the maze: robot's current position, unexplored, and explored areas. The protocol also currently dicatates what bits are set aside for relaying walls, presence and frequency of treasures, and a done signal. 
 
 # Radio Team:
 ### Members: Norman, Divya, Wenhan
