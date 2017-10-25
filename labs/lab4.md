@@ -43,16 +43,58 @@ Now that the wireless communication between the two Arduino was established, we 
 - 1 VGA switch
 - Various resistors (for voltage divider)
 
-## Procedure
-### Making our grid display the full 4x5 grid
+## Enhancing the Display
+In the previous lab (lab 3), we had some extra time and decided to display the full 4x5 grid using a basic SPI protocol that allowed an arduino to individually control the color of each tile. However, we would like the protocol to include other functionality that would allow us to display, walls, IR tresasures, current location, etc. We also changed the protocol to accept partial changes in the maze, to allow us to only send updates as they happen without transmitting the entire maze each time.
+
+To see the corresponding Verilog snippets for the base memory and SPI controller, see the previous lab.
+
+### The Updated SPI Protocol
+In order to accommodate these new features, we've updated the protocol as follows:
+
+|15-13     |12-11     |10-9        |8-7    | 6-3      | 2         | 1            | 0         |
+| -------- | -------- | ---------- | ----  |  ------- | --------- | ------------ | --------- |
+| X coord  | Y coord  | Treasure   |  00   | Walls    | Travered? | Current Loc? | Finished? |
+
+ - The X coordinate and Y coordinate describe the two coordinates that uniquely describe the tile being updated
+ - The Treasure status is encoded in 2 bits as follows
+   - 00: No treasure
+   - 01: 7 kHz
+   - 10: 12 kHz
+   - 11: 17 kHz
+ - The walls in each cell are encoded with 4 bits, 1 bit to represent the prescnece of the top, bottom, left, and right walls
+ - The Traversed? bit is set if the robot has seen this location before
+ - The Current Loc? bit is set if the robot is currently in this location
+ - The Finished? bit is set if the robot has reached the end of the maze
+
+### Update the Verilog Draw Code 
+
+In order to support differentiating beteween the current location, previously explored tiles, and unexplored tiles, we needed to alter our MAZE_MAPPER.v controller to parse the new protocol and display the appropriate colors:
+
+```verilog
+if (grid_array[PIXEL_Y / 9'd100][PIXEL_X / 9'd100] & (16'd1 << 1)) begin
+  COLOR_OUT = 8'b111_100_00; //yellow -> current location
+end else if (grid_array[PIXEL_Y / 9'd100][PIXEL_X / 9'd100] & (16'd1 << 2)) begin
+  COLOR_OUT = 8'b111_111_11; // white -> previously explored
+end else begin
+  COLOR_OUT = 8'b010_010_01; //grey -> unexplored
+end
+```
+
+### Testing this Protocol
+In order to test that our protocol was working before combining with the RF team, we wrote an Arduino program to simulate maze exploration
+
+```cpp
+TODO: ARDUINO CODE HERE
+```
+
+Here's a video of the program in operation (the yellow tile shows the current location, grey tiles are unexplored, and white tiles are explored):
+
+**TODO: INSERT ARDUINO TEST VIDEO HERE**
+
+
 ### Receiving packets from the arduino
 Using the packet format that you have agreed on with the radio team, write a module to read packets from the Arduino. Use the communication protocol you decided on in the pre-lab. To test your packet receiver, consider using the on-board LEDs and output signals onto GPIO pins and viewing them using a scope.
 
-### Highlight the robot’s current location based on packet information
-Now that you can receive packets, parse this data and use it to display the robot’s current location in the 4x5 grid.
-
-### Marking explored territory
-Finally, add additional support to display any previously-visited locations.
 
 ## Results
 
