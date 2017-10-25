@@ -28,6 +28,80 @@ To test the radios, we connected both Arduinos to the lab computer and programme
 Now that the wireless communication between the two Arduino was established, we increased the distance between the two radios to see if the transmitted signal can still be received. In fact, the information transmission worked well up to around 20 feet, at which dropped packets occurred, and the communication failed at around 30 feet.
  
 ### Sending the entire maze
+We initialized a 2D char array to represent the maze information. 
+```cpp
+unsigned char maze[5][5] =
+{
+3, 3, 3, 3, 3,
+3, 1, 1, 1, 3,
+3, 2, 0, 1, 2,
+3, 1, 3, 1, 3,
+3, 0, 3, 1, 0,
+};
+```
+To send this maze information, we first printed an indication that the maze was sending using printf. If the radio.write returned 1, which means the maze was successfully sent, “ok…” would be printed out. Otherwise, “failed.\n\r” would be printed on the screen. The code is shown below.
+```cpp
+    // First, stop listening so we can talk.
+    radio.stopListening();
+
+    // Take the time, and send it.  This will block until complete
+    //unsigned long time = maze;
+    printf("Now sending %lu...",maze);
+    bool ok = radio.write( maze, sizeof(maze) );
+
+    if (ok)
+      printf("ok...");
+    else
+      printf("failed.\n\r");
+
+    // Now, continue listening
+    radio.startListening();
+```
+In the receiver section of the code, a 2D char array “got_maze” was initialized to store the received maze information. The function radio.read was used to fetch the payload, and the received maze array was printed out. When there were no data ready to be read, the program would send back the last maze information received by the transmitter.
+
+```cpp
+  if ( role == role_pong_back )
+  {
+    // if there is data ready
+    if ( radio.available() )
+    {
+      // Dump the payloads until we've gotten everything
+      unsigned char got_maze[5][5];
+      bool done = false;
+      while (!done)
+      {
+        // Fetch the payload.
+        done = radio.read( got_maze, sizeof(got_maze) );
+      
+        // Print the maze
+        for (int i=0; i < 5; i++) {
+          for (int j=0; j < 5; j++) {
+            printf("%d ", got_maze[i][j]);
+          }
+          printf("\n");
+        }
+      
+        // Delay just a little bit to let the other unit
+        // make the transition to receiver
+        delay(20);
+      
+      }
+
+      // First, stop listening so we can talk
+      radio.stopListening();
+
+      // Send the final one back.
+      radio.write( &got_maze, sizeof(got_maze) );
+      printf("Sent response.\n\r");
+
+      // Now, resume listening so we catch the next packets.
+      radio.startListening();
+    }
+  }
+```
+After loading the program to both Arduinos, we were able to see the maze information packet successfully transmitting between the two Arduinos. The screenshot below depicts both serial monitors showing the correct maze array. 
+![](/Lab4Photos/IMG_4521.JPG.jpeg)
+
 
 ### Updating the maze array, dependent only on the updated robot information
 
