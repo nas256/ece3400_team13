@@ -18,7 +18,7 @@ In the end we were succesful in implementing a protocol for the robot to accurat
 
 ### Sending information wirelessly between Arduino’s
 First, we connected the radios to the special circuit boards, and plugged a radio into each of the two Arduinos with a supply voltage of 3.3V. 
-![](https://imgur.com/a/O9Cy5.png)
+![Radio](https://imgur.com/a/O9Cy5.png)
 
 We downloaded the [RF24 Arduino Libray](https://github.com/maniacbug/RF24) and added it to our Arduino library directory. Next, we replaced the Getting Started code in the RF24 library with the “Getting Started” sketch from the course repository. In the Getting Started example code, we changed the identifier numbers to 0x000000002CLL and  0x000000002DLL using the handout formula: 2 ( 3D + N ) + X. 
 
