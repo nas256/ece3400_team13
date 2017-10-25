@@ -18,14 +18,12 @@ In the end we were succesful in implementing a protocol for the robot to accurat
 
 ### Sending information wirelessly between Arduino’s
 First, we connected the radios to the special circuit boards, and plugged a radio into each of the two Arduinos with a supply voltage of 3.3V. 
-![Radio](https://imgur.com/a/O9Cy5.png)
-
-![](/Lab4Photos/IMG_20171019_203229.jpg)
+![](/Lab4Photos/IMG_20171019_203245.jpg)
 
 We downloaded the [RF24 Arduino Libray](https://github.com/maniacbug/RF24) and added it to our Arduino library directory. Next, we replaced the Getting Started code in the RF24 library with the “Getting Started” sketch from the course repository. In the Getting Started example code, we changed the identifier numbers to 0x000000002CLL and  0x000000002DLL using the handout formula: 2 ( 3D + N ) + X. 
 
 To test the radios, we connected both Arduinos to the lab computer and programmed the sketch to them. We chose one Arduino as transmitter, and typed “T” in its serial monitor. In the screenshot below, the left side serial monitor corresponds to the transmitter, and the right side serial monitor corresponds to the receiver. The signal sent by the transmitter was received by the receiver and sent back to the transmitter. The transmitter’s serial monitor also showed the round-trip delay. 
-![Signal](https://imgur.com/a/IDXIk.png)
+![](/Lab4Photos/IMG_20171019_203229.jpg)
 
 Now that the wireless communication between the two Arduino was established, we increased the distance between the two radios to see if the transmitted signal can still be received. In fact, the information transmission worked well up to around 20 feet, at which dropped packets occurred, and the communication failed at around 30 feet.
  
