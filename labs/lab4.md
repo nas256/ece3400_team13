@@ -136,7 +136,7 @@ By this point, we were able to send a packet containing information about the en
       printf("failed.\n\r");
 ``` 
 
-On the receiver side, we simply fetch the payload, print it, and send back the response back as before. We were able to see a test data packet, in which the x- and y-coordinates were set to 4 and 3, respectively, and the traverse and current bits were set to 1 and 0, respectively, resulting in a decimal value of 38916, was successfully transmitted.
+On the receiver side, we simply fetch the payload, print it, and send back the response back as before. We were able to see a test data packet, in which the x- and y-coordinates were set to 4 and 3, respectively, and the traverse and current bits were set to 1 and 0, respectively, resulting in a decimal value of 38916, was successfully transmitted. This method of sending new maze data instead of the entire maze array significantly reduces power consumption. However, it is slightly less robust since a dropped packet would result in incorrect information for that tile being displayed on the base station monitor. If the entire array werestored on the robot Arduino and sent to the base station, then this incorrect information would be fixed when the next packet were sent. However, since we can utilize the auto-acknowledge feature of the RF modules to detect and resend a dropped packet, we are able to use the power-friendly new-data-only method while ensuring that packets are not dropped.  
 
 ![](/Lab4Photos/IMG_20171019_215143.jpg)
 
