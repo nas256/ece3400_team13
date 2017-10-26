@@ -104,7 +104,41 @@ After loading the program to both Arduinos, we were able to see the maze informa
 
 
 ### Updating the maze array, dependent only on the updated robot information
+By this point, we were able to send a packet containing information about the entire maze between the two Arduinos. For our final robot, however, we want to be able to send only the updated maze information about a tile as it is discovered by the robot instead of sending the entire maze array, which would waste energy. To do this, we first defined an integer variable called new_data. Our encoding for the SPI protocol between the Arduino and VGA monitor is shown below and uses 16 bits to represent the location and state of the tile currently being updated. We used bit shifting to pack each field in the integer (16 bit) data packet, which can be sent as a single payload. The code for the sender Arduino on the robot is shown below: 
 
+```
+    // First, stop listening so we can talk.
+    radio.stopListening();
+
+    unsigned int new_data;
+    
+    // Test data
+    unsigned char x_coord = 4;
+    unsigned char y_coord = 3;
+    unsigned char traverse = 1;
+    unsigned char current = 0;
+    
+    // Use bit shifting to pack the bits
+    // For deployment with a robot, something like this should be factored out into
+    // a function, along with the code to unpack the bits
+    new_data = x_coord << 13 | y_coord << 11 | traverse << 2 | current << 1;
+    
+    // For the test case of (4, 3, 1, 0) the byte shoud look like: 1001100000000100
+    // In decimal this is 38916
+    
+    // Take the time, and send it.  This will block until complete
+    printf("Now sending new map data\n");
+    bool ok = radio.write( &new_data, sizeof(new_data) );
+    
+    if (ok)
+      printf("ok...");
+    else
+      printf("failed.\n\r");
+``` 
+
+On the receiver side, we simply fetch the payload, print it, and send back the response back as before. We were able to see a test data packet, in which the x- and y-coordinates were set to 4 and 3, respectively, and the traverse and current bits were set to 1 and 0, respectively, resulting in a decimal value of 38916, was successfully transmitted.
+
+![](/Lab4Photos/IMG_20171019_215143.jpg)
 
 # FPGA Team:
 ### Members: Nick, Eric, Julia
