@@ -282,8 +282,15 @@ Using the packet format that you have agreed on with the radio team, write a mod
 
 
 
-## Results: Merged Code
+## Results
+### Merged Code:
+
+Finally, both teams came together to transmit information from the robot's Arduino to the base station Arduino, which then stores the state of the maze in memory and relays this information to the FPGA via a custom half-duplex SPI protocol running at about 1MHz, that we developed in the last two labs.
+
 ** INCLUDE FINAL CODE HERE FOR both arduinos **
+
+Our efforts resulted in the wireless transmission of a simulated maze exploration (preprogrammed path, snakes its way down the maze) shown in the video below:
+
 [![Wireless Maze Exploration Maze Test](https://img.youtube.com/vi/vvY1DJPD8Ew/0.jpg)](https://youtu.be/vvY1DJPD8Ew)
 
 
