@@ -1,13 +1,9 @@
 # Lab 4: Radio Communication and Map Drawing
 ## Objective
-The objective of this lab was to build off of the work we did in Lab 3 and draw a full maze on a VGA monitor while updating it in real time with information recieved from our robot. This information is transmitted through radio communication from our robot to our base station
-
-While we had similair teams as the previous Lab, we all came together to agree on a communication protocol and worked together to combine the code. So all members gained experience with the VGA and radio communication elements.
-
-In the end we were succesful in implementing a protocol for the robot to accurately communicate to the base station about the current state of the maze: robot's current position, unexplored, and explored areas. The protocol also currently dicatates what bits are set aside for relaying walls, presence and frequency of treasures, and a done signal.
+The objective of this lab was to build off of the work we did in Lab 3 and draw a full maze on a VGA monitor while updating it in real time with information recieved from our robot. This information is transmitted through radio communication from our robot to our base station. We split into two groups, one which focused on implementing RF communication, and the other which further developed the FPGA implementation. Our two groups came together ultimately to merge our sections. In the end we were succesful in implementing a protocol for the robot to accurately communicate to the base station about the current state of the maze: robot's current position, unexplored, and explored areas. The protocol also currently dicatates what bits are set aside for relaying walls, presence and frequency of treasures, and a done signal.
 
 # Radio Team:
-### Members: Norman, Divya, Wenhan
+### Members: Nick, Eric, Julia
 
 ## Materials:
 - 2 Nordic nRF24L01+ transceivers
@@ -142,7 +138,7 @@ On the receiver side, we simply fetch the payload, print it, and send back the r
 ![](https://i.imgur.com/mlxNaNV.jpg)
 
 # FPGA Team:
-### Members: Nick, Eric, Julia
+### Members: Norman, Divya, Wenhan
 
 ## Materials
 - FPGA
@@ -153,7 +149,7 @@ On the receiver side, we simply fetch the payload, print it, and send back the r
 - Various resistors (for voltage divider)
 
 ## Enhancing the Display
-In the previous lab (lab 3), we had some extra time and decided to display the full 4x5 grid using a basic SPI protocol that allowed an arduino to individually control the color of each tile. However, we would like the protocol to include other functionality that would allow us to display, walls, IR tresasures, current location, etc. We also changed the protocol to accept partial changes in the maze, to allow us to only send updates as they happen without transmitting the entire maze each time.
+In the previous lab (lab 3), we had some extra time and decided to display the full 4x5 grid using a basic SPI protocol that allowed an Arduino to individually control the color of each tile. However, we would like the protocol to include other functionality that would allow us to display, walls, IR tresasures, current location, etc. We also changed the protocol to accept partial changes in the maze, to allow us to only send updates as they happen without transmitting the entire maze each time.
 
 To see the corresponding Verilog snippets for the base memory and SPI controller, see the previous lab.
 
@@ -329,7 +325,7 @@ Robot Arduino (transmitter):
     // Now, continue listening
     radio.startListening();
 ```
-On the basestation side, we receive the new maze data from the robot Arduino. Since power is less of a concern for the basestation Arduino, it stores the entire maze array in the integer array "maze", updates it with new data received over RF, and sends the entire maze array to the FPGA over SPI to display on the VGA monitor. 
+On the base station side, we receive the new maze data from the robot Arduino. Since power is less of a concern for the base station Arduino, it stores the entire maze array in the integer array "maze", updates it with new data received over RF, and sends the entire maze array to the FPGA over SPI to display on the VGA monitor. 
 ```cpp
       // First, stop listening so we can talk
       radio.stopListening();
@@ -383,6 +379,6 @@ We were also able to gracefully handle dropped packets by utilizing the auto-ack
 
 
 # Conclusion
-Our team was able to successfully complete both tasks in Lab 4. We created a successful communication protocol that encompasses all the information needed for the final maze. The radio team successfully used the RF transceivers to establish wireless communication between our robot and base station. By the end of the lab we simulated the robot navigating the maze in an S-formation. The robot's arduino then transmits its current location to the case station which indicates on the grid the current status.
+Our team was able to successfully complete both tasks in Lab 4. We created a successful communication protocol that encompasses all the information needed for the final maze. The radio team successfully used the RF transceivers to establish wireless communication between our robot and base station. By the end of the lab we simulated the robot navigating the maze in an S-formation. The robot's Arduino then transmits its current location to the case station which indicates on the grid the current status.
 
 Completing these two tasks was good practice with using the DE0-Nano Development Board and the Nordic nRF24L01+ transceivers. This lab encouraged us to hash out the final details for our base station and have us a good start on implementing the final system.
