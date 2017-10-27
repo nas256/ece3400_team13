@@ -294,7 +294,6 @@ Our efforts resulted in the wireless transmission of a simulated maze exploratio
 
 
 # Conclusion
-Our team was able to successfully complete both tasks in Lab 4. 
+Our team was able to successfully complete both tasks in Lab 4. We created a successful communication protocol that encompasses all the information needed for the final maze. The radio team successfully used the RF transceivers to establish wireless communication between our robot and base station. By the end of the lab we simulated the robot navigating the maze in an S-formation. The robot's arduino then transmits its current location to the case station which indicates on the grid the current status. 
 
-Completing these two tasks was good practice with using the DE0-Nano Development Board and gave us a good start on the base station design for our final system.
- One the acoustic side, we still need to implement a way for the base station Arduino to trigger the three-tone sound instead of using a physical switch on the FPGA as we did in this lab. This should be relatively easy to implement by having the FPGA either poll an output pin from the Arduino or receive an interrupt when maze-mapping is complete. On the graphics side, we need to finalize the SPI protocol that we will use to communicate the maze state to screen. We will also need to finalize how we are going to represent each element of the maze visually.
+Completing these two tasks was good practice with using the DE0-Nano Development Board and the Nordic nRF24L01+ transceivers. This lab encouraged us to hash out the final details for our base station and have us a good start on implementing the final system.
