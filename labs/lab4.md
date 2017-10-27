@@ -1,8 +1,9 @@
 # Lab 4: Radio Communication and Map Drawing
 ## Objective
-The objective of this lab was to build off of the work we did in Lab 3 to draw a full maze on a VGA monitor while updating it in real time with information recieved from our robot. This information is transmitted through radio communication from our robot to our base station
+The objective of this lab was to build off of the work we did in Lab 3 and draw a full maze on a VGA monitor while updating it in real time with information recieved from our robot. This information is transmitted through radio communication from our robot to our base station
 
 While we had similair teams as the previous Lab, we all came together to agree on a communication protocol and worked together to combine the code. So all members gained experience with the VGA and radio communication elements.
+
 In the end we were succesful in implementing a protocol for the robot to accurately communicate to the base station about the current state of the maze: robot's current position, unexplored, and explored areas. The protocol also currently dicatates what bits are set aside for relaying walls, presence and frequency of treasures, and a done signal. 
 
 # Radio Team:
@@ -25,7 +26,7 @@ We downloaded the [RF24 Arduino Libray](https://github.com/maniacbug/RF24) and a
 To test the radios, we connected both Arduinos to the lab computer and programmed the sketch to them. We chose one Arduino as transmitter, and typed “T” in its serial monitor. In the screenshot below, the left side serial monitor corresponds to the transmitter, and the right side serial monitor corresponds to the receiver. The signal sent by the transmitter was received by the receiver and sent back to the transmitter. The transmitter’s serial monitor also showed the round-trip delay. 
 ![](/Lab4Photos/IMG_20171019_203229.jpg)
 
-Now that the wireless communication between the two Arduino was established, we increased the distance between the two radios to see if the transmitted signal can still be received. In fact, the information transmission worked well up to around 20 feet, at which dropped packets occurred, and the communication failed at around 30 feet.
+Now that the wireless communication between the two Arduino was established, we increased the distance between the two radios to see if the transmitted signal can still be received. In fact, the information transmission worked well up to around 20 feet, at which dropped packets occurred, and the communication failed at around 30 feet (in low power mode).
  
 ### Sending the entire maze
 We initialized a 2D char array to represent the maze information. 
