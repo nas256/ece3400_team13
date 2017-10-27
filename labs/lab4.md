@@ -292,6 +292,13 @@ Our efforts resulted in the wireless transmission of a simulated maze exploratio
 
 [![Wireless Maze Exploration Maze Test](https://img.youtube.com/vi/-35leOOAmRI/0.jpg)](https://youtu.be/-35leOOAmRI)
 
+### Handling Dropped Packets
+
+We were also able to gracefully handle dropped packets. In the video below, you can see Norman Chen holding the robot with the transmitter attached. The transmitter is also generating a fake maze exploration. Norman walks too far away from the base station, and you can see that the maze stops updating. Then, he walks closer and the maze resumes updating where it left off, gracefully handling dropped packets.
+
+[![Wireless Maze Exploration Maze Test](https://img.youtube.com/vi/Uzm8_X5F-wc/0.jpg)](https://youtu.be/Uzm8_X5F-wc)
+
+
 
 # Conclusion
 Our team was able to successfully complete both tasks in Lab 4. We created a successful communication protocol that encompasses all the information needed for the final maze. The radio team successfully used the RF transceivers to establish wireless communication between our robot and base station. By the end of the lab we simulated the robot navigating the maze in an S-formation. The robot's arduino then transmits its current location to the case station which indicates on the grid the current status.
