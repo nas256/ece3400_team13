@@ -137,7 +137,7 @@ By this point, we were able to send a packet containing information about the en
       printf("failed.\n\r");
 ```
 
-On the receiver side, we simply fetch the payload, print it, and send back the response back as before. We were able to see a test data packet, in which the x- and y-coordinates were set to 4 and 3, respectively, and the traverse and current bits were set to 1 and 0, respectively, resulting in a decimal value of 38916, was successfully transmitted. This method of sending new maze data instead of the entire maze array significantly reduces power consumption. However, it is slightly less robust since a dropped packet would result in incorrect information for that tile being displayed on the base station monitor. If the entire array werestored on the robot Arduino and sent to the base station, then this incorrect information would be fixed when the next packet were sent. However, since we can utilize the auto-acknowledge feature of the RF modules to detect and resend a dropped packet, we are able to use the power-friendly new-data-only method while ensuring that packets are not dropped.  
+On the receiver side, we simply fetch the payload, print it, and send back the response back as before. We were able to see a test data packet, in which the x- and y-coordinates were set to 4 and 3, respectively, and the traverse and current bits were set to 1 and 0, respectively, resulting in a decimal value of 38916, was successfully transmitted. This method of sending new maze data instead of the entire maze array significantly reduces power consumption. However, it is slightly less robust since a dropped packet would result in incorrect information for that tile being displayed on the base station monitor. If the entire array werestored on the robot Arduino and sent to the base station, then this incorrect information would be fixed when the next packet were sent. However, since we can utilize the auto-acknowledge feature of the RF modules to detect and resend a dropped packet (which we do in our merged code), we are able to use the power-friendly new-data-only method while ensuring that packets are not dropped.  
 
 ![](https://i.imgur.com/mlxNaNV.jpg)
 
@@ -276,26 +276,108 @@ Here's a video of the program in operation (the yellow tile shows the current lo
 
 [![Local Maze Exploration Maze Test](https://img.youtube.com/vi/vvY1DJPD8Ew/0.jpg)](https://youtu.be/vvY1DJPD8Ew)
 
-
-### Receiving packets from the arduino
-Using the packet format that you have agreed on with the radio team, write a module to read packets from the Arduino. Use the communication protocol you decided on in the pre-lab. To test your packet receiver, consider using the on-board LEDs and output signals onto GPIO pins and viewing them using a scope.
-
-
-
 ## Results: Merged Code
 
-Finally, both teams came together to transmit information from the robot's Arduino to the base station Arduino, which then stores the state of the maze in memory and relays this information to the FPGA via a custom half-duplex SPI protocol running at about 1MHz, that we developed in the last two labs.
+Finally, both teams came together to transmit information from the robot's Arduino to the base station Arduino, which then stores the state of the maze in memory and relays this information to the FPGA via a custom half-duplex SPI protocol running at about 1MHz, that we developed in the last two labs. The transmitter code shown below integrates the maze traversal simulation code that the FPGA team worked on. It traverses the maze in a snaking pattern, transmitting only the new data about the current tile it is on. 
+ 
+Robot Arduino (transmitter):
+```cpp
+    // First, stop listening so we can talk.
+    radio.stopListening();
 
-** INCLUDE FINAL CODE HERE FOR both arduinos **
+    unsigned int new_data;
+   
+    // Traversal algorithm 
+    unsigned char traverse = 1;
+    unsigned char current = 1;
+    if (turn == 0) x_coord++;
+    if (turn == 1) x_coord--;
+    if (x_coord > X_SIZE - 1){ 
+      turn = 1;
+      y_coord++;
+      x_coord--;
+    }
+    if (x_coord < 0) {
+      turn = 0;
+      y_coord++;
+      x_coord++;
+    }
+    if (y_coord > Y_SIZE - 1) y_coord = 0;
+    
+    // Use bit shifting to pack the bits
+    // For deployment with a robot, something like this should be factored out into
+    // a function, along with the code to unpack the bits
+    new_data = x_coord << 13 | y_coord << 11 | traverse << 2 | current << 1;
+    
+    // For the test case of (5, 5, 3) the byte shoud look like: 10010011
+    // In decimal this is 147
+    
+    // Take the time, and send it.  This will block until complete
+    printf("Now sending new map data\n");
+    bool ok = radio.write( &new_data, sizeof(new_data) );
+    
+    if (ok)
+      printf("ok...");
+    else {
+      printf("failed.\n\r");
+      while(!ok){
+         ok = radio.write( &new_data, sizeof(new_data) );
+      }
+      printf("ok...");      
+    }
+    
+    // Now, continue listening
+    radio.startListening();
+```
+On the basestation side, we receive the new maze data from the robot Arduino. Since power is less of a concern for the basestation Arduino, it stores the entire maze array in the integer array "maze", updates it with new data received over RF, and sends the entire maze array to the FPGA over SPI to display on the VGA monitor. 
+```cpp
+      // First, stop listening so we can talk
+      radio.stopListening();
+      SPI.beginTransaction(SPISettings(1000000, MSBFIRST, SPI_MODE0)); //10MHz
+      unsigned int result = got_data;
+      unsigned char got_x = (got_data >> 13);
+      unsigned char got_y = (got_data >> 11) & 0x3;
+      maze[got_x][got_y] = got_data;
+      for (uint16_t x = 0; x < X_SIZE; x++) {
+        for (uint16_t y = 0; y < Y_SIZE; y++) {
+          if ((x != got_x) && (y != got_y)) maze[x][y] = maze[x][y] & 0xfffd;  
+          digitalWrite(7, LOW);
+          SPI.transfer16(maze[x][y]);
+          digitalWrite(7, HIGH);
+        }
+      }
+      
+  SPI.endTransaction();
+      // Send the final one back.
+      radio.write( &got_data, sizeof(got_data) );
+      printf("Sent response.\n\r");
 
+      // Now, resume listening so we catch the next packets.
+      radio.startListening();
+```
 Our efforts resulted in the wireless transmission of a simulated maze exploration (preprogrammed path, snakes its way down the maze) shown in the video below:
 
 [![Wireless Maze Exploration Maze Test](https://img.youtube.com/vi/-35leOOAmRI/0.jpg)](https://youtu.be/-35leOOAmRI)
 
 ### Handling Dropped Packets
 
-We were also able to gracefully handle dropped packets. In the video below, you can see Norman Chen holding the robot with the transmitter attached. The transmitter is also generating a fake maze exploration. Norman walks too far away from the base station, and you can see that the maze stops updating. Then, he walks closer and the maze resumes updating where it left off, gracefully handling dropped packets.
+We were also able to gracefully handle dropped packets by utilizing the auto-acknowledgment feature of the RF module. As shown in the snippet below, if the transmitter does not receive an acknowledgment that the packet has been received, it stays in a while loop resending the packet until it successfully sends. This check prevents the situation where a dropped packet would cause a misalignment in the maze array. In the video below, you can see Norman Chen holding the robot with the transmitter attached. The transmitter is also generating a fake maze exploration. Norman walks too far away from the base station, and you can see that the maze stops updating. Then, he walks closer and the maze resumes updating where it left off, gracefully handling dropped packets.
 
+```cpp
+    // Take the time, and send it.  This will block until complete
+    printf("Now sending new map data\n");
+    bool ok = radio.write( &new_data, sizeof(new_data) );
+    
+    if (ok)
+      printf("ok...");
+    else {
+      printf("failed.\n\r");
+      while(!ok){
+         ok = radio.write( &new_data, sizeof(new_data) );
+      }
+      printf("ok...");      
+    }
+```
 [![Wireless Maze Exploration Maze Test](https://img.youtube.com/vi/Uzm8_X5F-wc/0.jpg)](https://youtu.be/Uzm8_X5F-wc)
 
 
