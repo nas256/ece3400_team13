@@ -36,7 +36,7 @@ unsigned char maze[5][5] =
 3, 0, 3, 1, 0,
 };
 ```
-To send this maze information, we first printed an indication that the maze was sending using printf. If the radio.write returned 1, which means the maze was successfully sent, “ok…” would be printed out. Otherwise, “failed.\n\r” would be printed on the screen. The code is shown below.
+To send this maze information, we first printed an indication that the maze was sending using printf. If the radio.write returned 1, which means the maze was successfully sent, “ok…” would be printed out. Otherwise, “failed” would be printed on the screen. The code is shown below.
 ```cpp
     // First, stop listening so we can talk.
     radio.stopListening();
@@ -100,7 +100,7 @@ After loading the program to both Arduinos, we were able to see the maze informa
 ![](https://raw.githubusercontent.com/nas256/ece3400_team13/master/Lab4Photos/IMG_4521.JPG.jpeg)
 
 
-### Updating the maze array, dependent only on the updated robot information
+### Sending only new maze information
 By this point, we were able to send a packet containing information about the entire maze between the two Arduinos. For our final robot, however, we want to be able to send only the updated maze information about a tile as it is discovered by the robot instead of sending the entire maze array, which would waste energy. To do this, we first defined an integer variable called new_data. Our encoding for the SPI protocol between the Arduino and VGA monitor is shown below and uses 16 bits to represent the location and state of the tile currently being updated. We used bit shifting to pack each field in the integer (16 bit) data packet, which can be sent as a single payload. The code for the sender Arduino on the robot is shown below:
 
 ```
@@ -133,7 +133,7 @@ By this point, we were able to send a packet containing information about the en
       printf("failed.\n\r");
 ```
 
-On the receiver side, we simply fetch the payload, print it, and send back the response back as before. We were able to see a test data packet, in which the x- and y-coordinates were set to 4 and 3, respectively, and the traverse and current bits were set to 1 and 0, respectively, resulting in a decimal value of 38916, was successfully transmitted. This method of sending new maze data instead of the entire maze array significantly reduces power consumption. However, it is slightly less robust since a dropped packet would result in incorrect information for that tile being displayed on the base station monitor. If the entire array werestored on the robot Arduino and sent to the base station, then this incorrect information would be fixed when the next packet were sent. However, since we can utilize the auto-acknowledge feature of the RF modules to detect and resend a dropped packet (which we do in our merged code), we are able to use the power-friendly new-data-only method while ensuring that packets are not dropped.  
+On the receiver side, we simply fetch the payload, print it, and send back the response back as before. We were able to see a test data packet, in which the x- and y-coordinates were set to 4 and 3, respectively, and the traverse and current bits were set to 1 and 0, respectively, resulting in a decimal value of 38916, was successfully transmitted, as shown in the image of our serial monitor output below. This method of sending new maze data instead of the entire maze array significantly reduces power consumption. However, it is slightly less robust since a dropped packet would result in incorrect information for that tile being displayed on the base station monitor. If the entire array were stored on the robot Arduino and sent to the base station, then this incorrect information would be fixed when the next packet were sent. However, since we can utilize the auto-acknowledge feature of the RF modules to detect and resend a dropped packet (which we do in our merged code), we are able to use the power-friendly new-data-only method while ensuring that packets are not dropped.  
 
 ![](https://i.imgur.com/mlxNaNV.jpg)
 
