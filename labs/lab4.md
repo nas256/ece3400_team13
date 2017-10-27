@@ -273,16 +273,17 @@ void loop() {
 
 Here's a video of the program in operation (the yellow tile shows the current location, grey tiles are unexplored, and white tiles are explored):
 
-**TODO: INSERT ARDUINO TEST VIDEO HERE**
+[![Local Maze Exploration Maze Test](https://img.youtube.com/vi/vvY1DJPD8Ew/0.jpg)](https://youtu.be/vvY1DJPD8Ew)
 
 
 ### Receiving packets from the arduino
 Using the packet format that you have agreed on with the radio team, write a module to read packets from the Arduino. Use the communication protocol you decided on in the pre-lab. To test your packet receiver, consider using the on-board LEDs and output signals onto GPIO pins and viewing them using a scope.
 
-** INCLUDE FINAL CODE HERE FOR both arduinos
+** INCLUDE FINAL CODE HERE FOR both arduinos **
+[![Wireless Maze Exploration Maze Test](https://img.youtube.com/vi/vvY1DJPD8Ew/0.jpg)](https://youtu.be/vvY1DJPD8Ew)
 
 ## Results
-
+By the end of this lab
 
 
 # Conclusion
