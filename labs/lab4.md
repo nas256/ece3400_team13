@@ -282,8 +282,7 @@ Using the packet format that you have agreed on with the radio team, write a mod
 
 
 
-## Results
-###Merged Code:
+## Results: Merged Code
 ** INCLUDE FINAL CODE HERE FOR both arduinos **
 [![Wireless Maze Exploration Maze Test](https://img.youtube.com/vi/vvY1DJPD8Ew/0.jpg)](https://youtu.be/vvY1DJPD8Ew)
 
