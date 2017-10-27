@@ -279,11 +279,12 @@ Here's a video of the program in operation (the yellow tile shows the current lo
 ### Receiving packets from the arduino
 Using the packet format that you have agreed on with the radio team, write a module to read packets from the Arduino. Use the communication protocol you decided on in the pre-lab. To test your packet receiver, consider using the on-board LEDs and output signals onto GPIO pins and viewing them using a scope.
 
-** INCLUDE FINAL CODE HERE FOR both arduinos **
-[![Wireless Maze Exploration Maze Test](https://img.youtube.com/vi/vvY1DJPD8Ew/0.jpg)](https://youtu.be/vvY1DJPD8Ew)
+
 
 ## Results
-By the end of this lab
+###Merged Code:
+** INCLUDE FINAL CODE HERE FOR both arduinos **
+[![Wireless Maze Exploration Maze Test](https://img.youtube.com/vi/vvY1DJPD8Ew/0.jpg)](https://youtu.be/vvY1DJPD8Ew)
 
 
 # Conclusion
@@ -291,4 +292,3 @@ Our team was able to successfully complete both tasks in Lab 4.
 
 Completing these two tasks was good practice with using the DE0-Nano Development Board and gave us a good start on the base station design for our final system.
  One the acoustic side, we still need to implement a way for the base station Arduino to trigger the three-tone sound instead of using a physical switch on the FPGA as we did in this lab. This should be relatively easy to implement by having the FPGA either poll an output pin from the Arduino or receive an interrupt when maze-mapping is complete. On the graphics side, we need to finalize the SPI protocol that we will use to communicate the maze state to screen. We will also need to finalize how we are going to represent each element of the maze visually.
-
