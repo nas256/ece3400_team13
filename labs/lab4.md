@@ -326,6 +326,8 @@ Robot Arduino (transmitter):
     radio.startListening();
 ```
 On the base station side, we receive the new maze data from the robot Arduino. Since power is less of a concern for the base station Arduino, it stores the entire maze array in the integer array "maze", updates it with new data received over RF, and sends the entire maze array to the FPGA over SPI to display on the VGA monitor. 
+
+Base Station Arduino (receiver):
 ```cpp
       // First, stop listening so we can talk
       radio.stopListening();
@@ -357,7 +359,7 @@ Our efforts resulted in the wireless transmission of a simulated maze exploratio
 
 ### Handling Dropped Packets
 
-We were also able to gracefully handle dropped packets by utilizing the auto-acknowledgment feature of the RF module. As shown in the snippet below, if the transmitter does not receive an acknowledgment that the packet has been received, it stays in a while loop resending the packet until it successfully sends. This check prevents the situation where a dropped packet would cause a misalignment in the maze array. In the video below, you can see Norman Chen holding the robot with the transmitter attached. The transmitter is also generating a fake maze exploration. Norman walks too far away from the base station, and you can see that the maze stops updating. Then, he walks closer and the maze resumes updating where it left off, gracefully handling dropped packets.
+We were also able to gracefully handle dropped packets by utilizing the auto-acknowledgment feature of the RF module. As shown in the snippet below, if the transmitter does not receive an acknowledgment that the packet has been received, it stays in a while loop, resending the packet until it successfully sends. This check prevents the situation where a dropped packet would cause a misalignment in the base station's  maze array. In the video below, you can see Norman Chen holding the robot with the transmitter attached. The transmitter is also generating a fake maze exploration. Norman walks too far away from the base station, and you can see that the maze stops updating. Then, he walks closer and the maze resumes updating where it left off, gracefully handling dropped packets.
 
 ```cpp
     // Take the time, and send it.  This will block until complete
@@ -381,4 +383,4 @@ We were also able to gracefully handle dropped packets by utilizing the auto-ack
 # Conclusion
 Our team was able to successfully complete both tasks in Lab 4. We created a successful communication protocol that encompasses all the information needed for the final maze. The radio team successfully used the RF transceivers to establish wireless communication between our robot and base station. By the end of the lab we simulated the robot navigating the maze in an S-formation. The robot's Arduino then transmits its current location to the case station which indicates on the grid the current status.
 
-Completing these two tasks was good practice with using the DE0-Nano Development Board and the Nordic nRF24L01+ transceivers. This lab encouraged us to hash out the final details for our base station and have us a good start on implementing the final system.
+Completing these two tasks was good practice with using the DE0-Nano Development Board and the Nordic nRF24L01+ transceivers. This lab encouraged us to hash out the final details for our base station and gave us a good start on implementing the final system.
