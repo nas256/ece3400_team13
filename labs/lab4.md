@@ -162,7 +162,7 @@ In order to accommodate these new features, we've updated the protocol as follow
 
 |15-13     |12-11     |10-9        |8-7    | 6-3      | 2         | 1            | 0         |
 | -------- | -------- | ---------- | ----  |  ------- | --------- | ------------ | --------- |
-| X coord  | Y coord  | Treasure   |  00   | Walls    | Travered? | Current Loc? | Finished? |
+| X coord  | Y coord  | Treasure   |  00   | Walls    | Traversed? | Current Loc? | Finished? |
 
  - The X coordinate and Y coordinate describe the two coordinates that uniquely describe the tile being updated
  - The Treasure status is encoded in 2 bits as follows
