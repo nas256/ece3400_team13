@@ -19,6 +19,7 @@ You don’t have to worry about treasures/microphone circuitry yet, for either t
 ### Algorithm: DFS in C
 
 **Coordinate System**
+
 One of the major differences between our simulation and actual implementation is that the robot's orientation changes as it moves through the maze. Therefore, we must be able to translate between the robot's caridinal directions and the "true north" as seen by the DFS algorithm. In order to determine directions, we use a North, South, East, West cardinal direction system, the directions are encoded as follows:
 
 | Direction | Encoding |
