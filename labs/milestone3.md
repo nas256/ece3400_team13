@@ -6,7 +6,7 @@
 1 point: Indicator that shows the robot is done (explored everything explorable)
 
 ### Algorithm: DFS in Matlab
-**talk about matlab algorithm code**
+
 [![Matlab simulation](https://img.youtube.com/vi/BW15qMcbeaY/0.jpg)](https://youtu.be/BW15qMcbeaY)
 
 ### Matlab Graphics
@@ -61,8 +61,15 @@ Update maze array
 **Turning states**
 
 In order to get the robot to move according to our algorithm, we need to map each direction that `at_intersection()` can return to a direction that the board should move. If the robot receives NORTH, then the robot goes into the FOLLOW_LINE state, which essentially just keeps the robot driving straight. If the robot receives SOUTH, then the robot goes into the TURN_180 state, which rotates the wheels opposite to each other in order to turn the robot 180 degrees. If the robot receives WEST, then the robot will turn left, and EAST will cause the robot to turn right. Here's a video of our robot moving according to our DFS algorithm.
+
 [![DFS Trial](https://img.youtube.com/vi/KyGrfLteqN8/0.jpg)](https://youtu.be/KyGrfLteqN8)
+
+
 ### Robot's Done signal
 Our done signal is just lighting up three LEDs on our robot. This involves first adding a signal which `at_intersection()` can return to tell the robot that it is indeed done. We added a new state called DONE, which causes the robot to stop its wheels and light up the LEDs. Here's a video of our robot completing a DFS!
 
-TODO: video of final dfs
+**TODO: video of final dfs**
+
+
+## Conclusion 
+
