@@ -5,9 +5,99 @@
 4 points: Working algorithm that facilitates maze exploration.
 1 point: Indicator that shows the robot is done (explored everything explorable)
 
+### Algorithm: General DFS Overview
+
+Depth-first search (DFS) is an algorithm used for graph traversal that starts at a root node and explores as far as possible in one direction before backtracking and exploring other nodes. The general pseudocode for DFS is shown below. The frontier stack contains the list of nodes to visit, and current is the current node. A stack is used since it is a last-in-first-out (LIFO) data structure which facilitates proceeding as far in one direction before backtracking, or popping the stack.
+
+```cpp
+frontier = new Stack();
+frontier.push(root);
+
+while (frontier not empty) {
+    current = frontier.pop();
+    foreach (n neighbor of current) {
+        if (n not visited and not blocked) {
+            frontier.push(n);
+        }
+    }
+}
+traversal_complete = 1;
+```
+
 ### Algorithm: DFS in Matlab
 
-[![Matlab simulation](https://img.youtube.com/vi/BW15qMcbeaY/0.jpg)](https://youtu.be/BW15qMcbeaY)
+We implemented a simple DFS algorithm using Matlab for our maze simulation. In addition to our frontier stack, which we call 's', we also define a second stack called 'path', which contains the list of nodes in the path taken through the maze. We require this second array to remember our path so that we can backtrack. Additionally, we define two arrays that have one-bit entries for every tile in the grid: the array visited tracks whether that tile has been visited or not, and the added array tracks whether the tile has been added to the frontier stack or not. The commented Matlab code is shown below, as is a video of the simulation.
+
+```cpp
+completed = 0; // 1 if maze has been fully explored
+visited = zeros(6,6); // grid array, 1 if visited, 0 if not
+added = zeros(6,6); // grid array, 1 if added to frontier, 0 if not
+s = CStack(); // frontier stack
+path = CStack(); // path stack
+
+while (~completed)
+
+  update_view( map, maze, wall_loc );
+  s.push( [x,y] );
+  while (~s.isempty())
+      maze(x,y) = 0.5; // color current location green
+      wall_bin = de2bi(wall_loc(x,y), 4, 'right-msb');
+
+      // if all neighbors are visited or are blocked by walls, backtrack
+      if ((wall_bin(1) == 1 || ((x-1 >= 1) && visited(x-1,y) == 1)) ...
+        && (wall_bin(2) == 1 || ((x+1 <= 4) && visited(x+1,y) == 1)) ...
+      	&& (wall_bin(3) == 1 || ((y+1 <= 5) && visited(x,y+1) == 1)) ...
+        && (wall_bin(4) == 1 || ((y-1 >= 1) && visited(x,y-1) == 1)))
+          current = path.pop();
+      // otherwise, pop the next node from the frontier stack
+      else
+          current = s.pop();      
+          path.push(current);
+      end
+
+      // update current position on map
+      x = current(1);
+      y = current(2);
+      maze(current(1),current(2)) = 0;
+      update_view( map, maze, wall_loc );
+      pause(0.5);
+
+      // mark tile as visited if it hasn't been visited before
+      if ( visited(x,y) == 1)
+         disp('Visited');
+      else
+        visited(x,y) = 1;
+
+        // add all neighbors to stack, in order N,S,E,W
+        wall_bin = de2bi(wall_loc(x,y), 4, 'right-msb');
+        if ( (x-1) >= 1 && (added(x-1, y) == 0) && wall_bin(1) == 0 && visited(x-1,y) == 0)  
+            s.push( [x-1,y] );
+            added(x-1, y) = 1;
+        end
+        if ( (added(x+1, y) == 0) && wall_bin(2) == 0 && visited(x+1,y) == 0)
+            s.push( [x+1,y] );
+            added(x+1, y) = 1;
+        end
+        if ( (added(x, y+1) == 0) && wall_bin(3) == 0 && visited(x,y+1) == 0)  
+            s.push( [x,y+1] );
+            added(x, y+1);
+        end
+        if ( (y-1) >= 1 &&(added(x, y-1) == 0) && wall_bin(4) == 0 && visited(x,y-1) == 0)  
+            s.push( [x,y-1] );
+            added(x, y-1);
+        end
+      end
+      end
+
+  // if frontier node is empty, then graph is fully explored
+  completed = 1;
+  disp('Complete');
+end
+```
+
+[![Matlab DFS Video](https://img.youtube.com/vi/BW15qMcbeaY/0.jpg)](https://www.youtube.com/watch?v=BW15qMcbeaY)
+
+#### update video to include completed indicator
 
 ### Matlab Graphics
 **talk about matlab graphics and the done indicator in simulation**
@@ -73,3 +163,4 @@ Our done signal is just lighting up three LEDs on our robot. This involves first
 
 ## Conclusion 
 
+=======
