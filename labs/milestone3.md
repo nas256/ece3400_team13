@@ -1,6 +1,9 @@
 ### Nicholas Sarkis, Norman Chen, Eric Cole, Julia Currie, Divya Gupta, Wenhan Xia
 # Milestone 3: Algorithms
 
+## Introduction
+The main goal of milestone 3 was to implement a depth-first search (DFS) algorithm to facilitate maze exploration and to add an indicator to signal that the robot is done. Before we implemented the algorithm on our robot, we first ran a Matlab simulation to test the algorithm’s efficiency and robustness with different types of mazes. Once the simulation worked well, we translated the MATLAB code to C and added it to an Arduino program.
+
 ## In Simulation:
 4 points: Working algorithm that facilitates maze exploration.
 1 point: Indicator that shows the robot is done (explored everything explorable)
