@@ -3,6 +3,7 @@
 
 ## Introduction
 The main goal of milestone 3 was to implement a depth-first search (DFS) algorithm to facilitate maze exploration and to add an indicator to signal that the robot is done. Before we implemented the algorithm on our robot, we first ran a Matlab simulation to test the algorithm’s efficiency and robustness with different types of mazes. Once the simulation worked well, we translated the MATLAB code to C and added it to an Arduino program.
+The robot’s completion was indicated by a “Complete” message printed in the Matlab simulation, and by three lit LEDs for the real time maze mapping.
 
 ## In Simulation:
 4 points: Working algorithm that facilitates maze exploration.
@@ -108,9 +109,17 @@ To represent our maze graphically, we drew a 4x5 grid of rectangles and displaye
 
 
 
-Our grid starts out with every location unvisited (every square is white, and the value in maze is 1). Whenever our robot leaves a square, we change that location’s value in maze to 0.5, and the new square our robot moves to is updated to 0. Then we redraw the maze based on the updated matrix. 
+Our grid starts out with every location unvisited (every square is white, and the value in maze is 1). Whenever our robot leaves a square, we change that location’s value in maze to 0.5, and the new square our robot moves to is updated to 0. Then we redraw the maze based on the updated matrix with our redraw function:
 
+```cpp
+function update_view( map, maze, wall_loc )
+    colormap(map);
+    imagesc(maze);
+    caxis([0 1])
+    draw_walls(wall_loc);
 
+end
+```
 
 To encode wall locations, we also used a 4x5 grid, which we named wall_loc. For each square in the grid, we used a 4-bit binary sequence: a one indicates a wall present on a given side, with the bits ordered West, East, South, North. For instance, our top left corner might be 1001, indicating walls to the left and up. These 4-bit encodings were stored as decimal values in the 4x5 wall_loc matrix.
 
