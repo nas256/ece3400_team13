@@ -72,4 +72,4 @@ Our done signal is just lighting up three LEDs on our robot. This involves first
 
 
 ## Conclusion 
-
+By the end of this milestone we were able to simulate DFS maze exploration and fully implement DFS on our robot and signal when the maze is fully traversed. Looking ahead, we need still need to support the ending tone once the robot is done exploring and  treasure identificatoin in our robot's implementation. We are also working on the layout for a PCB which should make our electronics more compact and reliable. 
