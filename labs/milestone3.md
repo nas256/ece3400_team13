@@ -30,7 +30,9 @@ traversal_complete = 1;
 
 ### Algorithm: DFS in Matlab
 
-We implemented a simple DFS algorithm using Matlab for our maze simulation. In addition to our frontier stack, which we call 's', we also define a second stack called 'path', which contains the list of nodes in the path taken through the maze. We require this second array to remember our path so that we can backtrack. Additionally, we define two arrays that have one-bit entries for every tile in the grid: the array visited tracks whether that tile has been visited or not, and the added array tracks whether the tile has been added to the frontier stack or not. The commented Matlab code is shown below, as is a video of the simulation.
+We implemented a simple DFS algorithm using Matlab for our maze simulation. In addition to our frontier stack, which we call 's', we also define a second stack called 'path', which contains the list of nodes in the path taken through the maze. We require this second array to remember our path so that we can backtrack if all neighbors of the current tile are blocked by walls or have already been visited. Additionally, we define two arrays that have one-bit entries for every tile in the grid: the array visited tracks whether that tile has been visited or not, and the added array checks whether the tile has already been added to the frontier stack or not.
+
+The commented Matlab code is shown below, as is a video of the simulation. Tiles are marked as white if they are unexplored, green if they have been visited, and black if it is the current tile. After the maze is explored, a "Complete" message is printed to the command window.
 
 ```cpp
 completed = 0; // 1 if maze has been fully explored
@@ -99,9 +101,8 @@ while (~completed)
 end
 ```
 
-[![Matlab DFS Video](https://img.youtube.com/vi/BW15qMcbeaY/0.jpg)](https://www.youtube.com/watch?v=BW15qMcbeaY)
+[![Matlab DFS Video](https://img.youtube.com/vi/3pxyapwlsh0/0.jpg)](https://www.youtube.com/watch?v=3pxyapwlsh0)
 
-#### update video to include completed indicator
 
 ### Matlab Graphics
 
@@ -110,6 +111,8 @@ To represent our maze graphically, we drew a 4x5 grid of rectangles and displaye
 
 
 Our grid starts out with every location unvisited (every square is white, and the value in maze is 1). Whenever our robot leaves a square, we change that location’s value in maze to 0.5, and the new square our robot moves to is updated to 0. Then we redraw the maze based on the updated matrix with our redraw function:
+=======
+Our grid starts out with every location unvisited (every square is white, and the value in maze is 1). Whenever our robot leaves a square, we change that location’s value in maze to 0.5, and the new square our robot moves to is updated to 0. Then we redraw the maze based on the updated matrix.
 
 ```cpp
 function update_view( map, maze, wall_loc )
@@ -219,4 +222,6 @@ Our done signal is just lighting up three LEDs on our robot. This involves first
 By the end of this milestone we were able to simulate DFS maze exploration and fully implement DFS on our robot and signal when the maze is fully traversed. Looking ahead, we need still need to support the ending tone once the robot is done exploring and  treasure identificatoin in our robot's implementation. We are also working on the layout for a PCB which should make our electronics more compact and reliable. 
 
 
+=======
+## Conclusion
 
