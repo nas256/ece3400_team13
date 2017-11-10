@@ -32,7 +32,7 @@ traversal_complete = 1;
 
 We implemented a simple DFS algorithm using Matlab for our maze simulation. In addition to our frontier stack, which we call 's', we also define a second stack called 'path', which contains the list of nodes in the path taken through the maze. We require this second array to remember our path so that we can backtrack if all neighbors of the current tile are blocked by walls or have already been visited. Additionally, we define two arrays that have one-bit entries for every tile in the grid: the array visited tracks whether that tile has been visited or not, and the added array checks whether the tile has already been added to the frontier stack or not.
 
-The commented Matlab code is shown below, as is a video of the simulation. Tiles are marked as white if they are unexplored, green if they have been visited, and black if it is the current tile. After the maze is explored, a "Complete" message is printed to the command window.
+The commented Matlab code is shown below, as is a video of the simulation. The graphics functions are explained further in the next section. Tiles are marked as white if they are unexplored, green if they have been visited, and black if it is the current tile. After the maze is explored, a "Complete" message is printed to the command window.
 
 ```cpp
 completed = 0; // 1 if maze has been fully explored
@@ -111,8 +111,6 @@ To represent our maze graphically, we drew a 4x5 grid of rectangles and displaye
 
 
 Our grid starts out with every location unvisited (every square is white, and the value in maze is 1). Whenever our robot leaves a square, we change that location’s value in maze to 0.5, and the new square our robot moves to is updated to 0. Then we redraw the maze based on the updated matrix with our redraw function:
-=======
-Our grid starts out with every location unvisited (every square is white, and the value in maze is 1). Whenever our robot leaves a square, we change that location’s value in maze to 0.5, and the new square our robot moves to is updated to 0. Then we redraw the maze based on the updated matrix.
 
 ```cpp
 function update_view( map, maze, wall_loc )
