@@ -32,7 +32,7 @@ traversal_complete = 1;
 
 We implemented a simple DFS algorithm using Matlab for our maze simulation. In addition to our frontier stack, which we call 's', we also define a second stack called 'path', which contains the list of nodes in the path taken through the maze. We require this second array to remember our path so that we can backtrack if all neighbors of the current tile are blocked by walls or have already been visited. Additionally, we define two arrays that have one-bit entries for every tile in the grid: the array visited tracks whether that tile has been visited or not, and the added array checks whether the tile has already been added to the frontier stack or not.
 
-The commented Matlab code is shown below, as is a video of the simulation. The graphics functions are explained further in the next section. Tiles are marked as white if they are unexplored, green if they have been visited, and black if it is the current tile. After the maze is explored, a "Complete" message is printed to the command window.
+The commented Matlab code is shown below, as is a video of the simulation. The graphics functions are explained further in the next section. Tiles are marked as white if they are unexplored, green if they have been visited, and black if it is the current tile. After all explorable sections of the maze are explored, a "Complete" message is printed to the command window.
 
 ```cpp
 completed = 0; // 1 if maze has been fully explored
@@ -106,9 +106,7 @@ end
 
 ### Matlab Graphics
 
-To represent our maze graphically, we drew a 4x5 grid of rectangles and displayed it in a MATLAB figure. We encoded this grid as a 4x5 matrix maze, with the value of the matrix representing the status of that location - 1 for unvisited, .5 for visited, 0 for the robot’s current location. We then displayed the status of each grid by MATLAB’s colormap function and the following color coding, updating colors on each step in the DFS:
-
-
+To represent our maze graphically, we drew a 4x5 grid of rectangles and displayed it in a MATLAB figure. We encoded this grid as a 4x5 matrix maze, with the value of the matrix representing the status of that location: 1 for unvisited, .5 for visited, 0 for the robot’s current location. We then displayed the status of each grid by MATLAB’s colormap function and the following color coding, updating colors on each step in the DFS.
 
 Our grid starts out with every location unvisited (every square is white, and the value in maze is 1). Whenever our robot leaves a square, we change that location’s value in maze to 0.5, and the new square our robot moves to is updated to 0. Then we redraw the maze based on the updated matrix with our redraw function:
 
@@ -122,9 +120,22 @@ function update_view( map, maze, wall_loc )
 end
 ```
 
+This function does the following:
+
+1)  Set the color map to be used by imagesc, using our color mapping matrix:
+
+```cpp
+map = [...
+   0, 0, 0  %%black for maze value == 0 (current location)
+   0, 1, 0  %%green for maze value == .5 (visited)
+   1, 1, 1]; %%white for maze value == 1 (unvisited)
+```
+
+2)  Draw the colors according to our updated maze
+
+3) Draw the walls   
+
 To encode wall locations, we also used a 4x5 grid, which we named wall_loc. For each square in the grid, we used a 4-bit binary sequence: a one indicates a wall present on a given side, with the bits ordered West, East, South, North. For instance, our top left corner might be 1001, indicating walls to the left and up. These 4-bit encodings were stored as decimal values in the 4x5 wall_loc matrix.
-
-
 
 We displayed walls by drawing a red line at the border of each grid where a wall is encoded as described above, using the following function:
 
@@ -166,7 +177,7 @@ You don’t have to worry about treasures/microphone circuitry yet, for either t
 
 **Coordinate System**
 
-One of the major differences between our simulation and actual implementation is that the robot's orientation changes as it moves through the maze. Therefore, we must be able to translate between the robot's caridinal directions and the "true north" as seen by the DFS algorithm. In order to determine directions, we use a North, South, East, West cardinal direction system, the directions are encoded as follows:
+One of the major differences between our simulation and actual implementation is that the robot's orientation changes as it moves through the maze. Therefore, we must be able to translate between the robot's cardinal directions and the "true north" as seen by the DFS algorithm. In order to determine directions, we use a North, South, East, West cardinal direction system, the directions are encoded as follows:
 
 | Direction | Encoding |
 | --------- | -------- |
@@ -209,17 +220,14 @@ In order to get the robot to move according to our algorithm, we need to map eac
 
 [![DFS Trial](https://img.youtube.com/vi/KyGrfLteqN8/0.jpg)](https://youtu.be/KyGrfLteqN8)
 
-
 ### Robot's Done signal
 Our done signal is just lighting up three LEDs on our robot. This involves first adding a signal which `at_intersection()` can return to tell the robot that it is indeed done. We added a new state called DONE, which causes the robot to stop its wheels and light up the LEDs. Here's a video of our robot completing a DFS!
 
 **TODO: video of final dfs**
 
 
-## Conclusion 
-By the end of this milestone we were able to simulate DFS maze exploration and fully implement DFS on our robot and signal when the maze is fully traversed. Looking ahead, we need still need to support the ending tone once the robot is done exploring and  treasure identificatoin in our robot's implementation. We are also working on the layout for a PCB which should make our electronics more compact and reliable. 
-
-
-=======
 ## Conclusion
+By the end of this milestone we were able to simulate DFS maze exploration and fully implement DFS on our robot and signal when the maze is fully traversed. Looking ahead, we need still need to support the ending tone once the robot is done exploring and treasure identification in our robot's implementation. We are also working on the layout for a PCB which should make our electronics more compact and reliable.
 
+## Work Distribution
+All team members got exposure to all parts of the milestone tasks over the course of the two weeks. Nick, Julia, and Norman focused more on the real life algorithm, and Eric, Wenhan, and Divya focused more on the simulation.
