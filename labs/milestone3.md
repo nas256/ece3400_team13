@@ -3,7 +3,6 @@
 
 ## Introduction
 The main goal of milestone 3 was to implement a depth-first search (DFS) algorithm to facilitate maze exploration and to add an indicator to signal that the robot is done. Before we implemented the algorithm on our robot, we first ran a Matlab simulation to test the algorithm’s efficiency and robustness with different types of mazes. Once the simulation worked well, we translated the MATLAB code to C and added it to an Arduino program.
-The robot’s completion was indicated by a “Complete” message printed in the Matlab simulation, and by three lit LEDs for the real time maze mapping.
 
 ## In Simulation:
 4 points: Working algorithm that facilitates maze exploration.
@@ -104,7 +103,49 @@ end
 #### update video to include completed indicator
 
 ### Matlab Graphics
-**talk about matlab graphics and the done indicator in simulation**
+
+To represent our maze graphically, we drew a 4x5 grid of rectangles and displayed it in a MATLAB figure. We encoded this grid as a 4x5 matrix maze, with the value of the matrix representing the status of that location - 1 for unvisited, .5 for visited, 0 for the robot’s current location. We then displayed the status of each grid by MATLAB’s colormap function and the following color coding, updating colors on each step in the DFS:
+
+
+
+Our grid starts out with every location unvisited (every square is white, and the value in maze is 1). Whenever our robot leaves a square, we change that location’s value in maze to 0.5, and the new square our robot moves to is updated to 0. Then we redraw the maze based on the updated matrix. 
+
+
+
+To encode wall locations, we also used a 4x5 grid, which we named wall_loc. For each square in the grid, we used a 4-bit binary sequence: a one indicates a wall present on a given side, with the bits ordered West, East, South, North. For instance, our top left corner might be 1001, indicating walls to the left and up. These 4-bit encodings were stored as decimal values in the 4x5 wall_loc matrix.
+
+
+
+We displayed walls by drawing a red line at the border of each grid where a wall is encoded as described above, using the following function:
+
+```cpp
+function draw_walls( wall_loc )
+    [num_row, num_col] = size(wall_loc);
+
+    % Draw all north walls on image
+    for r = 1:num_row
+        for c = 1:num_col
+            wall_bin = de2bi(wall_loc(r,c), 4, 'right-msb');
+
+            % Draw all walls
+            if (wall_bin(1) == 1) % NORTH wall
+                line([c-0.5,c+0.5],[r-0.5,r-0.5],'color','r','linewidth', 3);
+            end
+            if (wall_bin(2) == 1) % SOUTH wall
+                line([c-0.5,c+0.5],[r+0.5,r+0.5],'color','r','linewidth', 3);
+            end
+            if (wall_bin(3) == 1) % EAST wall
+                line([c+0.5,c+0.5],[r-0.5,r+0.5],'color','r','linewidth', 3);
+            end
+            if (wall_bin(4) == 1) % WEST wall
+                line([c-0.5,c-0.5],[r-0.5,r+0.5],'color','r','linewidth', 3);
+            end
+        end
+    end
+end
+
+```
+
 
 ## On Maze:
 4 points: Working algorithm that facilitates maze exploration.
