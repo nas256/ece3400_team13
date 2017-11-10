@@ -5,11 +5,7 @@
 The main goal of milestone 3 was to implement a depth-first search (DFS) algorithm to facilitate maze exploration and to add an indicator to signal that the robot is done. Before we implemented the algorithm on our robot, we first ran a Matlab simulation to test the algorithm’s efficiency and robustness with different types of mazes. Once the simulation worked well, we translated the MATLAB code to C and added it to an Arduino program.
 The robot’s completion was indicated by a “Complete” message printed in the Matlab simulation, and by three lit LEDs for the real time maze mapping.
 
-## In Simulation:
-4 points: Working algorithm that facilitates maze exploration.
-1 point: Indicator that shows the robot is done (explored everything explorable)
-
-### Algorithm: General DFS Overview
+## DFS: An Overview
 
 Depth-first search (DFS) is an algorithm used for graph traversal that starts at a root node and explores as far as possible in one direction before backtracking and exploring other nodes. The general pseudocode for DFS is shown below. The frontier stack contains the list of nodes to visit, and current is the current node. A stack is used since it is a last-in-first-out (LIFO) data structure which facilitates proceeding as far in one direction before backtracking, or popping the stack.
 
@@ -28,7 +24,9 @@ while (frontier not empty) {
 traversal_complete = 1;
 ```
 
-### Algorithm: DFS in Matlab
+## In Simulation
+
+### Matlab DFS Algorithm
 
 We implemented a simple DFS algorithm using Matlab for our maze simulation. In addition to our frontier stack, which we call 's', we also define a second stack called 'path', which contains the list of nodes in the path taken through the maze. We require this second array to remember our path so that we can backtrack if all neighbors of the current tile are blocked by walls or have already been visited. Additionally, we define two arrays that have one-bit entries for every tile in the grid: the array visited tracks whether that tile has been visited or not, and the added array checks whether the tile has already been added to the frontier stack or not.
 
@@ -169,9 +167,6 @@ end
 
 
 ## On Maze:
-4 points: Working algorithm that facilitates maze exploration.
-1 point: Indicator that shows the robot is done (explored everything explorable)
-You don’t have to worry about treasures/microphone circuitry yet, for either the simulation or the real-life maze exploration. You do have to include walls. We do not expect everyone to have a perfectly running system in this milestone, the goal is for everyone to start the implementation and think about (and convey on the website) what next tasks/improvements need to be done to compete in the final competition.
 
 ### Algorithm: DFS in C
 
@@ -223,7 +218,7 @@ In order to get the robot to move according to our algorithm, we need to map eac
 ### Robot's Done signal
 Our done signal is just lighting up three LEDs on our robot. This involves first adding a signal which `at_intersection()` can return to tell the robot that it is indeed done. We added a new state called DONE, which causes the robot to stop its wheels and light up the LEDs. Here's a video of our robot completing a DFS!
 
-**TODO: video of final dfs**
+[![Roboto DFS Video](https://img.youtube.com/vi/TENBkc-Aw3M/0.jpg)](https://www.youtube.com/watch?v=TENBkc-Aw3M)
 
 
 ## Conclusion
