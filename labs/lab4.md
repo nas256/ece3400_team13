@@ -166,7 +166,7 @@ In order to accommodate these new features, we've updated the protocol as follow
    - 01: 7 kHz
    - 10: 12 kHz
    - 11: 17 kHz
- - The walls in each cell are encoded with 4 bits, 1 bit to represent the prescnece of the top, bottom, left, and right walls
+ - The walls in each cell are encoded with 4 bits, 1 bit to represent the prescnece of the west, south, east and north walls (in that order MSB-->LSB)
  - The Traversed? bit is set if the robot has seen this location before
  - The Current Loc? bit is set if the robot is currently in this location
  - The Finished? bit is set if the robot has reached the end of the maze
