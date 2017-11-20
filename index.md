@@ -11,6 +11,7 @@ Hello! Welcome to team Lucky 13's running webpage! We'll be documenting all of o
 - [Milestone 1](https://nas256.github.io/ece3400_team13/labs/milestone1)
 - [Milestone 2](https://nas256.github.io/ece3400_team13/labs/milestone2)
 - [Milestone 3](https://nas256.github.io/ece3400_team13/labs/milestone3)
+- [Milestone 4](https://nas256.github.io/ece3400_team13/labs/milestone4)
 
 ## Meeting Minutes
  - [9-8-2017](https://nas256.github.io/ece3400_team13/minutes/9-8-2017)
