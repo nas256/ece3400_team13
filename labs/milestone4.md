@@ -23,15 +23,15 @@ We quickly learned that our fft code from the previous IR lab, broke our main ro
 ``` cpp
 char IR_poll(uint8_t sensor){
 
-    old_ADCSRA = ADCSRA; //store old ADCSRA state 
+    old_ADCSRA = ADCSRA; //store old ADCSRA state
     ADCSRA = 0xe5; // set ADC to free running mode
     ADMUX = 0x44; // use adc4 with mux
-  
+
     amux_select(sensor); //select which IR sensor from MUX input
     delayMicroseconds(10);
-    
+
     cli();  // UDRE interrupt slows this way down on arduino1.0
-    
+
     for (int i = 0 ; i < 512 ; i += 2) { // save 256 samples
       while(!(ADCSRA & 0x10)); // wait for adc to be ready
       ADCSRA = 0xf5; // restart adc
@@ -47,20 +47,20 @@ char IR_poll(uint8_t sensor){
     fft_reorder(); // reorder the data before doing the fft
     fft_run(); // process the data in the fft
     fft_mag_log(); // take the output of the fft
-    
+
     sei();
 
     ADCSRA = old_ADCSRA; //set the ADC back into single sample
     //AnalogRead() will not work in free running mode
-    
-     if ( fft_log_out[47] > 120 )     //return 1 for 7kHz 
+
+     if ( fft_log_out[47] > 120 )     //return 1 for 7kHz
       return 1;
-    else if ( fft_log_out[81] > 110 ) //return 2 for 12kHz 
+    else if ( fft_log_out[81] > 110 ) //return 2 for 12kHz
       return 2;
     else if (fft_log_out[114] > 100 )
       return 3;                       //return 3 for 17kHz
     else return 0;                    //return 0 otherwise
-  
+
 }
 ```
 **Robot Arduino IR Transmitting Code**
@@ -72,7 +72,7 @@ if (/*!ir_flag &&*/ millis() - last_IR_time > 250){
     uint8_t ir = IR_poll(AMUX_TREASURE_1); // can poll the IR sensor on either side of the robot
     Serial.print("IR: ");
     Serial.println( ir );
-    
+
     tile_set_ir(pos, ir);
 
     last_IR_time = millis();
@@ -91,7 +91,7 @@ A “done” signal was implemented to indicate that the maze searching was comp
 if (PIXEL_X >= 10'd550 && PIXEL_X <= 10'd600) begin
  if (play_sound) COLOR_OUT = 8’b000_11_000;
  end
-end 
+end
 
 // Audio integration
 AUDIO audio(
@@ -102,11 +102,52 @@ AUDIO audio(
 ```
 
 ## Radio Communication
-### Robot
-### Basestation
-The basestation code remains relatively unchanged from lab 4. 
+As part of this milestone, our system had to be able to display walls and treasures on the basestation monitor in real time as the robot found them in the maze as well as well as a done signal when the robot indicates that the maze has been mapped. In order to achieve this, we had to integrate our RF code using the nRF24L01+ transceivers from Lab 4 into the code bases of both our robot and basestation. We simplified this integration by taking our Lab 4 code and modularizing it into functions *wireless_setup*, *wireless_read*, and *wireless_send* in a separate wireless1.ino file and then including the header file in our main code.
 
-We first need to initialize the maze with the correct x and y values. Because we output the entire maze to the fpga, we need to make sure that every tile is correctly initialized such that the fpga does not overdraw a tile. 
+### Robot
+The robot needs to transmit information about its current position and information about walls and treasures in the maze to the basestation. As we determined in Lab 4, we only want the robot to send new data (and not all information about the entire maze) in order to conserve power. Therefore, we decided to only transmit to the basestation after every intersection and to send information about the most recently traversed tile.
+
+To do this, we define a function called *tile_transmit* which sends information about the previous tile to the basestation using our 16-bit packet encoding.
+
+```cpp
+void tile_transmit(xy_pair xy){
+  uint16_t to_send = tile_array[xy.x][xy.y].data | mapper_done_flag | 1<< 2; // send data of most recently traversed tile including done flag
+  wireless_send ( &to_send, sizeof( uint16_t ) );
+}
+```
+
+We then call the *tile_transmit* function a set time after the robot has detected an intersection to send the previous tile's information, stored in xy_pair *prev_pos*, and use a variable *send_flag* to only transmit once.
+
+```cpp
+if (send_flag && (millis() - last_send_time > SEND_TIMER)) {
+  send_flag = 0;
+  tile_transmit(prev_pos);
+}
+```
+
+We also call this function when maze-mapping is complete, and the robot has to send the done signal back to the basestation.
+
+```cpp
+if (to_turn == 255) {
+ mapper_done();
+ tile_transmit( pos );
+ while(1) {
+   drive(LEFT_ZERO, RIGHT_ZERO);
+ }
+```
+
+Additionally, we increased the RF power setting in *wireless_setup* to HIGH to reduce the risk of dropped packets.
+
+```cpp
+// set the power
+// RF24_PA_MIN=-18dBm, RF24_PA_LOW=-12dBm, RF24_PA_MED=-6dBM, and RF24_PA_HIGH=0dBm.
+radio.setPALevel(RF24_PA_MIN);
+```
+
+### Basestation
+The basestation code remains relatively unchanged from lab 4.
+
+We first need to initialize the maze with the correct x and y values. Because we output the entire maze to the fpga, we need to make sure that every tile is correctly initialized such that the fpga does not overdraw a tile.
 ```cpp
   // Initialize maze
   for (int i = 0; i < X_SIZE; i++) {
@@ -117,15 +158,15 @@ We first need to initialize the maze with the correct x and y values. Because we
     }
   }
 ```
-Now that the maze is initialized, we can now wait to receive some data from the robot. 
+Now that the maze is initialized, we can now wait to receive some data from the robot.
 ```cpp
  while (timeout)
   {
     // Wait until we get data or timeout
     timeout = wireless_read( &got_data, sizeof(uint16_t) );
-  } 
+  }
 ```
-Once the above loop either gets some data or times out, we just transfer over SPI the entire maze updated with the new data we received. 
+Once the above loop either gets some data or times out, we just transfer over SPI the entire maze updated with the new data we received.
 ```cpp
 if (got_data & 0x1) done = 1;
 
@@ -154,7 +195,7 @@ for (uint16_t x = 0; x < X_SIZE; x++){
 }
 ```
 
-Here's a video of the robot completing a simple maze with radio communication! 
+Here's a video of the robot completing a simple maze with radio communication!
 
 [![Demo without treasure](https://img.youtube.com/vi/AXLjUVhm9pc/0.jpg)](https://youtu.be/AXLjUVhm9pc)
 
