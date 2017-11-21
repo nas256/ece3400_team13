@@ -1,17 +1,21 @@
 ### Nicholas Sarkis, Norman Chen, Eric Cole, Julia Currie, Divya Gupta, Wenhan Xia
 # Milestone 4: Putting it All Together
 
-##Introduction
+## Introduction
+
 The main goal of milestone 4 was to integrate all the previous labs and milestones into one seamless system. For this milestone, we were tasked with demonstrating that our robot can sucessfully communicate with the basestation and have it display walls and treasures as the robot finds them, and signal "done" on both the screen and the speakers when the robot has finished a maze. With the completion of this milestone, our robot and basestation will essentially be competition ready, and the rest of our time in lab will be spent making performance optimizations on the robot.
 
 ## FPGA Graphics
 ### Walls
 ### Treasure
+
 ljflakdjflkds
+
 [![17kHz Sensing](https://img.youtube.com/vi/EHfJIytHCts/0.jpg)](https://youtu.be/EHfJIytHCts)
 
 **Robot Arduino IR Sensing Code**
-We quickly learned that our fft code from the previous IR lab, broke our main robot's code. After some debugging, we realized that putting the ADC into free running mode, broke an subsequent Analog_Read() calls which are essential for line following and wall sensing. We remedied this by only settint the ADC to free running mode ```cpp ADCSRA = 0xe5;```
+
+We quickly learned that our fft code from the previous IR lab, broke our main robot's code. After some debugging, we realized that putting the ADC into free running mode, broke all subsequent Analog_Read() calls which are essential for line following and wall sensing. We remedied this by only setting the ADC to free running mode and storing the old ADCSRA state when we enter the IR\_poll funtion, so that we could restore it before we returned the value of the IR treasure we sensed. 
 
 ``` cpp
 char IR_poll(uint8_t sensor){
@@ -57,6 +61,7 @@ char IR_poll(uint8_t sensor){
 }
 ```
 **Robot Arduino IR Transmitting Code**
+
 We currently call the IR\_poll() function between sensing an intersection and the line following logic, every 250 ms. This was under the assumption that the IR sensor could be placed anywhere on the walls, but now that we know that the IR treasure will only be placed at intersections, this chunk of code will be moved into our intersection logic, rather than being polled at a specific time interval. Once we call IR\_poll, we then add assign it to that tile by calling tile\_set\_ir(pos,ir). This takes appropriate frequency treasure and adds it to the current tile, indicated by _pos_,  in the master tile array which keeps track of all the tiles in the maze. The updated 16 bit number associated with this tile will then be sent out by tile\_transmit(xy_pair xy) once the robot reaches the next intersection.
 
 ```cpp
@@ -152,6 +157,7 @@ Here's a video of the robot completing a simple maze with radio communication!
 
 
 ## Conclusion
+
 This milestone was particularly challenging considering the combined code size of all our labs, and debugging was much more complicated since we were dealing with a much larger codebase than before. In the end, we were able to integrate all the labs and milestones throughout the semetester into one seamlessly working system. The next steps for us as a team is to continue to optimize both the design of the robot and the software in our system. In addition, we still need to integrate the microphone into the full system, as well as replacing our breadboard with the pcb we ordered. Here's a video that demonstrates our robot traversing a simple maze and displaying walls, treasures, and a done signal.
 
 [![All Put Together](https://img.youtube.com/vi/tG9IEcegNAo/0.jpg)](https://youtu.be/tG9IEcegNAo)
