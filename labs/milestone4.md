@@ -102,7 +102,7 @@ AUDIO audio(
 ```
 
 ## Radio Communication
-As part of this milestone, our system had to be able to display walls and treasures on the basestation monitor in real time as the robot found them in the maze as well as well as a done signal when the robot indicates that the maze has been mapped. In order to achieve this, we had to integrate our RF code using the nRF24L01+ transceivers from Lab 4 into the code bases of both our robot and basestation. We simplified this integration by taking our Lab 4 code and modularizing it into functions *wireless_setup*, *wireless_read*, and *wireless_send* in a separate wireless1.ino file and then including the header file in our main code.
+As part of this milestone, our system had to be able to display walls and treasures on the basestation monitor in real time as the robot found them in the maze as well as a done signal when the robot indicates that the maze has been mapped. In order to achieve this, we had to integrate our RF code using the nRF24L01+ transceivers from Lab 4 into the code bases of both our robot and basestation. We simplified this integration by taking our Lab 4 code and modularizing it into functions *wireless_setup*, *wireless_read*, and *wireless_send* in a separate wireless1.ino file and then including the header file in our main code.
 
 ### Robot
 The robot needs to transmit information about its current position and information about walls and treasures in the maze to the basestation. As we determined in Lab 4, we only want the robot to send new data (and not all information about the entire maze) in order to conserve power. Therefore, we decided to only transmit to the basestation after every intersection and to send information about the most recently traversed tile.
