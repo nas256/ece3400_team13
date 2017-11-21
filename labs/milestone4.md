@@ -6,16 +6,19 @@
 The main goal of milestone 4 was to integrate all the previous labs and milestones into one seamless system. For this milestone, we were tasked with demonstrating that our robot can sucessfully communicate with the basestation and have it display walls and treasures as the robot finds them, and signal "done" on both the screen and the speakers when the robot has finished a maze. With the completion of this milestone, our robot and basestation will essentially be competition ready, and the rest of our time in lab will be spent making performance optimizations on the robot.
 
 ## FPGA Graphics
+
 ### Walls
+
 ### Treasure
 
-ljflakdjflkds
+The treasure goal for this milestone was to be able to sense an IR treasure will driving on the maze, then send the result to the basestation to display the appropriate frequency on that tile on the VGA display. A treasure is represented by a small solid square in the middle of a tile: 7kHz is a red square, 12kHz is green, and 17kHz is blue. Up until now, we had assumed that the IR treausre could be placed anywhere on a wall and completely the milestone that way. Now that we know that the IR treasure will only be at intersections and 4cm from the ground, we will need to modify our mounting of the sensor and the code slightly. However, for this milestone we successfully implemented IR sensing of all 3 frequencies while traversing the maze using DFS. (see Lab2 writeup for IR circuitry,as it was not modified)
+
 
 [![17kHz Sensing](https://img.youtube.com/vi/EHfJIytHCts/0.jpg)](https://youtu.be/EHfJIytHCts)
 
 **Robot Arduino IR Sensing Code**
 
-We quickly learned that our fft code from the previous IR lab, broke our main robot's code. After some debugging, we realized that putting the ADC into free running mode, broke all subsequent Analog_Read() calls which are essential for line following and wall sensing. We remedied this by only setting the ADC to free running mode and storing the old ADCSRA state when we enter the IR\_poll funtion, so that we could restore it before we returned the value of the IR treasure we sensed. 
+We quickly learned that our fft code from the previous IR lab, broke our main robot's code. After some debugging, we realized that putting the ADC into free running mode, broke all subsequent Analog_Read() calls which are essential for line following and wall sensing. We remedied this by only setting the ADC to free running mode and storing the old ADCSRA state when we enter the IR\_poll funtion, so that we could restore it before we returned the value of the IR treasure we sensed. To sense and calculate the IR treasures, we sample 512 times, convert from ADC units, and then calculate the FFT using the fft library used in a previous lab. We then look at 3 FFT indices, one fore each frequency, and check to see if it is a above a threshold value. If it is we return 0-3 for the appropriate IR frequency.
 
 ``` cpp
 char IR_poll(uint8_t sensor){
@@ -78,7 +81,7 @@ if (/*!ir_flag &&*/ millis() - last_IR_time > 250){
 ```
 
 **FPGA IR Graphics Code**
-ADD LATER!
+ADD LATER! @nick?
 
 ### Done Signal
 A “done” signal was implemented to indicate that the maze searching was completed. According to our encoding in lab4, the last bit of the 16-bit input signal to the FPGA is set if the robot reaches the end of the maze. In our code, a register play_sound takes the input signal “DATA_IN” ‘s last bit value. Once the play_sound register is set, the three-frequency tune implemented in lab 3 is played, and a green bar is drawn on the screen to signal that the process is complete.
