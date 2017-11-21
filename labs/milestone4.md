@@ -7,6 +7,8 @@ The main goal of milestone 4 was to integrate all the previous labs and mileston
 ## FPGA Graphics
 ### Walls
 ### Treasure
+[![17kHz Sensing](https://img.youtube.com/vi/EHfJIytHCts/0.jpg)](https://youtu.be/EHfJIytHCts)
+
 
 ### Done Signal
 A “done” signal was implemented to indicate that the maze searching was completed. According to our encoding in lab4, the last bit of the 16-bit input signal to the FPGA is set if the robot reaches the end of the maze. In our code, a register play_sound takes the input signal “DATA_IN” ‘s last bit value. Once the play_sound register is set, the three-frequency tune implemented in lab 3 is played, and a green bar is drawn on the screen to signal that the process is complete.
@@ -34,3 +36,4 @@ Here's a video of the robot completing a simple maze!
 
 
 ## Conclusion
+[![All Put Together](https://img.youtube.com/vi/tG9IEcegNAo/0.jpg)](https://youtu.be/tG9IEcegNAo)
