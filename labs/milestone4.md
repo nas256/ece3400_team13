@@ -7,8 +7,73 @@ The main goal of milestone 4 was to integrate all the previous labs and mileston
 ## FPGA Graphics
 ### Walls
 ### Treasure
+ljflakdjflkds
 [![17kHz Sensing](https://img.youtube.com/vi/EHfJIytHCts/0.jpg)](https://youtu.be/EHfJIytHCts)
 
+**Robot Arduino IR Sensing Code**
+We quickly learned that our fft code from the previous IR lab, broke our main robot's code. After some debugging, we realized that putting the ADC into free running mode, broke an subsequent Analog_Read() calls which are essential for line following and wall sensing. We remedied this by only settint the ADC to free running mode ```cpp ADCSRA = 0xe5;```
+
+``` cpp
+char IR_poll(uint8_t sensor){
+
+    old_ADCSRA = ADCSRA; //store old ADCSRA state 
+    ADCSRA = 0xe5; // set ADC to free running mode
+    ADMUX = 0x44; // use adc4 with mux
+  
+    amux_select(sensor); //select which IR sensor from MUX input
+    delayMicroseconds(10);
+    
+    cli();  // UDRE interrupt slows this way down on arduino1.0
+    
+    for (int i = 0 ; i < 512 ; i += 2) { // save 256 samples
+      while(!(ADCSRA & 0x10)); // wait for adc to be ready
+      ADCSRA = 0xf5; // restart adc
+      byte m = ADCL; // fetch adc data
+      byte j = ADCH;
+      int k = (j << 8) | m; // form into an int
+      k -= 0x0200; // form into a signed int
+      k <<= 6; // form into a 16b signed int
+      fft_input[i] = k; // put real data into even bins
+      fft_input[i+1] = 0; // set odd bins to 0
+    }
+    fft_window(); // window the data for better frequency response
+    fft_reorder(); // reorder the data before doing the fft
+    fft_run(); // process the data in the fft
+    fft_mag_log(); // take the output of the fft
+    
+    sei();
+
+    ADCSRA = old_ADCSRA; //set the ADC back into single sample
+    //AnalogRead() will not work in free running mode
+    
+     if ( fft_log_out[47] > 120 )     //return 1 for 7kHz 
+      return 1;
+    else if ( fft_log_out[81] > 110 ) //return 2 for 12kHz 
+      return 2;
+    else if (fft_log_out[114] > 100 )
+      return 3;                       //return 3 for 17kHz
+    else return 0;                    //return 0 otherwise
+  
+}
+```
+**Robot Arduino IR Transmitting Code**
+We currently call the IR\_poll() function between sensing an intersection and the line following logic, every 250 ms. This was under the assumption that the IR sensor could be placed anywhere on the walls, but now that we know that the IR treasure will only be placed at intersections, this chunk of code will be moved into our intersection logic, rather than being polled at a specific time interval. Once we call IR\_poll, we then add assign it to that tile by calling tile\_set\_ir(pos,ir). This takes appropriate frequency treasure and adds it to the current tile, indicated by _pos_,  in the master tile array which keeps track of all the tiles in the maze. The updated 16 bit number associated with this tile will then be sent out by tile\_transmit(xy_pair xy) once the robot reaches the next intersection.
+
+```cpp
+if (/*!ir_flag &&*/ millis() - last_IR_time > 250){
+    uint8_t ir = IR_poll(AMUX_TREASURE_1); // can poll the IR sensor on either side of the robot
+    Serial.print("IR: ");
+    Serial.println( ir );
+    
+    tile_set_ir(pos, ir);
+
+    last_IR_time = millis();
+    ir_flag = 1;
+  }
+```
+
+**FPGA IR Graphics Code**
+ADD LATER!
 
 ### Done Signal
 A “done” signal was implemented to indicate that the maze searching was completed. According to our encoding in lab4, the last bit of the 16-bit input signal to the FPGA is set if the robot reaches the end of the maze. In our code, a register play_sound takes the input signal “DATA_IN” ‘s last bit value. Once the play_sound register is set, the three-frequency tune implemented in lab 3 is played, and a green bar is drawn on the screen to signal that the process is complete.
