@@ -19,7 +19,7 @@ In order to complete this milestone, the base station needed to be updated to:
 
 In order to display walls on each tile, we can reference our protocol to figure out which walls to draw:
 
-|15-13     |12-11     |10-9        |8-7    | 6-3      | 2         | 1            | 0         |
+|15-14     |13-11     |10-9        |8-7    | 6-3      | 2         | 1            | 0         |
 | -------- | -------- | ---------- | ----  |  ------- | --------- | ------------ | --------- |
 | X coord  | Y coord  | Treasure   |  00   | Walls    | Traversed? | Current Loc? | Finished? |
 
@@ -55,6 +55,28 @@ if ( PIXEL_X >= tilex_pixel + `IR_BUFFER && PIXEL_X <= tilex_pixel + `TILE_SIZE 
     endcase
   end
 end
+```
+
+### Done Signal
+
+When the robot completes its DFS algorithm, it transmits a message with a 1 in the least significant bit, signifying that the robot is done. When this is recieved the FPGA latches the done signal and displays a green stripe on the right side of the screen to signify that the robot is finished. When the done signal is received, a 1 is latched into a *play_sound* register, which both enables the audio module and displays the green bar.
+
+Displaying the green bar involves a very simple if statement inside our draw loop:
+
+```v
+if (PIXEL_X >= 10'd500 && PIXEL_X <= 10'd550) begin
+  if (play_sound) COLOR_OUT = 8'b000_11_000; 
+end
+```
+
+In order to play the done sound, we separated the code out into an *AUDIO* module that would play a sound given an enable signal. The enable signal is directly driven by the same *play_sound* register to play the sound when the green bar is displayed:
+
+```v
+AUDIO audio(
+  .CLOCK_50(CLK),
+  .ENABLE( play_sound ),
+  .GPIO_1_D( GPIO_1_D ),
+);
 ```
 
 **Robot Arduino IR Sensing Code**

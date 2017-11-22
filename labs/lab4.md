@@ -156,7 +156,7 @@ To see the corresponding Verilog snippets for the base memory and SPI controller
 ### The Updated SPI Protocol
 In order to accommodate these new features, we've updated the protocol as follows:
 
-|15-13     |12-11     |10-9        |8-7    | 6-3      | 2         | 1            | 0         |
+|15-14     |13-11     |10-9        |8-7    | 6-3      | 2         | 1            | 0         |
 | -------- | -------- | ---------- | ----  |  ------- | --------- | ------------ | --------- |
 | X coord  | Y coord  | Treasure   |  00   | Walls    | Traversed? | Current Loc? | Finished? |
 
