@@ -5,16 +5,57 @@
 
 The main goal of milestone 4 was to integrate all the previous labs and milestones into one seamless system. For this milestone, we were tasked with demonstrating that our robot can sucessfully communicate with the basestation and have it display walls and treasures as the robot finds them, and signal "done" on both the screen and the speakers when the robot has finished a maze. With the completion of this milestone, our robot and basestation will essentially be competition ready, and the rest of our time in lab will be spent making performance optimizations on the robot.
 
+We were able to get the robot exploring a maze using a simple DFS algorithm and relaying its environment back to the base station. The base station correctly shows the robot's current location, the walls and tiles its currently found, and any IR transmitters that is has come across. When the robot reaches all of the nodes that it can explore, it sends a done signal to the basestation, which then displays a green stripe on the screen and plays a three tone tune to signify that the robot is done.
+
 ## FPGA Graphics
+
+In order to complete this milestone, the base station needed to be updated to:
+ - Be able to displays walls on the top, bottom, left, and right of each tile
+ - Be able to show green, blue, or red markers on tiles that have treasures on them
+ - Be able to show a done signal on the screen
+ - Be able to play a done tone
 
 ### Walls
 
+In order to display walls on each tile, we can reference our protocol to figure out which walls to draw:
+
+|15-13     |12-11     |10-9        |8-7    | 6-3      | 2         | 1            | 0         |
+| -------- | -------- | ---------- | ----  |  ------- | --------- | ------------ | --------- |
+| X coord  | Y coord  | Treasure   |  00   | Walls    | Traversed? | Current Loc? | Finished? |
+
+Bits 6-3 describe which walls a given tiles has. The bits are organized into the West, East, South, and North walls, in that order from bit 6 to bit 3. Once we have this information, drawing walls is easy! We just need to check to see if we're within a spot inside a tile where a wall would be drawn, and if that tile has a wall in that place, we draw it.
+
+Here's an example of drawing the left (aka east) wall, and this pattern is repeated for each other direction:
+
+```v
+if ( PIXEL_X <= tilex_pixel + `WALL_THICKNESS ) begin // left wall
+  if ( grid_array[tiley][tilex] & (16'd1 << 6) ) begin
+    COLOR_OUT = `COLOR_WALLS;
+  end
+end
+```
+
 ### Treasure
 
-The treasure goal for this milestone was to be able to sense an IR treasure will driving on the maze, then send the result to the basestation to display the appropriate frequency on that tile on the VGA display. A treasure is represented by a small solid square in the middle of a tile: 7kHz is a red square, 12kHz is green, and 17kHz is blue. Up until now, we had assumed that the IR treausre could be placed anywhere on a wall and completely the milestone that way. Now that we know that the IR treasure will only be at intersections and 4cm from the ground, we will need to modify our mounting of the sensor and the code slightly. However, for this milestone we successfully implemented IR sensing of all 3 frequencies while traversing the maze using DFS. (see Lab2 writeup for IR circuitry,as it was not modified)
-
+The treasure goal for this milestone was to be able to sense an IR treasure will driving on the maze, then send the result to the basestation to display the appropriate frequency on that tile on the VGA display. A treasure is represented by a small solid square in the middle of a tile: 7kHz is a red square, 12kHz is green, and 17kHz is blue. Up until now, we had assumed that the IR treausre could be placed anywhere on a wall and completely the milestone that way. Now that we know that the IR treasure will only be at intersections and 4cm from the ground, we will need to modify our mounting of the sensor and the code slightly. However, for this milestone we successfully implemented IR sensing of all 3 frequencies while traversing the maze using DFS. (see Lab2 writeup for IR circuitry, as it was not modified)
 
 [![17kHz Sensing](https://img.youtube.com/vi/EHfJIytHCts/0.jpg)](https://youtu.be/EHfJIytHCts)
+
+The FPGA implementation of the IR sensing is quite similar to the wall implementation. The treasure for a given tile is encoded in 2 bits, with 00 representing no trasure, 01 representing 7kHz, 10 for 12kHz, and finally, 11 for 17 kHz. Then, when we're inside the center of the tile, we check to see which treasure the tile has, if any, and draw the appropriate color. Here's the code we used to draw the IR markers seen in the above video:
+
+```v
+if ( PIXEL_X >= tilex_pixel + `IR_BUFFER && PIXEL_X <= tilex_pixel + `TILE_SIZE - `IR_BUFFER ) begin
+  if ( PIXEL_Y >= tiley_pixel + `IR_BUFFER && PIXEL_Y <= tiley_pixel + `TILE_SIZE - `IR_BUFFER  ) begin
+    // In the draw zone for IR, choose color based on IR reading
+    case ( (grid_array[tiley][tilex] >> 9 ) & 2'd3 )
+      2'b01:   COLOR_OUT = `COLOR_7kHz;
+      2'b10:   COLOR_OUT = `COLOR_12kHz;
+      2'b11:   COLOR_OUT = `COLOR_17kHz;
+      default: COLOR_OUT =  COLOR_OUT;
+    endcase
+  end
+end
+```
 
 **Robot Arduino IR Sensing Code**
 
@@ -63,6 +104,7 @@ char IR_poll(uint8_t sensor){
 
 }
 ```
+
 **Robot Arduino IR Transmitting Code**
 
 We currently call the IR\_poll() function between sensing an intersection and the line following logic, every 250 ms. This was under the assumption that the IR sensor could be placed anywhere on the walls, but now that we know that the IR treasure will only be placed at intersections, this chunk of code will be moved into our intersection logic, rather than being polled at a specific time interval. Once we call IR\_poll, we then add assign it to that tile by calling tile\_set\_ir(pos,ir). This takes appropriate frequency treasure and adds it to the current tile, indicated by _pos_,  in the master tile array which keeps track of all the tiles in the maze. The updated 16 bit number associated with this tile will then be sent out by tile\_transmit(xy_pair xy) once the robot reaches the next intersection.
@@ -70,8 +112,6 @@ We currently call the IR\_poll() function between sensing an intersection and th
 ```cpp
 if (/*!ir_flag &&*/ millis() - last_IR_time > 250){
     uint8_t ir = IR_poll(AMUX_TREASURE_1); // can poll the IR sensor on either side of the robot
-    Serial.print("IR: ");
-    Serial.println( ir );
 
     tile_set_ir(pos, ir);
 
@@ -79,9 +119,6 @@ if (/*!ir_flag &&*/ millis() - last_IR_time > 250){
     ir_flag = 1;
   }
 ```
-
-**FPGA IR Graphics Code**
-ADD LATER! @nick?
 
 ### Done Signal
 A “done” signal was implemented to indicate that the maze searching was completed. According to our encoding in lab4, the last bit of the 16-bit input signal to the FPGA is set if the robot reaches the end of the maze. In our code, a register play_sound takes the input signal “DATA_IN” ‘s last bit value. Once the play_sound register is set, the three-frequency tune implemented in lab 3 is played, and a green bar is drawn on the screen to signal that the process is complete.
@@ -154,7 +191,6 @@ We first need to initialize the maze with the correct x and y values. Because we
     for (int j = 0; j < Y_SIZE; j++) {
       maze[i][j] = 0;
       maze[i][j] |= ((i&3) << 14) | ((j&7) << 11);
-      Serial.println(maze[i][j]);
     }
   }
 ```
