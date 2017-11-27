@@ -1,5 +1,6 @@
 # Ethics Homework
-## Wenhan Xia, Julia Currie, Divya Gupta, Nicholas Sarkis, Norman Chen, Eric Cole
+## Topic: Tesla driver dies in first fatal car crash
+### Wenhan Xia, Julia Currie, Divya Gupta, Nicholas Sarkis, Norman Chen, Eric Cole
 
 On May 7, 2016, Joshua Brown was driving his 2015 Tesla Model S from Cedar Key to Ocala, Florida. The trip lasted 41 minutes, 37 of which the driver relied upon the vehicle’s internal driving assists, principally Traffic-Aware Cruise Control (TACC) and Autosteer lane-keeping, despite a combined two minutes of visual and auditory warnings to the driver from the vehicle to provide manual steering input. At 4:36 PM, the Tesla struck a semitrailer that had turned in front of the car’s path, resulting in the car travelling off the highway and striking a utility pole. Brown was killed in the event (NTSB 2016). 
 
