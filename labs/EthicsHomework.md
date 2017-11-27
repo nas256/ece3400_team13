@@ -24,10 +24,10 @@ NHTSA must be held accountable for this lack of enforcement. A justice test demo
 Automation is powerful and pervasive, and may make life safer and more convenient if properly implemented. When automated processes directly affect human safety, stringent policies must be created, and manufacturers must be held accountable for upholding these policies. Given the number of automobile drivers, the proper use and safeguarding of automated vehicles is particularly important, and regulatory bodies such as NHTSA are responsible for ensuring the safety of AV drivers and the general public. Preliminary policies such as legally enforced manual reading and comprehension, thorough technical limitation and appropriate usage disclaimers, and standardized AV misuse safeguards will ease the transition of automated vehicles from a nascent to a mature and safe mode of transportation.  
 
 ### References
-(1) Marks, Gene. “A fully automated restaurant just opened in New York City (114 years after the last automated restaurant opened.” Washington Post, 2016, https://www.washingtonpost.com/news/on-small-business/wp/2016/12/19/a-fully-automated-restaurant-just-opened-in-new-york-city-114-years-after-the-last-automated-restaurant-opened/?utm_term=.f80a3338c187
-(2) “Collision Between a Car Operating With Automated Vehicle Control Systems and a Tractor-Semitrailer Truck Near Williston, Florida, May 7, 2016.” National Transportation Safety Board, 2016, https://www.ntsb.gov/investigations/AccidentReports/Reports/HAR1702.pdf.
-(3) Vijh, Rahul. “Autonomous Cars – Patents and Perspectives.” IPWatchdog, 7 April 2016, http://www.ipwatchdog.com/2016/04/07/autonomous-cars-patents-perspectives/id=68045/
-(4) Tesla Inc. 2016. Tesla Model S Owner’s Manual. 
+- (1) Marks, Gene. “A fully automated restaurant just opened in New York City (114 years after the last automated restaurant opened.” Washington Post, 2016, https://www.washingtonpost.com/news/on-small-business/wp/2016/12/19/a-fully-automated-restaurant-just-opened-in-new-york-city-114-years-after-the-last-automated-restaurant-opened/?utm_term=.f80a3338c187
+- (2) “Collision Between a Car Operating With Automated Vehicle Control Systems and a Tractor-Semitrailer Truck Near Williston, Florida, May 7, 2016.” National Transportation Safety Board, 2016, https://www.ntsb.gov/investigations/AccidentReports/Reports/HAR1702.pdf.
+- (3) Vijh, Rahul. “Autonomous Cars – Patents and Perspectives.” IPWatchdog, 7 April 2016, http://www.ipwatchdog.com/2016/04/07/autonomous-cars-patents-perspectives/id=68045/
+- (4) Tesla Inc. 2016. Tesla Model S Owner’s Manual. 
 
 
 
