@@ -9,11 +9,11 @@ The lack of legally enforced Automated Vehicle (AV) policies has lead to ambiguo
 
 To determine the fairest future course of future action regarding AV policy making, Tesla Inc.’s AV technical documentation and technology must first be addressed. According to NTSB’s incident report detailing Joshua Brown’s crash, the Brown’s Tesla Model S falls under a Society of Automotive Engineers (SAE) automation ranking of 2, which indicates that the car was only partially automated, and that “human driver[s] [must] monitor the driving environment” (NTSB p 24). Though this ranking is not explicitly mentioned in the Tesla Model S manual, the manual does make numerous notices that detail the company’s idea of proper AV usage, including “Warning: Traffic-Aware Cruise Control is designed for your driving comfort and convenience and is not a collision warning or avoidance system. It is your responsibility to stay alert, drive safely, and be in control of the vehicle at all times” (Tesla p 67). The manual also lists situations in which the Tesla’s AV technology may fail, such as when 
 
-•	The road has sharp curves.
-• Visibility is poor (due to heavy rain, snow, fog, etc.).
-• Bright light (oncoming headlights or direct sunlight) is interfering with the camera's view.
-• The radar sensor is obstructed (dirty, covered, etc.).
-• The windshield area in the camera's  eld of view is obstructed (fogged over, dirty, covered by a sticker, etc.).
+-	The road has sharp curves.
+- Visibility is poor (due to heavy rain, snow, fog, etc.).
+- Bright light (oncoming headlights or direct sunlight) is interfering with the camera's view.
+- The radar sensor is obstructed (dirty, covered, etc.).
+- The windshield area in the camera's  eld of view is obstructed (fogged over, dirty, covered by a sticker, etc.).
 
 The manual clearly states the limitations of the car’s technology, and provides multiple disclaimers regarding AV misuse. Whether Joshua Brown read these limitations and disclaimers, however, is unknown, since reading car manuals is typically performed at the car owner’s discretion. If there existed a law to enforce manual reading and comprehension prior to purchase, ignorance of these points would be circumvented. A simple justice test defines car consumers and the general public as principal stakeholders. Presale manual reading and comprehension would benefit the public and AV drivers, since the drivers would, in principle, know how to appropriately use AV technology, thus decreasing the probability of an AV-related road accident. No presale manual reading or comprehension might be convenient for the consumer, but would increase driver negligence and thus increase the risk of an accident. Altogether, legally enforced manual reading and comprehension would promote safe driving at the expense of consumer convenience, which is trivial in comparison. 
 
