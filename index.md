@@ -24,7 +24,7 @@ Hello! Welcome to team Lucky 13's running webpage! We'll be documenting all of o
  - [11-10-2017](https://nas256.github.io/ece3400_team13/minutes/11-10-2017)
 
 ## Ethics Homework
- - [Ethics Homework](https://nas256.github.io/labs/EthicsHomework.md)
+ - [Ethics Homework](https://nas256.github.io/ece3400_team13/labs/EthicsHomework)
 
 ## Who We Are
  (Alphabetically)
