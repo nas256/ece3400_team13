@@ -2,7 +2,7 @@
 Hello! Welcome to team Lucky 13's running webpage! We'll be documenting all of our progress here, as well as our design decisions, struggles, and triumphs! In order to ensure that we can work as efficiently as possible, and that we are all aware of each other's expectations, we've created and signed a [Team Contract](https://nas256.github.io/ece3400_team13/team_contract). 
 
 ## Final Robot
-[Meet Roboto!] (https://nas256.github.io/ece3400_team13/labs/finaldesign)
+[Meet Roboto!](https://nas256.github.io/ece3400_team13/labs/finaldesign)
 
 ## Lab Links
  - [Lab1](https://nas256.github.io/ece3400_team13/labs/lab1)
