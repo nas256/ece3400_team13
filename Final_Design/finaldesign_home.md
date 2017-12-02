@@ -4,5 +4,7 @@ This section will summarize our final design and describe our additions to the d
 
 
  - [Addition of a PCB](https://nas256.github.io/ece3400_team13/Final_Design/PCB)
-
+ - [Depth First Search Algorithm](https://nas256.github.io/ece3400_team13/Final_Design/DFS)
+ - [IR Sensing](https://nas256.github.io/ece3400_team13/Final_Design/IR_sensing)
+ - [Microphone Circuit](https://nas256.github.io/ece3400_team13/Final_Design/microphone)
 
