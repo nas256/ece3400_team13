@@ -11,8 +11,8 @@ This section will summarize our final design and describe our additions to the d
 ## Overview
  
 Insert block diagram of robot system
-![Robot System](https://imgur.com/a/ywiE9)
-![BaseStation System](https://imgur.com/a/ywiE9)
+![Robot System](https://i.imgur.com/2jgzwm6.png)
+![BaseStation System](https://i.imgur.com/P2D3elu.png)
 
 
 Pictures
