@@ -1,6 +1,6 @@
 # Final Robot Design
 
-![Roboto](https://i.imgur.com/zibkOJE.jpg)
+![Roboto](https://i.imgur.com/7y2TJ4C.jpg)
 
 This section will summarize our final design and describe our additions to the design after completing the labs and milestones.
 
@@ -12,7 +12,7 @@ This section will summarize our final design and describe our additions to the d
  
 ## Overview
    
-![Front Shot](https://i.imgur.com/dlLDhwU.jpg)
+![Front Shot](https://i.imgur.com/Rkkye7J.jpg)
 
 ### Robot System Design
 
