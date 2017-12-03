@@ -1,5 +1,7 @@
 # Final Robot Design
 
+![Roboto](https://i.imgur.com/zibkOJE.jpg)
+
 This section will summarize our final design and describe our additions to the design after completing the labs and milestones.
 
 
@@ -9,8 +11,9 @@ This section will summarize our final design and describe our additions to the d
  - [Microphone Circuit](https://nas256.github.io/ece3400_team13/Final_Design/microphone)
  
 ## Overview
- 
-Insert block diagram of robot system
+   
+![Front Shot](https://i.imgur.com/dlLDhwU.jpg)
+
 ### Robot System Design
 
 ![Robot System](https://i.imgur.com/2jgzwm6.png)
