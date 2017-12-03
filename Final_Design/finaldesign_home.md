@@ -8,11 +8,11 @@ This section will summarize our final design and describe our additions to the d
  - [IR Sensing](https://nas256.github.io/ece3400_team13/Final_Design/IR_sensing)
  - [Microphone Circuit](https://nas256.github.io/ece3400_team13/Final_Design/microphone)
  
- ## Overview
+## Overview
  
- Insert block diagram of robot system
- 
- Pictures
- 
+Insert block diagram of robot system
+
+Pictures
+
  
 

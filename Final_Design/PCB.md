@@ -1,5 +1,7 @@
 # Addition of a Printed Control Board
 
+[Back to Final Design](https://nas256.github.io/ece3400_team13/Final_Design)
+
 ## Motivations
 
 As we continue to add components and parts, our robot gets more and more bulky, and becomes very prone to wires coming loose or other random sources of failure. This has become more difficult to bug check. Because much of our basic design is completed after the labs and milestones, we will address these difficulties by incorporating a printed circuit board (PCB) into our design. A PCB is an insulator panel onto which conductive wires are laminated, allowing connection of different devices without the burden associated with using a breadboard and wires. 
