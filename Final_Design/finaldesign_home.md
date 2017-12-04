@@ -1,6 +1,6 @@
 # Final Robot Design
-
-![Front Shot](https://i.imgur.com/Rkkye7J.jpg)
+ <img src = "https://i.imgur.com/Rkkye7J.jpg" width = "75%">
+<!--![Front Shot](https://i.imgur.com/Rkkye7J.jpg)-->
 
 
 This section will summarize our final design and describe our additions to the design after completing the labs and milestones.
@@ -18,8 +18,8 @@ This section will summarize our final design and describe our additions to the d
 
  
 ## Overview
-
-![Roboto](https://i.imgur.com/7y2TJ4C.jpg)
+<img src = "https://i.imgur.com/7y2TJ4C.jpg" width = "75%">
+<!---![Roboto](https://i.imgur.com/7y2TJ4C.jpg)-->
 
 ### Robot System Design
 
