@@ -14,6 +14,7 @@ This section will summarize our final design and describe our additions to the d
  - [Servos](https://nas256.github.io/ece3400_team13/Final_Design/Servos)
  - [Starting Logic](https://nas256.github.io/ece3400_team13/Final_Design/Start_Logic)
  - [RF Comm](https://nas256.github.io/ece3400_team13/Final_Design/RF)
+ - [Base Station](https://nas256.github.io/ece3400_team13/Base_Station)
 
  
 ## Overview
@@ -24,22 +25,10 @@ This section will summarize our final design and describe our additions to the d
 
 ![Robot System](https://i.imgur.com/2jgzwm6.png)
 
-- IR Sensing
-- Line Sensing
-- Wall Sensing
-- Isolators
-- RF Communication
-- Start Button
-- Microphone:
-
-    We were able to have the microphone work successfully off of the robot, however we ultimately decided against adding it to the final robot
 
 ### BaseStation System Design
 
 ![BaseStation System](https://i.imgur.com/P2D3elu.png)
 
-- FPGA (burned on code)
-- Arduino Codez
-- VGA Display
  
 
