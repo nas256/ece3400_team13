@@ -12,4 +12,6 @@
 
 ### The bug we found
 
+[![DFS Edge case](https://img.youtube.com/vi/ITbs1UXNAfc/0.jpg)](https://youtu.be/ITbs1UXNAfc)
+
 ## References
