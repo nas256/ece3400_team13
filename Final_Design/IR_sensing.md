@@ -20,6 +20,6 @@ For our final code, we modified this implementation to poll for treasure at inte
 
 ## References
 
-http://www.ti.com/lit/ds/symlink/lm158-n.pdf
+[LM358 Datasheet](http://www.ti.com/lit/ds/symlink/lm158-n.pdf)
 
-http://optoelectronics.liteon.com/upload/download/DS-50-93-0013/LTR-301.pdf
+[IR Reciever Datasheet](http://optoelectronics.liteon.com/upload/download/DS-50-93-0013/LTR-301.pdf)
