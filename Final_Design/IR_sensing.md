@@ -4,10 +4,9 @@
 
 ## Overview
 
-The competition required us to identify IR treasures along the maze that transmits at 7kHz, 12kHz, and 17kHz. We used a photo transistor, whose output was passed through a LM358 op-amp to achieve a 200x gain. The output signal was then fed into our analog mux. 
+The competition required us to identify IR treasures along the maze that transmits at 7kHz, 12kHz, and 17kHz. We used a photo transistor, whose output was passed through a LM358 op-amp to achieve a 200x gain. The output signal was then fed into our analog mux. The arduino processed this data by finding the analog input's FFT spectrum. In order to do so, we need to change the ADC to free running mode in order to sample fast enough for the FFT. Once we collect this we look at the magnitude of a specific index which corresponds to one of the three frequencies. If there are above a specific threashold then we return from the function, saying that we have dedected a treasure. We also must change the ADC back into single acquistion mode, in order to not break all future AnalogRead() calls. 
 
 <img src = "https://i.imgur.com/oGP2ja8.png" width = "50%">
-
 
 
 ## Modifications
@@ -20,3 +19,7 @@ For our final code, we modified this implementation to poll for treasure at inte
 
 
 ## References
+
+http://www.ti.com/lit/ds/symlink/lm158-n.pdf
+
+http://optoelectronics.liteon.com/upload/download/DS-50-93-0013/LTR-301.pdf
