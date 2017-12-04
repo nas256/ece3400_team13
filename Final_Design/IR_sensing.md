@@ -6,7 +6,9 @@
 
 The competition required us to identify IR treasures along the maze that transmits at 7kHz, 12kHz, and 17kHz. We used a photo transistor, whose output was passed through a LM358 op-amp to achieve a 200x gain. The output signal was then fed into our analog mux. 
 
-**INCLUDE SCHEMATIC**
+
+
+<img src = "https://i.imgur.com/oGP2ja8.png" width = "50%">
 
 
 
