@@ -4,6 +4,12 @@ Hello! Welcome to team Lucky 13's running webpage! We'll be documenting all of o
 ## Final Robot
 [Meet Roboto!](https://nas256.github.io/ece3400_team13/Final_Design/finaldesign_home)
 
+## Results
+
+We made it to the finals!
+[Competition Videos](https://nas256.github.io/ece3400_team13/Final_Design/Comp_Vids)
+
+
 ## Lab Links
  - [Lab1](https://nas256.github.io/ece3400_team13/labs/lab1)
  - [Lab2](https://nas256.github.io/ece3400_team13/labs/lab2)
