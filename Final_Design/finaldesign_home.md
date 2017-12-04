@@ -9,7 +9,12 @@ This section will summarize our final design and describe our additions to the d
  - [Addition of a PCB](https://nas256.github.io/ece3400_team13/Final_Design/PCB)
  - [Depth First Search Algorithm](https://nas256.github.io/ece3400_team13/Final_Design/DFS)
  - [IR Sensing](https://nas256.github.io/ece3400_team13/Final_Design/IR_sensing)
- - [Microphone Circuit](https://nas256.github.io/ece3400_team13/Final_Design/microphone)
+ - [Wall Sensing](https://nas256.github.io/ece3400_team13/Final_Design/Wall_Sensing)
+ - [Line Following](https://nas256.github.io/ece3400_team13/Final_Design/Line_Following)
+ - [Servos](https://nas256.github.io/ece3400_team13/Final_Design/Servos)
+ - [Starting Logic](https://nas256.github.io/ece3400_team13/Final_Design/Start_Logic)
+ - [RF Comm](https://nas256.github.io/ece3400_team13/Final_Design/RF)
+
  
 ## Overview
 
@@ -25,7 +30,9 @@ This section will summarize our final design and describe our additions to the d
 - Isolators
 - RF Communication
 - Start Button
-- Microphone
+- Microphone:
+
+    We were able to have the microphone work successfully off of the robot, however we ultimately decided against adding it to the final robot
 
 ### BaseStation System Design
 
