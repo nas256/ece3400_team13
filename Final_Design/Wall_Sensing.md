@@ -10,6 +10,8 @@
 
 **WE ADDED LOW PASS FILTERING ON INPUT OF THEM** --> do we rememebr the values?
 
+The only modifications we made to wall sensing since milestone 4 is adding low pass filters to their signal paths before they go into the analog Mux.
+
 ## References
 
 **INCLUDE DATASHEET**

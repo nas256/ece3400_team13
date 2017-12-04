@@ -13,8 +13,9 @@ This section will summarize our final design and describe our additions to the d
  - [Line Following](https://nas256.github.io/ece3400_team13/Final_Design/Line_Following)
  - [Servos](https://nas256.github.io/ece3400_team13/Final_Design/Servos)
  - [Starting Logic](https://nas256.github.io/ece3400_team13/Final_Design/Start_Logic)
+ - [Analog Mux](https://nas256.github.io/ece3400_team13/Final_Design/Mux)
  - [RF Comm](https://nas256.github.io/ece3400_team13/Final_Design/RF)
- - [Base Station](https://nas256.github.io/ece3400_team13/Base_Station)
+ - [Base Station](https://nas256.github.io/ece3400_team13/Final_Design/Base_Station)
 
  
 ## Overview
