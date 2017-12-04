@@ -9,6 +9,7 @@ For the competition, we were tasked with waiting till a 660kHZ sound was played 
 ## Microphone
 
 **TODO: Someone who did the microphone can yah talk about how it works n'stuffz**
+The microphone inputs the signal to our system. In order to filter out the high frequency noise and keep the 660 Hz signal, the signal from the microphone should first be filtered with a lowpass or bandpass filter. After the filter, an amplifying circuit is needed to amplify the signal before it is sent to the Arduino. Since the microphone we were given already had a highpass filter and amplifiers built inside, we just implemented an extra circuit outside to further amplify the signal received by the Arduino. We tried multiple different circuits including both non-inverting amplifier and inverting amplifier, but we were not able to get any obvious further gain. We also tried many resistors with different values, but still failed to see a clear gain even though the large resistors such as 1 kΩ gave a cleaner signal. 
 
 We had a spot for the microphone on the PCB, however we soon found out that we needed to further amplify the signal and we felt as if spending the extra time implementing the extra circuitry on the robot was worth tthe 2 point reduction in competition.
 
