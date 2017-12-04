@@ -19,12 +19,20 @@ This section will summarize our final design and describe our additions to the d
 
 ![Robot System](https://i.imgur.com/2jgzwm6.png)
 
+- IR Sensing
+- Line Sensing
+- Wall Sensing
+- Isolators
+- RF Communication
+- Start Button
+- Microphone
+
 ### BaseStation System Design
 
 ![BaseStation System](https://i.imgur.com/P2D3elu.png)
 
-
-Pictures
-
+- FPGA (burned on code)
+- Arduino Codez
+- VGA Display
  
 
