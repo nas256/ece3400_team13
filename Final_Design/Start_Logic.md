@@ -18,6 +18,11 @@ We had a spot for the microphone on the PCB, however we soon found out that we n
 
 The start button was a simple switch that shorted its two contacts together when pressed. We connected the button between a arduino digital pin and ground. We used the arduino's internal pull up resistors to keep the pin HIGH, unless it was pressed in which case it was pulled low. In our code we simply waited for this signal to break out of a while() loop to begin our DFS code.
 
+```cpp
+pinMode(INPUT_PULLUP, P_START_BUTTON);
+digitalWrite(P_START_BUTTON, HIGH);
+````
+
 **ADD PICTURE**
 
 
