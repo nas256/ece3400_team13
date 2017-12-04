@@ -30,5 +30,25 @@ This section will summarize our final design and describe our additions to the d
 
 ![BaseStation System](https://i.imgur.com/P2D3elu.png)
 
+## Conclusion
+
+## Cost Breakdown
+
+|        Part       | Indv Cost | Quantity | Total Cost |
+|:-----------------:|-----------|:--------:|:----------:|
+| Line Sensors      |     $3    |     4    |     $12    |
+| Wall Sensors      |     $7    |     3    |     21     |
+| Servos            |    $13    |     2    |     26     |
+| LM358             |           |     1    |            |
+| 3D printed parts  |     $0    |    10    |     N/A    |
+| Lazer cut chassis |     $0    |     1    |     N/A    |
+| Custom PCB        |           |     1    |            |
+| Ball Bearing      |           |     1    |            |
+| Photo Transistor  |           |     2    |            |
+| Mux               |           |     1    |            |
+| 5V Battery Pack   |           |     1    |            |
+| 9V Battery        |           |     1    |            |
+
+
  
 
