@@ -5,6 +5,10 @@
 
 This section will summarize our final design and describe our additions to the design after completing the labs and milestones.
 
+ 
+## Overview
+<img src = "https://i.imgur.com/7y2TJ4C.jpg" width = "50%">
+<!---![Roboto](https://i.imgur.com/7y2TJ4C.jpg)-->
 
  - [Addition of a PCB](https://nas256.github.io/ece3400_team13/Final_Design/PCB)
  - [Depth First Search Algorithm](https://nas256.github.io/ece3400_team13/Final_Design/DFS)
@@ -16,11 +20,6 @@ This section will summarize our final design and describe our additions to the d
  - [Analog Mux](https://nas256.github.io/ece3400_team13/Final_Design/Mux)
  - [RF Comm](https://nas256.github.io/ece3400_team13/Final_Design/RF)
  - [Base Station](https://nas256.github.io/ece3400_team13/Final_Design/Base_Station)
-
- 
-## Overview
-<img src = "https://i.imgur.com/7y2TJ4C.jpg" width = "75%">
-<!---![Roboto](https://i.imgur.com/7y2TJ4C.jpg)-->
 
 ### Robot System Design
 
