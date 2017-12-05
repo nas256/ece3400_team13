@@ -13,8 +13,9 @@ In round 3, we falsely sensed a treasure in our first try, but what really hurt 
 
 
 ## Videos
-
-**INSERT VIDEOS!!**
-[![Round 1](https://img.youtube.com/vi/Om05LhPf-6E/0.jpg)](https:// .be/Om05LhPf-6E)
+### Round 1
+[![Round 1](https://img.youtube.com/vi/Om05LhPf-6E/0.jpg)](https://youtu.be/Om05LhPf-6E)
+### Round 2
 [![Round 2](https://img.youtube.com/vi/l0gw35ZfIL0/0.jpg)](https://youtu.be/l0gw35ZfIL0)
+### Round 3
 [![Round 3](https://img.youtube.com/vi/o_EQyqt-YL0/0.jpg)](https://youtu.be/o_EQyqt-YL0)
