@@ -6,21 +6,21 @@
 
 ![Basestation Overview](https://i.imgur.com/Ler2lM7.png)
 
-The basestation is responsible for recieving, storing, and displaying map data as the robot explores. As shown in the block diagram above, the base station consists of an nRF24L01+ wireless transciever, an Arduino, an FPGA, a DAC, and a VGA resistor DAC.
+The basestation is responsible for receiving, storing, and displaying map data as the robot explores. As shown in the block diagram above, the base station consists of an nRF24L01+ wireless transciever, an Arduino, an FPGA, a DAC, and a VGA resistor DAC.
 
 ## Serial Configuration Device
 
-In order to improve our setup time for the competition, we burned our Verilog onto the serial configuration device ont he DE0-Nano board so that our program is loaded onto the FPGA at powerup. This way, we don't need to program the FPGA every time we power up the FPGA. We did this by following the section in the DE0-Nano's Appendix pertaining to the serial configuration device.
+In order to improve our setup time for the competition, we burned our Verilog onto the serial configuration device on the DE0-Nano board so that our program is loaded onto the FPGA at powerup. This way, we don't need to program the FPGA every time we power up the FPGA. We did this by following the section in the DE0-Nano's Appendix pertaining to the serial configuration device.
 
 ## Verilog
 
-Our code Verilog is split up into three main modules: a MAZE\_MAPPER module, an SPI\_SLAVE module, and an AUDIO module.
+Our Verilog code is split up into three main modules: a MAZE\_MAPPER module, an SPI\_SLAVE module, and an AUDIO module.
 
 The SPI\_SLAVE module recieves data from the Arduino by reading the SPI channel. It begins listening when the chip select (CS) line is asserted low, and clocks data on the MOSI line every time SCK has a rising edge.
 
 The MAZE\_MAPPER module takes input from the SPI\_SLAVE module and provides color data to the provided vga driver module to draw elements on the maze. It parses the incoming data based on the SPI protocol and displays data accordingly.
 
-Finally, the AUDIO module plays a three tone tune while an enable signal is asserted, 
+Finally, the AUDIO module plays a three tone tune while an enable signal is asserted.
 
 ## SPI protocal
 
