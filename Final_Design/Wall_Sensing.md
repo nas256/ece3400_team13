@@ -4,9 +4,11 @@
 
 ## Overview
 
-**HOW IT WORKS**
+There are many ways to go about sensing walls. The most stable and straightfoward way to do this is to use some sort of distance sensors. There are a lot of different types of distance sensors, ultrasonic, infrared, etc. We chose the infrared sensors because of their relatively simple interface (analog voltage output) and their in-lab availability. The sensors that we used did not have a linear voltage to distance relationship, but rather an exponential one. We therefore empirically measured voltage outputs of the sensor when the robot saw a wall and when it did not, and used a threshold-based system to detect the walls. This proved very stable and reliable.
 
 ## Modifications
+
+Throughout most of the most of the semester we simply connected the wall sensors either directly to the Arduino or to the analog mux and used a digital filter to filter out noise. We then decided to add hardware filters as well, to help avoid false positive or false negative wall detections. 
 
 **WE ADDED LOW PASS FILTERING ON INPUT OF THEM** --> do we rememebr the values?
 
