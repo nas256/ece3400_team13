@@ -12,7 +12,9 @@ Aside from this issue, we are lucky that our robot's movement has been quite con
 An optoisolator is a device that uses an optical transmission path to pass an electrical signal between two circuit components, rather than through direct connection by a conducting wire. This allows us to electrically isolate two circuits, while still maintaining a connection between the two circuits. This yields the following benefits when using motors in a microcontroller system such as an Arduino:
 
 1) Isolation eliminates the heavy noise that the motor's vibration introduces to the main circuit.
+
 2) Connection to different power supplies means that the servo does not draw power from the Arduino, which may have a limited supply.
+
 3) A larger power supply (such as 5V) can be used to power the servos directly, which can make them faster and more powerful.
 
 In our implementation, the optoisolator will allow us to power the servos separately using a 9 V battery. For each servo, we will connect Vdd and ground wires to this separate power supply, and the Arduino's only connection to the motors will be the PWM logic signal through the isolator circuit.
