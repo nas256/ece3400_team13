@@ -12,6 +12,8 @@
 
 The only modifications we made to wall sensing since milestone 4 is adding low pass filters to their signal paths before they go into the analog Mux.
 
+<img src = "https://i.imgur.com/xlyItyB.png" width = "50%">
+
 ## References
 
 [Short Range IR Sensors](http://www.sharp-world.com/products/device/lineup/data/pdf/datasheet/gp2y0a41sk_e.pdf)

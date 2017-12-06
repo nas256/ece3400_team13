@@ -7,4 +7,10 @@ Throughout our testing, we realized that the behavior of our sensors was sometim
 
 ## Modifications
 
+
+<img src = "https://i.imgur.com/YgDfVJ1.png" width = "50%">
+
+
 ## References
+
+[Opto-Isolators](https://www.vishay.com/docs/81181/4n35.pdf)
