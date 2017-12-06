@@ -14,6 +14,6 @@ The only modifications we made to wall sensing since milestone 4 is adding low p
 
 ## References
 
-**INCLUDE DATASHEET**
+[Short Range IR Sensors](http://www.sharp-world.com/products/device/lineup/data/pdf/datasheet/gp2y0a41sk_e.pdf)
 
 
