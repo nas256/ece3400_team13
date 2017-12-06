@@ -6,7 +6,7 @@
 
 There are many ways to go about sensing walls. The most stable and straightfoward way to do this is to use some sort of distance sensors. There are a lot of different types of distance sensors, ultrasonic, infrared, etc. We chose the infrared sensors because of their relatively simple interface (analog voltage output) and their in-lab availability. The sensors that we used did not have a linear voltage to distance relationship, but rather an exponential one. We therefore empirically measured voltage outputs of the sensor when the robot saw a wall and when it did not, and used a threshold-based system to detect the walls. This proved very stable and reliable.
 
-In order to sense walls around the bot, we utiliezd three of these sensors. One sensor pointed forward identified obstacles in front of the robot, and two sensors on each side, each facing away from the robot, detected walls on the left and right of the bot. This way, as we explored the maze, we could identify all the walls that the robot saw and navigate accordingly.
+In order to sense walls around the bot, we utilixed three of these sensors. One sensor pointed forward identified obstacles in front of the robot, and two sensors on each side, each facing away from the robot, detected walls on the left and right of the bot. This way, as we explored the maze, we could identify all the walls that the robot saw and navigate accordingly.
 
 ## Modifications
 
