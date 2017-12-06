@@ -51,7 +51,7 @@ The board performs the following functions:
 
 ## Implementation
 
-Once we recieved the board, we began immediately soldering all of the components to the board. The process went rather smoothly, until we noticed that whoever sent out the PCBs forgot to draw our power and ground planes on the top and bottom of the board! This made the implementation significantly more difficult, as we had to rework almost every power and ground together, which took a number of hours to complete. Once completed however, the stability granted by this new design is very desirable. The design works as intended, after the aforementioned modifications.
+Once we received the board, we began immediately soldering all of the components to the board. The process went rather smoothly, until we noticed that whoever sent out the PCBs forgot to draw our power and ground planes on the top and bottom of the board! This made the implementation significantly more difficult, as we had to rework almost every power and ground together, which took a number of hours to complete. Once completed however, the stability granted by this new design is very desirable. The design works as intended, after the aforementioned modifications.
 
 ## Testing
 
