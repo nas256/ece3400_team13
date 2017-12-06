@@ -4,7 +4,7 @@
 
 ## Overview
 
-In order to communicate between the base station and the robot, we utilized the nRF24L01+ 2.4 GHz transciever. We used a packet size of 16 bits, with a single tile encoded in each of these packets. We only send packets to update tiles that change, to save us trasmitting time, as cpu time on the robot is no commodity. We use the same protocol as we do over SPI:
+In order to communicate between the base station and the robot, we utilized the nRF24L01+ 2.4 GHz transceiver. We used a packet size of 16 bits, with a single tile encoded in each of these packets. We only send packets to update tiles that change, to save us trasmitting time, as cpu time on the robot is no commodity. We use the same protocol as we do over SPI:
 
 |15-14     |13-11     |10-9        |8-7    | 6-3      | 2         | 1            | 0         |
 | -------- | -------- | ---------- | ----  |  ------- | --------- | ------------ | --------- |
