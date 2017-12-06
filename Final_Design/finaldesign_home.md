@@ -30,7 +30,8 @@ This section will summarize our final design and describe our additions to the d
 
 ![BaseStation System](https://i.imgur.com/P2D3elu.png)
 
-## Conclusion
+![BaseStation IRL](https://i.imgur.com/6wiZ0a9.jpg)
+
 
 ## Cost Breakdown
 
