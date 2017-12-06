@@ -12,7 +12,6 @@ The microphone inputs the signal to our system. In order to filter out the high 
 
 We had a spot for the microphone on the PCB, however we soon found out that we needed to further amplify the signal and we felt as if spending the extra time implementing the extra circuitry on the robot was worth tthe 2 point reduction in competition.
 
-**ADD PICS**
 
 ## Start Button
 
@@ -23,6 +22,5 @@ pinMode(INPUT_PULLUP, P_START_BUTTON);
 digitalWrite(P_START_BUTTON, HIGH);
 ````
 
-**ADD PICTURE**
 
 
