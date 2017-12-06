@@ -20,7 +20,7 @@ As we were testing our robot on different mazes, we found a bug in our initial D
 
 [![DFS Edge case](https://img.youtube.com/vi/ITbs1UXNAfc/0.jpg)](https://youtu.be/ITbs1UXNAfc)
 
-When the robot got to tile (2,1), the robot had walls to its left and right, and it had already added the tile in front of it to the missed_op stack, so it would not add it again. Considering our DFS pseudocode included below, we want the robot to consider this condition as it being surrounded and therefore backtrack by popping the path stack and moving along it. However, in our initial implementation of DFS, we only considered ourselves surrounded if we had walls or visited tiles on all sides and did not consider tiles on the missed_op stack. Therefore, the robot tried to go to the tile popped off of the missed_op stack, which in this case was tile (2,2), and it crashed into the wall.
+When the robot got to tile (2,1), the robot had walls to its left and right, and it had already added the tile in front of it to the missed_op stack, so it would not add it again. Considering our DFS pseudocode included below, we want the robot to consider this condition as it being surrounded and therefore backtrack by popping the path stack and moving along it. However, in our initial implementation of DFS, we only considered ourselves surrounded if we had walls or visited tiles on all sides and did not consider tiles on the missed_op stack. Therefore, the robot tried to go to the tile popped off of the missed_op stack, which in this case was tile (1,1), and it crashed into the wall.
 
 Old pseudocode:
 ```
