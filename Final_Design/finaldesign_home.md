@@ -37,17 +37,20 @@ This section will summarize our final design and describe our additions to the d
 |        Part       | Indv Cost | Quantity | Total Cost |
 |:-----------------:|-----------|:--------:|:----------:|
 | Line Sensors      |     $3    |     4    |     $12    |
-| Wall Sensors      |     $7    |     3    |     21     |
-| Servos            |    $13    |     2    |     26     |
-| LM358             |           |     1    |            |
-| 3D printed parts  |     $0    |    10    |     N/A    |
-| Lazer cut chassis |     $0    |     1    |     N/A    |
-| Custom PCB        |           |     1    |            |
-| Ball Bearing      |           |     1    |            |
-| Photo Transistor  |           |     2    |            |
-| Mux               |           |     1    |            |
-| 5V Battery Pack   |           |     1    |            |
-| 9V Battery        |           |     1    |            |
+| Wall Sensors      |     $7    |     3    |     $21    |
+| Servos            |    $13    |     2    |     $26    |
+| LM358             |   $0.95   |     1    |    $0.95   |
+| 3D printed parts  |    N/A    |    10    |     $0     |
+| Lazer cut chassis |    N/A    |     1    |     $0     |
+| Custom PCB        |    $10    |     1    |     $10    |
+| Ball Bearing      |    N/A    |     1    |     $0     |
+| Photo Transistor  |   $0.51   |     2    |   $1.02    |
+| Mux               |   $0.43   |     1    |   $0.43    |
+| Microphone        |     $7    |     1    |     $7     |
+| 5V Battery Pack   |    N/A    |     1    |     $0     |
+| 9V Battery        |    N/A    |     1    |     $0     |
+|:-----------------:|-----------|:--------:|:----------:|
+|    **Total**      |           |          |   $78.41   |
 
 
  
