@@ -39,4 +39,4 @@ if ( abs(line_left_value - line_right_value) < LIGHT_TOLERANCE ){
 
 ## References
 
-**INCLUDE DATASHEET**
+[Line Following Sensor](https://cdn.sparkfun.com/datasheets/Sensors/Proximity/QRE1113.pdf)
