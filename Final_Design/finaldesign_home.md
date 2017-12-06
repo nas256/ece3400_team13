@@ -50,7 +50,6 @@ This section will summarize our final design and describe our additions to the d
 | Microphone        |     $7    |     1    |     $7     |
 | 5V Battery Pack   |    N/A    |     1    |     $0     |
 | 9V Battery        |    N/A    |     1    |     $0     |
-|:-----------------:|-----------|:--------:|:----------:|
 |    **Total**      |           |          |   $78.41   |
 
 
